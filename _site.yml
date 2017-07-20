@@ -1,0 +1,10 @@
+name: "my-website"
+navbar:
+  title: "Andreas Mock"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Publications"
+      href: refs.html
