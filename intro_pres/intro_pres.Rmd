@@ -221,13 +221,14 @@ help(cbind)
 
 ## Bespieldaten des Kurses
 
-```{r,echo=FALSE}
-load("../hnscc.RData")
-```
-
 Metadaten des *The Cancer Genome Atlas (TCGA)* zur Analyse von Kopf-Hals-Tumoren (head and neck squamous cell carcinoma; HNSCC). Der Datensatz fasst die wichtigsten klinisch-pathologischen Charakteristika der Studienkohorte (n=279) zusammen.
 
 [Link zur Originalpublikation](https://tcga-data.nci.nih.gov/docs/publications/hnsc_2014/)
+
+```{r,echo=FALSE}
+#Datensatz in R laden
+load("andreasmock.github.io/data/hnscc.RData")
+```
 
 ## Bespieldaten des Kurses
 
@@ -235,4 +236,3 @@ Metadaten des *The Cancer Genome Atlas (TCGA)* zur Analyse von Kopf-Hals-Tumoren
 head(hnscc)
 ```
 
-# Fragen?
