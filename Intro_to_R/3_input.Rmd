@@ -1,0 +1,85 @@
+---
+title: "Teil 3: Daten einlesen"
+author:
+- name: Andreas Mock
+  affiliation: Nationales Centrum für Tumorerkrankungen (NCT) Heidelberg
+  email: andreas.mock@med.uni-heidelberg.de
+output:
+  rmarkdown::html_document:
+    theme: cosmo
+    toc: false
+    toc_float: false
+---
+
+## Einführung
+
+Dieses Kapitel ist zugegebener Maße trocken, soll aber Abhilfe schaffen bei einem der größten Stolpersteine beim Einstieg in eine Programmierumgebung wie R: Das Einlesen von (eigenen) Daten.
+
+Der Schlüssel zum Meistern dieser Lektion ist das Verständnis von Dateipfaden. 
+
+## Dateipfade
+
+1) Wie finde ich heraus, in welche Dateipfad sich meine momentane Umgebung befindet, in der ich R ausführe, dass so genannte *working directory*?
+
+```{r}
+getwd()
+```
+
+2) Welche Dateien befinden sich in dem aktuellen Dateipfad?
+
+```{r}
+list.files()
+```
+
+3) Wie kann ich ausgehend vom *working directory* einen relativen Pfad angeben?
+
+Mit dem Präfix `../` lässt sich eine Ordnereben, mit `../../` entsprechend 2 Ebenen nach oben gehen.
+
+Der relative Pfad
+
+```{r}
+list.files("../")
+```
+
+entspricht damit dem absoluten Dateipfad
+
+```{r}
+list.files("/Users/Andy/Documents/Research/Github_page")
+```
+
+4) Wie kann ich Daten aus dem Internet einlesen?
+
+Einfach den Webpfad benutzen:
+
+```{r, eval=F}
+read.xls(xls="http://www.cell.com/cms/attachment/2106066377/2081438868/mmc2.xlsx",
+                skip=1)
+```
+
+## Funktionen zum Einlesen von Daten
+
+```{r, eval=F}
+install.packages("gdata")
+library(gdata)
+```
+
+
+```{r, eval=F}
+# tab-separated files (txt)
+file1 <- read.table("Pfad", sep="\t", header=TRUE)
+```
+
+```{r, eval=F}
+# comma-separated files (csv)
+file2 <- read.csv("Pfad")
+```
+
+```{r, eval=F}
+# Excel sheets
+file3 <- read.xls(xls="http://www.cell.com/cms/attachment/2106066377/2081438868/mmc2.xlsx",
+                skip=1)
+```
+
+## Learning by doing (15 min.)
+
+Die anfänglichen Probleme mit dem Einlesen von Dateien lassen sich am besten durch die eigene Anwendung erkunden. Sucht euch txt, csv und xls/xlsx Files auf eurem Computer heraus und versucht diese in die *R* Umgebung zu laden. Denkt bitte auch an die Möglichkeit die Hilfe zu den einzelnen Funktionen aufzurufen. Am Ende der Übung sammeln wir die wichtigsten Probleme und Lösungsansätze.

@@ -1,0 +1,106 @@
+---
+title: "Teil 5: Überlebenszeitanalysen"
+author:
+- name: Andreas Mock
+  affiliation: Nationales Centrum für Tumorerkrankungen (NCT) Heidelberg
+  email: andreas.mock@med.uni-heidelberg.de
+output:
+  rmarkdown::html_document:
+    theme: cosmo
+    toc: false
+    toc_float: false
+---
+
+```{r, echo=FALSE, message=FALSE}
+library(gdata)
+library(survival)
+library(survminer)
+padc = read.xls(xls ="http://www.cell.com/cms/attachment/2106066377/2081438868/mmc2.xlsx",
+                skip=1)
+```
+
+## Einführung
+
+Kaum eine klinische Studie kommt ohne Überlebensanalysen aus. Deshalb sollte die sachkundige Durchführung und Interpretation dieser zum Rüstzeug jedes Mediziners gehören. 
+
+## Vokabular
+
+- Hazard Ratio (HR): Relative Wahrscheinlichkeit zwischen den Gruppen innerhalb eines Zeitintervalls (z.B. innerhalb eines Monats oder Jahres) ein Event zu haben (z.B. Tod oder Progress)
+- Censor: 1 = Event eingetroffen (z.B. Tod oder Progress), 0 = Event noch nicht eingetroffen
+- univariat: Es wird nur der Einfluss eines Faktors (z.B. Geschlecht) auf den Endpunkt (z.B. Gesamtüberleben) untersucht.
+- multivariat: Es wird nur der Einfluss mehrerer Faktoren auf den Endpunkt untersucht.
+- log-rank Test: Statistischer Test zum Vergleich der beiden Gruppen in der Überlebenszeitanalyse.
+
+## Pakete installieren und laden
+
+```{r,eval=FALSE}
+install.packages("gdata")
+install.packages("survival")
+install.packages("survminer")
+
+library(gdata)
+library(survival)
+library(survminer)
+```
+
+## Beispieldaten
+
+**Integrated Genomic Characterization of Pancreatic Ductal Adenocarcinoma**  
+*Cancer Cell*. **Volume 32** Issue 2: p185-203
+
+```{r, eval=FALSE}
+padc <- read.xls(xls ="http://www.cell.com/cms/attachment/2106066377/2081438868/mmc2.xlsx",
+                skip=1)
+```
+
+Für eine vergleichende Überlebenszeitanalysen benötigen wir drei Informationen: 
+
+1. die Zeit bis zu einem Event (z.B. Tod oder Progress) 
+2. der Censor (binäre Info ob Event eingetroffen ist, z.B. 1 = tod, 0 = lebend)
+3. die Gruppenzugehörigkeiten (diskrete oder kontinuierliche Daten)
+
+Die Funktion `colnames` zeigt uns alle Spaltennamen in unserem dataframe `data` an:
+
+```{r}
+head(colnames(padc))
+```
+
+## Endpunkt: Überlebenszeit (OS - overall survival)
+
+```{r}
+padc$OS = padc$Days.to.death
+head(padc$OS)
+```
+
+CAVE: Follow-up Zeiten der zensierten Patienten sind nicht im Vektor `Days.to.death` vorhanden.
+
+```{r}
+padc$OS[is.na(padc$OS)] = padc$Follow.up.days[is.na(padc$OS)]
+```
+
+
+## Kaplan-Meier-Kurve 
+
+Der Klassiker der Visualisierung von Überlebenszeitanalysen ist die so genannte Kaplan-Meier-Kurve. Der folgende Codechunk visualisiert den Einfluss des Geschlechts auf den Endpunkt Gesamtüberleben.
+
+```{r}
+padc$OS = padc$Days.to.death
+padc$Censor = padc$Follow.up.vital.status
+levels(padc$Censor) = c(1,2)
+padc$Censor = as.numeric(padc$Censor)
+fit = survfit(Surv(OS, Censor) ~ Gender, data=padc)
+
+ggsurvplot(fit,
+           padc,
+           risk.table = TRUE, 
+           pval=TRUE,
+           tables.height=0.25,
+           palette = c("goldenrod","skyblue4"),
+           xlab="Time (months)")
+```
+
+## Übung (20 min.)
+
+Sucht euch andere Faktoren aus den TCGA Metadaten und untersucht deren Einfluss auf das Gesamtüberleben.
+
+Für Fortgeschrittene, versucht euch auch das progressionsfreie Überleben anzuschauen.

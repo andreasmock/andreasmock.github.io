@@ -23,8 +23,8 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -34,10 +34,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -280,11 +282,41 @@ div.tocify {
 <li>
   <a href="refs.html">Publications</a>
 </li>
-<li>
-  <a href="software.html">Software</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Software
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="CVE.html">CVE</a>
+    </li>
+    <li>
+      <a href="MetaboDiff.html">MetaboDiff</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="teaching.html">Teaching</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Teaching
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="teaching.html">Intro</a>
+    </li>
+    <li>
+      <a href="day1.html">Tag1</a>
+    </li>
+    <li>
+      <a href="day2.html">Tag2</a>
+    </li>
+    <li>
+      <a href="day3.html">Tag3</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -316,6 +348,13 @@ div.tocify {
 
 <p><br></p>
 <div id="section" class="section level3">
+<h3>2018</h3>
+<p><a href="https://www.ncbi.nlm.nih.gov/pubmed/29227286">Drug-perturbation-based stratification of blood cancer.</a><br />
+Dietrich S, Oleś M, Lu J, Sellner L, Anders S, Velten B, Wu B, Hüllein J, da Silva Liberio M, Walther T, Wagner L, Rabe S, Ghidelli-Disse S, Bantscheff M, Oleś AK, Słabicki M, <strong>Mock A</strong>, Oakes CC, Wang S, Oppermann S, Lukas M, Kim V, Sill M, Benner A, Jauch A, Sutton LA, Young E, Rosenquist R, Liu X, Jethwa A, Lee KS, Lewis J, Putzker K, Lutz C, Rossi D, Mokhir A, Oellerich T, Zirlik K, Herling M, Nguyen-Khac F, Plass C, Andersson E, Mustjoki S, von Kalle C, Ho AD, Hensel M, Dürig J, Ringshausen I, Zapatka M, Huber W, Zenz T.<br />
+<strong>J Clin Invest.</strong> 2018 Jan 2;128(1):427-445. doi: 10.1172/JCI93801. Epub 2017 Dec 11.</p>
+<p><br></p>
+</div>
+<div id="section-1" class="section level3">
 <h3>2017</h3>
 <p><a href="https://www.ncbi.nlm.nih.gov/pubmed/28901970">The 2016 WHO classification of central nervous system tumors: what neurologists need to know</a><br />
 DeWitt JC*, <strong>Mock A*</strong>, Louis DN.<br />
@@ -326,7 +365,7 @@ DeWitt JC*, <strong>Mock A*</strong>, Louis DN.<br />
 <strong>BMC Med Genomics</strong>. 2017 May 25;10(1):37. doi: 10.1186/s12920-017-0261-6.</p>
 <p><br></p>
 </div>
-<div id="section-1" class="section level3">
+<div id="section-2" class="section level3">
 <h3>2016</h3>
 <p><a href="https://www.ncbi.nlm.nih.gov/pubmed/27782828">Spatial transcriptome analysis reveals Notch pathway-associated prognostic markers in IDH1 wild-type glioblastoma involving the subventricular zone</a><br />
 Jungk C, <strong>Mock A</strong>, Exner J, Geisenberger C, Warta R, Capper D, Abdollahi A, Friauf S, Lahrmann B, Grabe N, Beckhove P, von Deimling A, Unterberg A, Herold-Mende C.<br />
@@ -349,7 +388,7 @@ Schmidt M*, <strong>Mock A*</strong>, Jungk C, Sahm F, Ull AT, Warta R, Lamszus 
 <strong>Oncotarget</strong>. 2016 Mar 22;7(12):14551-68. doi: 10.18632/oncotarget.7396.</p>
 <p><br></p>
 </div>
-<div id="section-2" class="section level3">
+<div id="section-3" class="section level3">
 <h3>2015</h3>
 <p><a href="https://www.ncbi.nlm.nih.gov/pubmed/25931051">Molecular profiling of long-term survivors identifies a subgroup of glioblastoma characterized by chromosome 19/20 co-gain.</a><br />
 Geisenberger C*, <strong>Mock A*</strong>, Warta R, Rapp C, Schwager C, Korshunov A, Nied AK, Capper D, Brors B, Jungk C, Jones D, Collins VP, Ichimura K, Bäcklund LM, Schnabel E, Mittelbron M, Lahrmann B, Zheng S, Verhaak RG, Grabe N, Pfister SM, Hartmann C, von Deimling A, Debus J, Unterberg A, Abdollahi A, Herold-Mende C.<br />
@@ -368,7 +407,7 @@ Lohr J*, <strong>Mock A*</strong>, Beckhove P, Herold-Mende C.<br />
 <strong>Oncotarget</strong>. 2015 May 30;6(15):13579-90.</p>
 <p><br></p>
 </div>
-<div id="section-3" class="section level3">
+<div id="section-4" class="section level3">
 <h3>2014</h3>
 <p><a href="https://www.ncbi.nlm.nih.gov/pubmed/25175691">Microenvironment and brain tumor stem cell maintenance: impact of the niche.</a><br />
 Herold-Mende C, <strong>Mock A</strong>.<br />

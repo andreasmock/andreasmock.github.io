@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>R-Kurs Tag 1 - Einstieg in die Datenexploration</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">AM</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="refs.html">Publications</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Software
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="CVE.html">CVE</a>
+    </li>
+    <li>
+      <a href="MetaboDiff.html">MetaboDiff</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Teaching
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="teaching.html">Intro</a>
+    </li>
+    <li>
+      <a href="day1.html">Tag1</a>
+    </li>
+    <li>
+      <a href="day2.html">Tag2</a>
+    </li>
+    <li>
+      <a href="day3.html">Tag3</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/andreasmock">
+    <span class="fa fa-github-square"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/am0ck">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">R-Kurs Tag 1 - Einstieg in die Datenexploration</h1>
+
+</div>
+
+
+<p>Im ersten Teil des Praktikums, soll es uns darum gehen so schnell wie möglich in das Kerngeschäft von R einzusteigen - in die Datenexploration.</p>
+<p><br></p>
+<div class="figure">
+<img src="pics/data-science-explore.png" />
+
+</div>
+<p><a href="http://r4ds.had.co.nz">R for Data Science, Hadley Wickham 2016</a></p>
+<p><br></p>
+<div id="beispieldaten" class="section level2">
+<h2>Beispieldaten</h2>
+<p>Der Bespieldatensatz des Kurses sind Metadaten des <em>The Cancer Genome Atlas (TCGA)</em> zur Analyse von Kopf-Hals-Tumoren (head and neck squamous cell carcinoma; HNSCC). Der Datensatz fasst die wichtigsten klinisch-pathologischen Charakteristika der Studienkohorte (n=279) zusammen.</p>
+<p>Für den Start möchten wir bewusst den Schritt überspringen, wie genau Daten in R geladen werden können und laden das Objekt mit folgendem Befehl:</p>
+<pre class="r"><code>load(&quot;andreasmock.github.io/hnscc.RData&quot;)</code></pre>
+<pre class="r"><code>hnscc</code></pre>
+<pre><code>##               id age alcohol days_to_death gender  neoplasm_site grade
+## 1   TCGA-BA-4074  69     YES           461   MALE    Oral Tongue    G3
+## 2   TCGA-BA-4076  39     YES           415   MALE         Larynx    G2
+## 3   TCGA-BA-4077  45     YES          1134 FEMALE Base of Tongue    G2
+## 4   TCGA-BA-4078  83      NO           276   MALE         Larynx    G2
+## 5   TCGA-BA-5149  47     YES           248   MALE Floor of Mouth    G2
+## 6   TCGA-BA-5151  72     YES           190   MALE  Buccal Mucosa    G1
+## 7   TCGA-BA-5152  56     YES           845   MALE Alveolar Ridge    G2
+## 8   TCGA-BA-5153  51     YES          1761   MALE         Tonsil    G2
+## 9   TCGA-BA-5555  54     YES           186   MALE         Larynx    G2
+## 10  TCGA-BA-5556  58     YES           179 FEMALE Floor of Mouth    G3
+## 11  TCGA-BA-5557  41     YES           242 FEMALE    Oral Tongue    G2
+## 12  TCGA-BA-5558  65     YES          1635   MALE    Hard Palate    G1
+## 13  TCGA-BA-5559  71     YES          1747   MALE         Tonsil    G3
+## 14  TCGA-BA-6868  53     YES           152   MALE         Larynx    G2
+## 15  TCGA-BA-6869  62     YES           244   MALE         Larynx    G2
+## 16  TCGA-BA-6870  60     YES            NA FEMALE         Larynx    G2
+## 17  TCGA-BA-6871  75     YES            63   MALE Base of Tongue    G2
+## 18  TCGA-BA-6872  47     YES            NA   MALE Floor of Mouth    G2
+## 19  TCGA-BA-6873  28     YES           113   MALE    Oral Tongue    G2
+## 20  TCGA-BA-7269  61     YES           236   MALE    Oral Tongue    G1
+## 21  TCGA-BB-4217  68     YES           186   MALE         Larynx    G3
+## 22  TCGA-BB-4223  48      NO          2891   MALE         Tonsil    G3
+## 23  TCGA-BB-4224  52     YES           275   MALE    Oral Tongue    G2
+## 24  TCGA-BB-4225  73     YES           140   MALE Base of Tongue    G3
+## 25  TCGA-BB-4228  50     YES           557   MALE Base of Tongue    GX
+## 26  TCGA-CN-4723  67     YES           412   MALE         Larynx    G2
+## 27  TCGA-CN-4725  60      NO           310   MALE    Oral Tongue    G2
+## 28  TCGA-CN-4726  68     YES           142   MALE  Buccal Mucosa    G2
+## 29  TCGA-CN-4727  56     YES           194   MALE         Larynx    G2
+## 30  TCGA-CN-4728  56     YES           325   MALE    Oral Cavity    G2
+## 31  TCGA-CN-4729  73     YES           166   MALE    Oral Cavity    G2
+## 32  TCGA-CN-4730  62     YES           343   MALE Floor of Mouth    G2
+## 33  TCGA-CN-4731  63     YES           383 FEMALE  Buccal Mucosa    G3
+## 34  TCGA-CN-4733  61      NO           522   MALE    Oral Tongue    G3
+## 35  TCGA-CN-4735  52     YES           369   MALE         Larynx    G3
+## 36  TCGA-CN-4736  70     YES           395 FEMALE    Oral Tongue    G2
+## 37  TCGA-CN-4737  19      NO           240   MALE    Oral Tongue    G2
+## 38  TCGA-CN-4738  53     YES           436   MALE         Larynx    G2
+## 39  TCGA-CN-4739  71     YES           348   MALE         Larynx    G2
+## 40  TCGA-CN-4740  79     YES           810 FEMALE    Oral Cavity    G2
+## 41  TCGA-CN-4741  75      NO           875   MALE Alveolar Ridge    G2
+## 42  TCGA-CN-4742  48     YES           397 FEMALE    Oral Tongue    G3
+## 43  TCGA-CN-5355  64     YES           279   MALE         Larynx    G2
+## 44  TCGA-CN-5356  56      NO           289   MALE         Larynx    G2
+## 45  TCGA-CN-5358  60     YES           173   MALE Floor of Mouth    G2
+## 46  TCGA-CN-5359  59     YES           377   MALE Floor of Mouth    G2
+## 47  TCGA-CN-5360  68     YES           866   MALE         Larynx    G2
+## 48  TCGA-CN-5363  48     YES           252   MALE         Larynx    G3
+## 49  TCGA-CN-5364  55     YES           493   MALE Floor of Mouth    G2
+## 50  TCGA-CN-5365  38     YES           351   MALE         Tonsil    G2
+## 51  TCGA-CN-5366  51     YES           360   MALE    Hypopharynx    G2
+## 52  TCGA-CN-5367  60     YES           352 FEMALE    Oral Tongue    G2
+## 53  TCGA-CN-5369  90      NO           380 FEMALE    Hard Palate    G3
+## 54  TCGA-CN-5370  78     YES            NA   MALE    Oral Tongue    G3
+## 55  TCGA-CN-5373  55     YES           413 FEMALE Floor of Mouth    G1
+## 56  TCGA-CN-5374  56    &lt;NA&gt;           274 FEMALE         Tonsil    G3
+## 57  TCGA-CN-6010  53     YES           207   MALE         Larynx    G2
+## 58  TCGA-CN-6011  57     YES           228   MALE Alveolar Ridge    G3
+## 59  TCGA-CN-6012  66      NO           143   MALE         Larynx    G2
+## 60  TCGA-CN-6013  56     YES           154   MALE    Oral Cavity    G3
+## 61  TCGA-CN-6016  64     YES           201   MALE Floor of Mouth    G2
+## 62  TCGA-CN-6017  55     YES           159   MALE    Oral Tongue    G2
+## 63  TCGA-CN-6018  85      NO            45 FEMALE    Oral Cavity    G2
+## 64  TCGA-CN-6019  61     YES           134   MALE    Oral Tongue    G2
+## 65  TCGA-CN-6020  58     YES            97   MALE    Oral Tongue    G2
+## 66  TCGA-CN-6021  63      NO           276 FEMALE         Larynx    G2
+## 67  TCGA-CN-6022  49    &lt;NA&gt;           201   MALE         Larynx    G3
+## 68  TCGA-CN-6023  73     YES           188   MALE         Larynx    GX
+## 69  TCGA-CN-6024  66     YES           224   MALE    Oral Tongue    G2
+## 70  TCGA-CN-6988  47     YES            42   MALE         Larynx    G3
+## 71  TCGA-CN-6989  64     YES           177   MALE         Larynx    G2
+## 72  TCGA-CN-6992  61     YES            83   MALE         Larynx    G2
+## 73  TCGA-CN-6994  67    &lt;NA&gt;           119   MALE    Oral Cavity    G2
+## 74  TCGA-CN-6995  78      NO            NA   MALE Floor of Mouth    G2
+## 75  TCGA-CN-6997  66      NO           100   MALE         Larynx    G3
+## 76  TCGA-CN-6998  53      NO            46   MALE    Oral Tongue    G2
+## 77  TCGA-CQ-5323  82     YES          1465   MALE Alveolar Ridge    G2
+## 78  TCGA-CQ-5324  59      NO          1207   MALE Floor of Mouth    G2
+## 79  TCGA-CQ-5325  65     YES           654   MALE    Oral Tongue    G2
+## 80  TCGA-CQ-5326  67     YES            NA   MALE Alveolar Ridge    G3
+## 81  TCGA-CQ-5329  46      NO           841 FEMALE    Oral Tongue    G2
+## 82  TCGA-CQ-5330  69      NO           896 FEMALE    Oral Tongue    G3
+## 83  TCGA-CQ-5331  73      NO          1028 FEMALE    Hard Palate    G2
+## 84  TCGA-CQ-5332  87     YES           317   MALE Floor of Mouth    G2
+## 85  TCGA-CQ-5334  87      NO           128   MALE  Buccal Mucosa    G2
+## 86  TCGA-CQ-6218  52      NO           870 FEMALE Floor of Mouth    G2
+## 87  TCGA-CQ-6220  69     YES            NA   MALE  Buccal Mucosa    G2
+## 88  TCGA-CQ-6221  79     YES          1000   MALE    Oral Tongue    G3
+## 89  TCGA-CQ-6223  69      NO          1057   MALE Alveolar Ridge    G2
+## 90  TCGA-CQ-6224  52     YES           984   MALE    Oral Tongue    G3
+## 91  TCGA-CQ-6225  65      NO            NA   MALE    Oral Tongue    G2
+## 92  TCGA-CQ-6227  77     YES            NA   MALE    Oral Cavity    G2
+## 93  TCGA-CQ-6228  71     YES            NA FEMALE Floor of Mouth    G2
+## 94  TCGA-CQ-6229  61      NO           814   MALE    Oral Tongue    G2
+## 95  TCGA-CQ-7065  40      NO          1006   MALE    Oral Tongue    G2
+## 96  TCGA-CQ-7068  80      NO           693 FEMALE Floor of Mouth    G2
+## 97  TCGA-CR-5243  51     YES          2562   MALE         Tonsil    G3
+## 98  TCGA-CR-5247  48     YES           358   MALE         Tonsil    G2
+## 99  TCGA-CR-5248  53     YES          1662   MALE         Tonsil    G3
+## 100 TCGA-CR-5249  35     YES          1152 FEMALE         Tonsil    GX
+## 101 TCGA-CR-5250  71     YES           798   MALE Base of Tongue    G3
+## 102 TCGA-CR-6467  59     YES          1777   MALE         Tonsil    G3
+## 103 TCGA-CR-6470  38     YES          1521   MALE         Tonsil    G2
+## 104 TCGA-CR-6471  58     YES            NA   MALE    Oral Cavity    G2
+## 105 TCGA-CR-6472  59     YES          1050   MALE Base of Tongue    G3
+## 106 TCGA-CR-6473  68     YES          1125   MALE    Hypopharynx    G3
+## 107 TCGA-CR-6474  51     YES            NA   MALE         Larynx    G2
+## 108 TCGA-CR-6477  56     YES           514 FEMALE Base of Tongue    G2
+## 109 TCGA-CR-6478  66     YES            NA FEMALE         Tonsil    G3
+## 110 TCGA-CR-6481  47     YES           311   MALE         Tonsil    G2
+## 111 TCGA-CR-6482  62     YES           345   MALE         Tonsil    G3
+## 112 TCGA-CR-6484  67      NO           354 FEMALE    Oral Cavity    G2
+## 113 TCGA-CR-6487  50     YES           233   MALE         Tonsil    G3
+## 114 TCGA-CR-6488  68     YES           379 FEMALE    Oral Tongue    G2
+## 115 TCGA-CR-6491  60     YES           350   MALE Floor of Mouth    G2
+## 116 TCGA-CR-6492  78     YES           479   MALE    Hard Palate    G3
+## 117 TCGA-CR-6493  69     YES            NA   MALE    Oral Tongue    G2
+## 118 TCGA-CR-7364  66      NO          1435   MALE         Larynx    G2
+## 119 TCGA-CR-7365  60     YES          1190   MALE    Oral Cavity    G2
+## 120 TCGA-CR-7367  52     YES          1440   MALE    Oral Cavity    G1
+## 121 TCGA-CR-7368  54     YES          1244   MALE    Oral Cavity    G2
+## 122 TCGA-CR-7369  59     YES            NA   MALE    Oral Cavity    G2
+## 123 TCGA-CR-7370  72     YES           104 FEMALE         Larynx    G2
+## 124 TCGA-CR-7371  45      NO            NA FEMALE         Larynx    G2
+## 125 TCGA-CR-7372  45     YES           759   MALE    Oral Tongue    G1
+## 126 TCGA-CR-7373  66      NO           889   MALE    Oral Cavity    G2
+## 127 TCGA-CR-7374  67     YES            30 FEMALE         Larynx    G2
+## 128 TCGA-CR-7376  83     YES           972   MALE    Oral Cavity    G2
+## 129 TCGA-CR-7377  58     YES            NA   MALE    Oral Cavity    G3
+## 130 TCGA-CR-7379  78      NO          1036 FEMALE    Oral Cavity    G2
+## 131 TCGA-CR-7380  58     YES            NA   MALE    Oral Cavity    G2
+## 132 TCGA-CR-7382  49     YES           796   MALE    Oral Tongue    G2
+## 133 TCGA-CR-7383  79     YES            NA FEMALE         Tonsil    G2
+## 134 TCGA-CR-7385  42     YES           997   MALE         Tonsil    G2
+## 135 TCGA-CR-7386  69     YES          1430   MALE    Oral Cavity    G1
+## 136 TCGA-CR-7388  70     YES            NA FEMALE         Larynx    G2
+## 137 TCGA-CR-7389  55     YES           392   MALE         Larynx    G2
+## 138 TCGA-CR-7390  67     YES           907   MALE    Oral Tongue    G2
+## 139 TCGA-CR-7391  36     YES           913 FEMALE    Oral Tongue    G1
+## 140 TCGA-CR-7392  67      NO           946 FEMALE    Oral Tongue    G1
+## 141 TCGA-CR-7393  26     YES           908   MALE    Oral Tongue    G2
+## 142 TCGA-CR-7394  70      NO           898   MALE    Oral Tongue    G2
+## 143 TCGA-CR-7395  80     YES           929 FEMALE    Oral Cavity    G2
+## 144 TCGA-CR-7397  44     YES           216   MALE    Oral Tongue    G2
+## 145 TCGA-CR-7398  53     YES           156 FEMALE         Larynx    G2
+## 146 TCGA-CR-7399  60     YES           180 FEMALE         Larynx    G3
+## 147 TCGA-CR-7401  64     YES          1077   MALE    Oral Tongue    G2
+## 148 TCGA-CR-7402  68     YES           910   MALE         Larynx    G2
+## 149 TCGA-CR-7404  53     YES          1471   MALE         Tonsil    G2
+## 150 TCGA-CV-5430  61     YES          4115   MALE         Larynx    G3
+## 151 TCGA-CV-5431  73     YES           522   MALE         Larynx    G3
+## 152 TCGA-CV-5432  68    &lt;NA&gt;          3930   MALE         Larynx    G3
+## 153 TCGA-CV-5434  60      NO          3295   MALE         Larynx    G2
+## 154 TCGA-CV-5435  57     YES          1438   MALE         Larynx    G3
+## 155 TCGA-CV-5436  65     YES           584   MALE Floor of Mouth    G2
+## 156 TCGA-CV-5439  62     YES           546   MALE Base of Tongue    G2
+## 157 TCGA-CV-5440  52     YES          2732   MALE         Larynx    G3
+## 158 TCGA-CV-5441  58     YES          2663   MALE         Larynx    G3
+## 159 TCGA-CV-5442  76      NO          2326 FEMALE    Hard Palate    G3
+## 160 TCGA-CV-5443  63     YES          2567   MALE         Larynx    G3
+## 161 TCGA-CV-5444  64     YES          1969   MALE         Larynx    G3
+## 162 TCGA-CV-5966  63     YES           519 FEMALE    Oral Cavity    G3
+## 163 TCGA-CV-5970  59     YES           406   MALE    Oral Tongue    G2
+## 164 TCGA-CV-5971  60     YES           540   MALE    Oral Tongue    G2
+## 165 TCGA-CV-5973  62      NO          1736 FEMALE    Oral Tongue    G3
+## 166 TCGA-CV-5976  50     YES          1478   MALE    Oral Tongue    G2
+## 167 TCGA-CV-5977  66     YES          1007   MALE    Oral Tongue    G2
+## 168 TCGA-CV-5978  53     YES           215 FEMALE         Larynx    G2
+## 169 TCGA-CV-5979  26     YES          1315   MALE    Oral Tongue    G2
+## 170 TCGA-CV-6003  50     YES          1246 FEMALE    Oral Tongue    G2
+## 171 TCGA-CV-6433  57     YES           405   MALE    Oral Tongue    G3
+## 172 TCGA-CV-6436  62      NO           743   MALE    Oral Tongue    G1
+## 173 TCGA-CV-6441  60     YES           179   MALE    Oral Tongue    G3
+## 174 TCGA-CV-6933  53     YES            NA   MALE    Oral Tongue    G2
+## 175 TCGA-CV-6934  66      NO            NA FEMALE    Oral Tongue    G2
+## 176 TCGA-CV-6935  67     YES            NA   MALE         Larynx    G3
+## 177 TCGA-CV-6936  68     YES            NA   MALE Floor of Mouth    G2
+## 178 TCGA-CV-6937  71      NO            NA   MALE    Oral Cavity    G2
+## 179 TCGA-CV-6938  87      NO            NA   MALE    Oral Cavity    G1
+## 180 TCGA-CV-6939  60      NO            NA   MALE    Oral Tongue    G3
+## 181 TCGA-CV-6940  80      NO            NA FEMALE  Buccal Mucosa    G2
+## 182 TCGA-CV-6941  51     YES            NA   MALE    Oral Tongue    G2
+## 183 TCGA-CV-6942  73      NO          3835 FEMALE    Oral Cavity    G3
+## 184 TCGA-CV-6943  74     YES            NA   MALE Base of Tongue    G2
+## 185 TCGA-CV-6945  41     YES            NA   MALE    Oral Tongue    G2
+## 186 TCGA-CV-6948  79      NO            NA FEMALE Floor of Mouth    G2
+## 187 TCGA-CV-6950  64     YES            NA   MALE Base of Tongue    G2
+## 188 TCGA-CV-6951  57     YES            NA   MALE    Oral Tongue    G2
+## 189 TCGA-CV-6952  65     YES            NA FEMALE    Oral Tongue    G1
+## 190 TCGA-CV-6953  80      NO            NA FEMALE Floor of Mouth    G1
+## 191 TCGA-CV-6954  59     YES            NA   MALE    Oral Tongue    G2
+## 192 TCGA-CV-6955  74      NO            NA   MALE    Oral Cavity    G3
+## 193 TCGA-CV-6956  67     YES            NA   MALE    Oral Tongue    G2
+## 194 TCGA-CV-6959  48     YES            NA   MALE    Oral Tongue    G2
+## 195 TCGA-CV-6960  49     YES            NA   MALE    Oral Cavity    G3
+## 196 TCGA-CV-6961  61     YES            NA   MALE    Oral Tongue    G3
+## 197 TCGA-CV-6962  65      NO            NA   MALE         Larynx    G2
+## 198 TCGA-CV-7089  74     YES            NA   MALE         Larynx    G2
+## 199 TCGA-CV-7090  39      NO          3836   MALE    Oral Cavity    G2
+## 200 TCGA-CV-7091  54     YES          3380   MALE    Oral Cavity    G3
+## 201 TCGA-CV-7095  87      NO            NA FEMALE    Oral Cavity    G2
+## 202 TCGA-CV-7097  53     YES            NA   MALE    Oral Cavity    G3
+## 203 TCGA-CV-7099  85      NO            NA FEMALE    Oral Cavity    G2
+## 204 TCGA-CV-7100  66      NO            NA   MALE    Oral Cavity    G3
+## 205 TCGA-CV-7101  80     YES            NA   MALE         Larynx    G2
+## 206 TCGA-CV-7102  76     YES            NA FEMALE Floor of Mouth    G3
+## 207 TCGA-CV-7103  49     YES            NA FEMALE    Oral Tongue    G2
+## 208 TCGA-CV-7104  61      NO            NA FEMALE    Oral Tongue    G2
+## 209 TCGA-CV-7177  82      NO            NA FEMALE         Larynx    G2
+## 210 TCGA-CV-7178  64     YES            NA FEMALE    Oral Cavity    G3
+## 211 TCGA-CV-7180  34     YES            NA   MALE    Oral Tongue    G2
+## 212 TCGA-CV-7183  53      NO          3496   MALE    Oral Cavity    G1
+## 213 TCGA-CV-7235  67     YES          1724   MALE Floor of Mouth    G3
+## 214 TCGA-CV-7236  77      NO            NA FEMALE    Oral Tongue    G3
+## 215 TCGA-CV-7238  69      NO          1444 FEMALE    Oral Tongue    G2
+## 216 TCGA-CV-7242  60     YES          1095 FEMALE         Larynx    G2
+## 217 TCGA-CV-7243  50     YES           953   MALE    Oral Tongue    G2
+## 218 TCGA-CV-7245  62      NO           797   MALE         Larynx    G2
+## 219 TCGA-CV-7247  55      NO            NA   MALE         Larynx    G2
+## 220 TCGA-CV-7248  63      NO            NA FEMALE         Larynx    G2
+## 221 TCGA-CV-7250  64     YES            NA   MALE         Larynx    G1
+## 222 TCGA-CV-7252  62      NO            NA FEMALE    Oral Cavity    G2
+## 223 TCGA-CV-7253  58    &lt;NA&gt;            NA   MALE    Oral Cavity    G2
+## 224 TCGA-CV-7254  55     YES            NA   MALE    Oral Cavity    G3
+## 225 TCGA-CV-7255  32     YES            NA FEMALE    Oral Tongue    G2
+## 226 TCGA-CV-7261  57      NO          1099   MALE         Larynx    G2
+## 227 TCGA-CV-7263  64      NO            NA   MALE    Oral Cavity    G1
+## 228 TCGA-CV-7406  49     YES            NA   MALE Base of Tongue    GX
+## 229 TCGA-CV-7407  67      NO            NA FEMALE Floor of Mouth    G2
+## 230 TCGA-CV-7410  61      NO            NA   MALE         Larynx    GX
+## 231 TCGA-CV-7411  64      NO            NA FEMALE    Oral Cavity    G1
+## 232 TCGA-CV-7413  74      NO            NA FEMALE    Oral Cavity    G2
+## 233 TCGA-CV-7414  78      NO            NA   MALE    Oral Cavity    G2
+## 234 TCGA-CV-7415  60      NO            NA   MALE         Larynx    G2
+## 235 TCGA-CV-7416  29    &lt;NA&gt;            NA FEMALE    Oral Tongue    GX
+## 236 TCGA-CV-7418  62     YES            NA   MALE         Larynx    G2
+## 237 TCGA-CV-7421  76      NO            NA   MALE         Larynx    G2
+## 238 TCGA-CV-7422  60     YES            NA FEMALE         Larynx    G3
+## 239 TCGA-CV-7423  65      NO            NA   MALE    Oral Cavity    G1
+## 240 TCGA-CV-7424  67      NO            NA   MALE         Larynx    G2
+## 241 TCGA-CV-7427  73     YES            NA FEMALE    Oral Cavity    G1
+## 242 TCGA-CV-7429  55     YES            NA   MALE    Oral Cavity    G3
+## 243 TCGA-CV-7430  56      NO            NA   MALE         Larynx    G2
+## 244 TCGA-CV-7432  79      NO            NA   MALE    Oral Cavity    G1
+## 245 TCGA-CV-7433  49      NO            NA   MALE         Larynx    G3
+## 246 TCGA-CV-7434  64     YES            NA   MALE    Oral Cavity    G2
+## 247 TCGA-CV-7435  57      NO          4334 FEMALE    Oral Cavity    G2
+## 248 TCGA-CV-7437  77      NO            NA   MALE         Larynx    GX
+## 249 TCGA-CV-7438  87      NO            NA FEMALE    Oral Tongue    G3
+## 250 TCGA-CV-7440  38      NO            NA   MALE         Larynx    GX
+## 251 TCGA-CX-7082  82     YES           316   MALE    Oral Cavity    G2
+## 252 TCGA-CX-7085  77     YES           321 FEMALE    Oral Tongue    G2
+## 253 TCGA-CX-7086  53     YES           236   MALE Floor of Mouth    G2
+## 254 TCGA-CX-7219  47     YES           828   MALE Floor of Mouth    G2
+## 255 TCGA-D6-6515  82      NO           403 FEMALE    Oral Tongue    G3
+## 256 TCGA-D6-6516  69      NO           325   MALE            Lip    G2
+## 257 TCGA-D6-6517  59     YES           250   MALE         Larynx    G2
+## 258 TCGA-D6-6823  50     YES           238   MALE    Oral Tongue    G2
+## 259 TCGA-D6-6824  61     YES            77   MALE         Larynx    G2
+## 260 TCGA-D6-6825  73     YES           152   MALE    Oral Tongue    G2
+## 261 TCGA-D6-6826  64      NO           153 FEMALE         Larynx    G2
+## 262 TCGA-DQ-5624  43      NO          1149 FEMALE    Oral Tongue    G2
+## 263 TCGA-DQ-5625  52     YES          1058 FEMALE    Oral Tongue    G2
+## 264 TCGA-DQ-5629  64     YES           516   MALE         Larynx    G2
+## 265 TCGA-DQ-5630  73     YES           477   MALE    Oral Tongue    G2
+## 266 TCGA-DQ-5631  52     YES           548   MALE    Oral Tongue    G3
+## 267 TCGA-DQ-7588  66     YES            NA   MALE  Buccal Mucosa    G3
+## 268 TCGA-DQ-7591  62     YES           360   MALE Base of Tongue    G4
+## 269 TCGA-DQ-7592  57     YES           299   MALE    Oral Tongue    G2
+## 270 TCGA-F7-7848  47     YES            35   MALE         Larynx    G2
+## 271 TCGA-H7-7774  75     YES            30 FEMALE    Oral Cavity    G2
+## 272 TCGA-HD-7229  60      NO             2   MALE         Larynx    G3
+## 273 TCGA-HD-7753  62     YES             5   MALE     Oropharynx    G2
+## 274 TCGA-HD-7754  69     YES            25   MALE         Tonsil    G1
+## 275 TCGA-HD-7831  74     YES             0   MALE    Oral Tongue    G2
+## 276 TCGA-HD-7832  52     YES             0   MALE Floor of Mouth    G2
+## 277 TCGA-IQ-7630  49      NO           160   MALE     Oropharynx    G3
+## 278 TCGA-IQ-7631  60      NO           122 FEMALE  Buccal Mucosa    G1
+## 279 TCGA-IQ-7632  68      NO           113 FEMALE Alveolar Ridge    G1
+##     pack_years                               tabacco_group tumor_stage
+## 1     51.00000                              Current smoker   Stage IVA
+## 2     30.00000                              Current smoker        &lt;NA&gt;
+## 3     30.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 4     75.00000 Current reformed smoker for &lt; or = 15 years        &lt;NA&gt;
+## 5     60.00000                              Current smoker   Stage IVA
+## 6     20.00000      Current reformed smoker for &gt; 15 years   Stage IVA
+## 7           NA                         Lifelong Non-smoker   Stage IVA
+## 8           NA                         Lifelong Non-smoker        &lt;NA&gt;
+## 9     62.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 10    60.00000 Current reformed smoker for &lt; or = 15 years    Stage II
+## 11          NA                         Lifelong Non-smoker   Stage III
+## 12          NA                         Lifelong Non-smoker        &lt;NA&gt;
+## 13          NA                         Lifelong Non-smoker        &lt;NA&gt;
+## 14    60.00000 Current reformed smoker for &lt; or = 15 years        &lt;NA&gt;
+## 15    46.00000                              Current smoker   Stage III
+## 16    40.00000                              Current smoker        &lt;NA&gt;
+## 17   180.00000 Current reformed smoker for &lt; or = 15 years        &lt;NA&gt;
+## 18    40.00000                              Current smoker        &lt;NA&gt;
+## 19     1.00000                              Current smoker   Stage IVA
+## 20    46.00000                              Current smoker   Stage III
+## 21    60.00000                              Current smoker   Stage IVA
+## 22          NA                         Lifelong Non-smoker   Stage IVA
+## 23          NA                         Lifelong Non-smoker   Stage IVA
+## 24     1.50000 Current reformed smoker for &lt; or = 15 years        &lt;NA&gt;
+## 25   102.50000                              Current smoker   Stage III
+## 26          NA Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 27          NA                         Lifelong Non-smoker    Stage II
+## 28    12.50000                              Current smoker   Stage IVA
+## 29    80.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 30    40.00000                              Current smoker   Stage IVA
+## 31    35.00000 Current reformed smoker for &lt; or = 15 years   Stage III
+## 32    47.00000                              Current smoker   Stage IVA
+## 33    60.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 34          NA                         Lifelong Non-smoker   Stage III
+## 35   120.00000                              Current smoker   Stage IVA
+## 36    45.00000 Current reformed smoker for &lt; or = 15 years        &lt;NA&gt;
+## 37          NA                         Lifelong Non-smoker   Stage IVA
+## 38    72.00000                              Current smoker   Stage IVA
+## 39    82.50000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 40    12.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 41    45.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 42    20.00000                              Current smoker   Stage IVA
+## 43    40.00000                              Current smoker   Stage IVA
+## 44          NA                              Current smoker   Stage III
+## 45    45.00000 Current reformed smoker for &lt; or = 15 years    Stage II
+## 46    29.00000                              Current smoker   Stage IVA
+## 47    50.00000                              Current smoker   Stage IVA
+## 48    15.00000                              Current smoker   Stage IVB
+## 49          NA                              Current smoker   Stage IVA
+## 50    26.00000                              Current smoker   Stage IVB
+## 51    80.00000                              Current smoker   Stage IVA
+## 52    40.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 53          NA                              Current smoker   Stage IVA
+## 54          NA Current reformed smoker for &lt; or = 15 years   Stage III
+## 55    60.00000 Current reformed smoker for &lt; or = 15 years     Stage I
+## 56    30.00000                              Current smoker   Stage IVA
+## 57    67.50000                              Current smoker   Stage IVA
+## 58    40.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 59   100.00000                              Current smoker   Stage IVA
+## 60          NA                         Lifelong Non-smoker   Stage IVA
+## 61    50.00000                              Current smoker   Stage IVA
+## 62     5.00000      Current reformed smoker for &gt; 15 years   Stage IVA
+## 63          NA                         Lifelong Non-smoker   Stage IVA
+## 64    20.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 65          NA                              Current smoker   Stage III
+## 66    60.00000 Current reformed smoker for &lt; or = 15 years        &lt;NA&gt;
+## 67          NA                              Current smoker   Stage IVA
+## 68    35.00000      Current reformed smoker for &gt; 15 years   Stage IVA
+## 69   150.00000                              Current smoker   Stage IVA
+## 70    40.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 71    50.00000                              Current smoker   Stage IVA
+## 72    90.00000                              Current smoker   Stage IVA
+## 73    12.00000      Current reformed smoker for &gt; 15 years   Stage IVA
+## 74          NA                              Current smoker   Stage IVA
+## 75    80.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 76    40.00000                              Current smoker   Stage IVA
+## 77    45.00000      Current reformed smoker for &gt; 15 years     Stage I
+## 78    43.00000 Current reformed smoker for &lt; or = 15 years   Stage III
+## 79    49.00000 Current reformed smoker for &lt; or = 15 years     Stage I
+## 80    40.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 81          NA                         Lifelong Non-smoker    Stage II
+## 82    21.00000      Current reformed smoker for &gt; 15 years   Stage IVA
+## 83    15.00000      Current reformed smoker for &gt; 15 years        &lt;NA&gt;
+## 84    90.00000 Current reformed smoker for &lt; or = 15 years   Stage III
+## 85          NA      Current reformed smoker for &gt; 15 years   Stage IVA
+## 86    30.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 87          NA                         Lifelong Non-smoker   Stage III
+## 88    25.00000      Current reformed smoker for &gt; 15 years        &lt;NA&gt;
+## 89    22.00000      Current reformed smoker for &gt; 15 years    Stage II
+## 90    35.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 91          NA      Current reformed smoker for &gt; 15 years   Stage III
+## 92    20.00000      Current reformed smoker for &gt; 15 years   Stage IVA
+## 93    50.00000                              Current smoker   Stage IVA
+## 94          NA                         Lifelong Non-smoker    Stage II
+## 95          NA                         Lifelong Non-smoker    Stage II
+## 96          NA                         Lifelong Non-smoker    Stage II
+## 97          NA                         Lifelong Non-smoker        &lt;NA&gt;
+## 98   105.00000                              Current smoker        &lt;NA&gt;
+## 99          NA                              Current smoker        &lt;NA&gt;
+## 100         NA                         Lifelong Non-smoker    Stage II
+## 101   30.00000                              Current smoker        &lt;NA&gt;
+## 102   15.00000 Current reformed smoker for &lt; or = 15 years   Stage III
+## 103         NA                         Lifelong Non-smoker    Stage II
+## 104   40.00000                              Current smoker   Stage IVA
+## 105         NA                         Lifelong Non-smoker        &lt;NA&gt;
+## 106   50.00000 Current reformed smoker for &lt; or = 15 years        &lt;NA&gt;
+## 107   74.00000                              Current smoker   Stage IVA
+## 108         NA      Current reformed smoker for &gt; 15 years        &lt;NA&gt;
+## 109         NA Current reformed smoker for &lt; or = 15 years        &lt;NA&gt;
+## 110         NA                         Lifelong Non-smoker        &lt;NA&gt;
+## 111   31.00000 Current reformed smoker for &lt; or = 15 years        &lt;NA&gt;
+## 112         NA                         Lifelong Non-smoker   Stage IVA
+## 113   11.00000 Current reformed smoker for &lt; or = 15 years     Stage I
+## 114         NA                         Lifelong Non-smoker    Stage II
+## 115   67.50000                              Current smoker   Stage IVA
+## 116   50.00000                              Current smoker   Stage III
+## 117   15.00000      Current reformed smoker for &gt; 15 years   Stage IVA
+## 118  150.00000                              Current smoker   Stage III
+## 119         NA                              Current smoker   Stage IVA
+## 120   45.00000                              Current smoker   Stage IVA
+## 121   57.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 122   48.00000                              Current smoker   Stage IVA
+## 123  112.00000 Current reformed smoker for &lt; or = 15 years        &lt;NA&gt;
+## 124   60.00000                              Current smoker   Stage III
+## 125         NA                         Lifelong Non-smoker     Stage I
+## 126   90.00000      Current reformed smoker for &gt; 15 years   Stage IVA
+## 127   45.00000                              Current smoker        &lt;NA&gt;
+## 128   54.00000      Current reformed smoker for &gt; 15 years   Stage III
+## 129   80.00000                              Current smoker   Stage IVA
+## 130    0.71000      Current reformed smoker for &gt; 15 years   Stage IVA
+## 131         NA                         Lifelong Non-smoker   Stage IVB
+## 132         NA                         Lifelong Non-smoker   Stage IVA
+## 133  110.00000                              Current smoker     Stage I
+## 134    0.01685      Current reformed smoker for &gt; 15 years        &lt;NA&gt;
+## 135   54.00000      Current reformed smoker for &gt; 15 years   Stage IVA
+## 136  110.00000                              Current smoker        &lt;NA&gt;
+## 137   34.00000                              Current smoker        &lt;NA&gt;
+## 138   80.00000                              Current smoker   Stage IVA
+## 139         NA      Current reformed smoker for &gt; 15 years     Stage I
+## 140   30.00000      Current reformed smoker for &gt; 15 years   Stage IVA
+## 141         NA                         Lifelong Non-smoker   Stage III
+## 142   60.00000                              Current smoker   Stage IVA
+## 143   60.00000      Current reformed smoker for &gt; 15 years    Stage II
+## 144         NA Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 145   40.00000                              Current smoker    Stage II
+## 146  135.00000                              Current smoker   Stage IVA
+## 147   66.00000 Current reformed smoker for &lt; or = 15 years     Stage I
+## 148  108.00000                              Current smoker        &lt;NA&gt;
+## 149         NA                         Lifelong Non-smoker        &lt;NA&gt;
+## 150         NA      Current reformed smoker for &gt; 15 years   Stage IVA
+## 151         NA Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 152         NA Current reformed smoker for &lt; or = 15 years   Stage III
+## 153         NA      Current reformed smoker for &gt; 15 years   Stage IVA
+## 154         NA Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 155         NA                              Current smoker   Stage IVA
+## 156         NA                              Current smoker   Stage IVA
+## 157         NA                              Current smoker   Stage IVA
+## 158         NA Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 159         NA Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 160         NA                              Current smoker   Stage III
+## 161         NA Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 162         NA Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 163         NA Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 164         NA                              Current smoker   Stage IVA
+## 165         NA                         Lifelong Non-smoker   Stage III
+## 166         NA Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 167         NA Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 168         NA                              Current smoker   Stage IVB
+## 169         NA                         Lifelong Non-smoker   Stage IVA
+## 170         NA                         Lifelong Non-smoker   Stage III
+## 171         NA                              Current smoker    Stage II
+## 172         NA      Current reformed smoker for &gt; 15 years   Stage IVA
+## 173         NA Current reformed smoker for &lt; or = 15 years   Stage III
+## 174   60.00000 Current reformed smoker for &lt; or = 15 years   Stage III
+## 175    1.00000                              Current smoker   Stage IVA
+## 176         NA                              Current smoker   Stage IVA
+## 177    1.00000                              Current smoker   Stage IVA
+## 178         NA Current reformed smoker for &lt; or = 15 years    Stage II
+## 179         NA      Current reformed smoker for &gt; 15 years    Stage II
+## 180         NA                         Lifelong Non-smoker   Stage IVA
+## 181         NA                              Current smoker   Stage III
+## 182   60.00000                              Current smoker   Stage III
+## 183         NA                         Lifelong Non-smoker    Stage II
+## 184         NA      Current reformed smoker for &gt; 15 years   Stage III
+## 185   75.00000                              Current smoker   Stage IVA
+## 186         NA                                        &lt;NA&gt;   Stage IVB
+## 187         NA Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 188         NA Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 189   30.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 190         NA                         Lifelong Non-smoker   Stage III
+## 191         NA      Current reformed smoker for &gt; 15 years   Stage IVA
+## 192         NA                         Lifelong Non-smoker    Stage II
+## 193         NA                              Current smoker   Stage III
+## 194         NA                         Lifelong Non-smoker   Stage III
+## 195         NA Current reformed smoker for &lt; or = 15 years   Stage III
+## 196         NA Current reformed smoker for &lt; or = 15 years    Stage II
+## 197         NA Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 198         NA Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 199         NA                         Lifelong Non-smoker    Stage II
+## 200         NA Current reformed smoker for &lt; or = 15 years     Stage I
+## 201   40.00000      Current reformed smoker for &gt; 15 years    Stage II
+## 202   64.00000 Current reformed smoker for &lt; or = 15 years    Stage II
+## 203         NA      Current reformed smoker for &gt; 15 years    Stage II
+## 204         NA      Current reformed smoker for &gt; 15 years   Stage III
+## 205         NA                              Current smoker    Stage II
+## 206         NA Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 207         NA                              Current smoker   Stage IVA
+## 208         NA                         Lifelong Non-smoker   Stage IVA
+## 209         NA                                        &lt;NA&gt;    Stage II
+## 210         NA      Current reformed smoker for &gt; 15 years   Stage IVA
+## 211         NA      Current reformed smoker for &gt; 15 years    Stage II
+## 212         NA      Current reformed smoker for &gt; 15 years    Stage II
+## 213   97.50000      Current reformed smoker for &gt; 15 years    Stage II
+## 214         NA                                        &lt;NA&gt;   Stage IVA
+## 215         NA                         Lifelong Non-smoker    Stage II
+## 216   40.00000      Current reformed smoker for &gt; 15 years    Stage II
+## 217         NA                         Lifelong Non-smoker   Stage III
+## 218   60.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 219         NA                         Lifelong Non-smoker   Stage III
+## 220   30.00000                              Current smoker   Stage IVA
+## 221   60.00000      Current reformed smoker for &gt; 15 years   Stage IVA
+## 222         NA                                        &lt;NA&gt;   Stage IVA
+## 223         NA                                        &lt;NA&gt;   Stage IVA
+## 224   40.00000 Current reformed smoker for &lt; or = 15 years    Stage II
+## 225         NA                         Lifelong Non-smoker   Stage IVA
+## 226   41.00000                              Current smoker   Stage IVA
+## 227   60.00000      Current reformed smoker for &gt; 15 years    Stage II
+## 228    9.00000 Current reformed smoker for &lt; or = 15 years    Stage II
+## 229         NA                         Lifelong Non-smoker    Stage II
+## 230   38.00000      Current reformed smoker for &gt; 15 years   Stage III
+## 231         NA                              Current smoker   Stage IVA
+## 232         NA                                        &lt;NA&gt;    Stage II
+## 233         NA      Current reformed smoker for &gt; 15 years   Stage IVA
+## 234         NA                                        &lt;NA&gt;   Stage IVA
+## 235         NA                         Lifelong Non-smoker   Stage IVA
+## 236   60.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 237         NA      Current reformed smoker for &gt; 15 years   Stage IVA
+## 238   80.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 239         NA      Current reformed smoker for &gt; 15 years    Stage II
+## 240   50.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 241   25.00000      Current reformed smoker for &gt; 15 years    Stage II
+## 242         NA Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 243   40.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 244   61.00000 Current reformed smoker for &lt; or = 15 years    Stage II
+## 245   16.00000                              Current smoker   Stage IVA
+## 246   80.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 247         NA                              Current smoker   Stage IVA
+## 248         NA                         Lifelong Non-smoker    Stage II
+## 249         NA                         Lifelong Non-smoker     Stage I
+## 250   21.00000                              Current smoker    Stage II
+## 251   50.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 252    3.00000      Current reformed smoker for &gt; 15 years     Stage I
+## 253   35.00000                              Current smoker   Stage III
+## 254   20.00000                              Current smoker   Stage IVA
+## 255         NA                         Lifelong Non-smoker    Stage II
+## 256   74.00000 Current reformed smoker for &lt; or = 15 years     Stage I
+## 257   30.00000 Current reformed smoker for &lt; or = 15 years   Stage III
+## 258   60.00000                              Current smoker    Stage II
+## 259   40.00000                              Current smoker   Stage IVA
+## 260  300.00000 Current reformed smoker for &lt; or = 15 years     Stage I
+## 261         NA                         Lifelong Non-smoker   Stage IVA
+## 262         NA                         Lifelong Non-smoker        &lt;NA&gt;
+## 263   33.00000                              Current smoker        &lt;NA&gt;
+## 264   63.00000 Current reformed smoker for &lt; or = 15 years        &lt;NA&gt;
+## 265    5.00000      Current reformed smoker for &gt; 15 years        &lt;NA&gt;
+## 266   23.00000 Current reformed smoker for &lt; or = 15 years        &lt;NA&gt;
+## 267   45.00000 Current reformed smoker for &lt; or = 15 years        &lt;NA&gt;
+## 268   20.00000      Current reformed smoker for &gt; 15 years        &lt;NA&gt;
+## 269   68.00000                              Current smoker        &lt;NA&gt;
+## 270   20.00000                              Current smoker   Stage IVA
+## 271   55.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 272         NA      Current reformed smoker for &gt; 15 years   Stage IVA
+## 273   40.00000                              Current smoker     Stage I
+## 274    4.00000 Current reformed smoker for &lt; or = 15 years   Stage IVA
+## 275         NA                         Lifelong Non-smoker   Stage IVA
+## 276   36.00000                              Current smoker   Stage IVA
+## 277         NA                         Lifelong Non-smoker    Stage II
+## 278   30.00000      Current reformed smoker for &gt; 15 years    Stage II
+## 279   10.00000      Current reformed smoker for &gt; 15 years   Stage IVA
+##     vital_status
+## 1       DECEASED
+## 2       DECEASED
+## 3       DECEASED
+## 4       DECEASED
+## 5         LIVING
+## 6         LIVING
+## 7         LIVING
+## 8       DECEASED
+## 9         LIVING
+## 10        LIVING
+## 11        LIVING
+## 12        LIVING
+## 13        LIVING
+## 14        LIVING
+## 15        LIVING
+## 16      DECEASED
+## 17        LIVING
+## 18      DECEASED
+## 19        LIVING
+## 20        LIVING
+## 21        LIVING
+## 22        LIVING
+## 23        LIVING
+## 24        LIVING
+## 25        LIVING
+## 26        LIVING
+## 27        LIVING
+## 28      DECEASED
+## 29        LIVING
+## 30        LIVING
+## 31        LIVING
+## 32        LIVING
+## 33        LIVING
+## 34        LIVING
+## 35        LIVING
+## 36      DECEASED
+## 37        LIVING
+## 38      DECEASED
+## 39        LIVING
+## 40        LIVING
+## 41        LIVING
+## 42      DECEASED
+## 43        LIVING
+## 44        LIVING
+## 45        LIVING
+## 46      DECEASED
+## 47        LIVING
+## 48      DECEASED
+## 49      DECEASED
+## 50      DECEASED
+## 51      DECEASED
+## 52      DECEASED
+## 53      DECEASED
+## 54      DECEASED
+## 55        LIVING
+## 56        LIVING
+## 57        LIVING
+## 58        LIVING
+## 59        LIVING
+## 60        LIVING
+## 61        LIVING
+## 62        LIVING
+## 63        LIVING
+## 64        LIVING
+## 65        LIVING
+## 66      DECEASED
+## 67        LIVING
+## 68        LIVING
+## 69        LIVING
+## 70        LIVING
+## 71        LIVING
+## 72        LIVING
+## 73        LIVING
+## 74      DECEASED
+## 75        LIVING
+## 76        LIVING
+## 77        LIVING
+## 78        LIVING
+## 79      DECEASED
+## 80      DECEASED
+## 81        LIVING
+## 82        LIVING
+## 83        LIVING
+## 84      DECEASED
+## 85      DECEASED
+## 86        LIVING
+## 87      DECEASED
+## 88        LIVING
+## 89        LIVING
+## 90        LIVING
+## 91      DECEASED
+## 92      DECEASED
+## 93      DECEASED
+## 94        LIVING
+## 95        LIVING
+## 96        LIVING
+## 97        LIVING
+## 98        LIVING
+## 99        LIVING
+## 100       LIVING
+## 101       LIVING
+## 102       LIVING
+## 103       LIVING
+## 104     DECEASED
+## 105       LIVING
+## 106       LIVING
+## 107     DECEASED
+## 108       LIVING
+## 109     DECEASED
+## 110       LIVING
+## 111       LIVING
+## 112       LIVING
+## 113       LIVING
+## 114       LIVING
+## 115       LIVING
+## 116       LIVING
+## 117     DECEASED
+## 118       LIVING
+## 119       LIVING
+## 120       LIVING
+## 121       LIVING
+## 122     DECEASED
+## 123       LIVING
+## 124     DECEASED
+## 125       LIVING
+## 126       LIVING
+## 127       LIVING
+## 128       LIVING
+## 129       LIVING
+## 130       LIVING
+## 131     DECEASED
+## 132       LIVING
+## 133     DECEASED
+## 134       LIVING
+## 135       LIVING
+## 136     DECEASED
+## 137       LIVING
+## 138       LIVING
+## 139       LIVING
+## 140       LIVING
+## 141       LIVING
+## 142       LIVING
+## 143       LIVING
+## 144       LIVING
+## 145       LIVING
+## 146       LIVING
+## 147       LIVING
+## 148       LIVING
+## 149       LIVING
+## 150       LIVING
+## 151     DECEASED
+## 152       LIVING
+## 153     DECEASED
+## 154     DECEASED
+## 155     DECEASED
+## 156     DECEASED
+## 157       LIVING
+## 158       LIVING
+## 159       LIVING
+## 160       LIVING
+## 161       LIVING
+## 162     DECEASED
+## 163     DECEASED
+## 164       LIVING
+## 165       LIVING
+## 166       LIVING
+## 167       LIVING
+## 168     DECEASED
+## 169       LIVING
+## 170       LIVING
+## 171       LIVING
+## 172       LIVING
+## 173     DECEASED
+## 174     DECEASED
+## 175     DECEASED
+## 176     DECEASED
+## 177     DECEASED
+## 178     DECEASED
+## 179     DECEASED
+## 180     DECEASED
+## 181     DECEASED
+## 182     DECEASED
+## 183       LIVING
+## 184     DECEASED
+## 185     DECEASED
+## 186     DECEASED
+## 187     DECEASED
+## 188     DECEASED
+## 189     DECEASED
+## 190     DECEASED
+## 191     DECEASED
+## 192     DECEASED
+## 193     DECEASED
+## 194     DECEASED
+## 195     DECEASED
+## 196     DECEASED
+## 197     DECEASED
+## 198     DECEASED
+## 199       LIVING
+## 200       LIVING
+## 201     DECEASED
+## 202     DECEASED
+## 203     DECEASED
+## 204     DECEASED
+## 205     DECEASED
+## 206     DECEASED
+## 207     DECEASED
+## 208     DECEASED
+## 209     DECEASED
+## 210     DECEASED
+## 211     DECEASED
+## 212       LIVING
+## 213       LIVING
+## 214     DECEASED
+## 215       LIVING
+## 216       LIVING
+## 217       LIVING
+## 218       LIVING
+## 219     DECEASED
+## 220     DECEASED
+## 221     DECEASED
+## 222     DECEASED
+## 223     DECEASED
+## 224     DECEASED
+## 225     DECEASED
+## 226       LIVING
+## 227     DECEASED
+## 228     DECEASED
+## 229     DECEASED
+## 230     DECEASED
+## 231     DECEASED
+## 232     DECEASED
+## 233     DECEASED
+## 234     DECEASED
+## 235     DECEASED
+## 236     DECEASED
+## 237     DECEASED
+## 238     DECEASED
+## 239     DECEASED
+## 240     DECEASED
+## 241     DECEASED
+## 242     DECEASED
+## 243     DECEASED
+## 244     DECEASED
+## 245     DECEASED
+## 246     DECEASED
+## 247       LIVING
+## 248     DECEASED
+## 249     DECEASED
+## 250     DECEASED
+## 251       LIVING
+## 252       LIVING
+## 253       LIVING
+## 254       LIVING
+## 255     DECEASED
+## 256       LIVING
+## 257       LIVING
+## 258       LIVING
+## 259       LIVING
+## 260       LIVING
+## 261       LIVING
+## 262       LIVING
+## 263       LIVING
+## 264       LIVING
+## 265       LIVING
+## 266     DECEASED
+## 267     DECEASED
+## 268       LIVING
+## 269       LIVING
+## 270       LIVING
+## 271       LIVING
+## 272       LIVING
+## 273       LIVING
+## 274       LIVING
+## 275       LIVING
+## 276       LIVING
+## 277       LIVING
+## 278       LIVING
+## 279       LIVING</code></pre>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

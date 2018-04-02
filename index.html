@@ -20,8 +20,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -31,10 +31,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -182,11 +184,41 @@ $(document).ready(function () {
 <li>
   <a href="refs.html">Publications</a>
 </li>
-<li>
-  <a href="software.html">Software</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Software
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="CVE.html">CVE</a>
+    </li>
+    <li>
+      <a href="MetaboDiff.html">MetaboDiff</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="teaching.html">Teaching</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Teaching
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="teaching.html">Intro</a>
+    </li>
+    <li>
+      <a href="day1.html">Tag1</a>
+    </li>
+    <li>
+      <a href="day2.html">Tag2</a>
+    </li>
+    <li>
+      <a href="day3.html">Tag3</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -216,38 +248,53 @@ $(document).ready(function () {
 </div>
 
 
-<p><img src="pics/Mock_Andreas.jpg" width="150" /></p>
+<p><img src="pics/home.png" width="400" /></p>
 <div id="on-the-personal-website-of-andreas-mock" class="section level4">
 <h4>on the personal website of Andreas Mock</h4>
 <p>I am a physician-scientist at the Department of Medical Oncology at the <a href="https://www.nct-heidelberg.de">National Center for Tumor Diseases (NCT)</a> in Heidelberg, Germany.</p>
-<p>I am intrigued by the prospects of <strong>Clinical Computational Oncology</strong> and are exploiting data science for <strong>Non-invasive Tumor Profiling</strong>.</p>
+<p>I am intrigued by the prospects of data science for precision oncology.</p>
 <p><br></p>
-<table style="width:60%;">
+</div>
+<div id="education" class="section level4">
+<h4>Education</h4>
+<table style="width:78%;">
 <colgroup>
 <col width="13%" />
 <col width="23%" />
-<col width="22%" />
+<col width="15%" />
+<col width="25%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Education</th>
-<th></th>
+<th>date</th>
+<th>study</th>
+<th>topic of thesis</th>
+<th>university</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>2008-2017</td>
-<td>Medical studies (Dr. med.)</td>
-<td>University of Heidelberg</td>
+<td>2016-present</td>
+<td>PhD studies (Dr. rer. nat.)</td>
+<td>Cancer metabolism</td>
+<td>DKFZ and University of Heidelberg</td>
 </tr>
 <tr class="even">
-<td>2014-2015</td>
-<td>Master program in Computational Biology (M.Phil.)</td>
-<td>University of Cambridge, UK</td>
+<td>2008-2017</td>
+<td>Medical studies (Dr. med.)</td>
+<td>Cancer epigenetics</td>
+<td>University of Heidelberg</td>
 </tr>
 <tr class="odd">
+<td>2014-2015</td>
+<td>Master program in Computational Biology (M.Phil.)</td>
+<td>Omic-driven cancer therapy</td>
+<td>University of Cambridge, UK</td>
+</tr>
+<tr class="even">
 <td>2012-2013</td>
 <td>Master program in Translational Medical Research (M.Sc.)</td>
+<td>Non-invasive cancer immunoprofiling</td>
 <td>University of Heidelberg</td>
 </tr>
 </tbody>
