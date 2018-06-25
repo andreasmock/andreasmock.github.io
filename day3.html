@@ -11,7 +11,7 @@
 
 
 
-<title>Hands-on Praktikum: Einführung in die angewandte Datenanalyse mit R</title>
+<title>Angewandte Datenanalyse mit R</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -164,6 +167,101 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -225,70 +323,43 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Hands-on Praktikum: Einführung in die angewandte Datenanalyse mit <code>R</code></h1>
+<h1 class="title toc-ignore">Angewandte Datenanalyse mit <code>R</code></h1>
+<h3 class="subtitle"><em>Tag 3 - Datenimport und -modellierung</em></h3>
 
 </div>
 
 
-<div id="heicumed-wahlfachtrack-internistische-onkologie-sozitat-czerny-mediss-promotionsprogramm" class="section level4">
-<h4>HeiCuMed | Wahlfachtrack internistische Onkologie, Sozität Czerny &amp; MEDISS Promotionsprogramm</h4>
-<p><code>Andreas Mock</code><br />
-Medizinische Onkologie, Nationales Centrum für Tumorerkrankungen (NCT) Heidelberg</p>
-<hr />
-<p><strong>Termine Sommersemester 2018</strong><br />
-<strong>Ort:</strong> NCT INF 460 Raum K1 1.OG<br />
-<strong>Kurszeiten:</strong></p>
+<p><br></p>
+<div id="ubung-7---datenimport" class="section level1">
+<h1>Übung 7 - Datenimport</h1>
+<p>Die anfänglichen Probleme mit dem Einlesen von Dateien lassen sich am besten durch die eigene Anwendung erkunden. Sucht euch txt, csv und xls/xlsx Files auf eurem Computer heraus und versucht diese in die <em>R</em> Umgebung zu laden. Denkt bitte auch an die Möglichkeit die Hilfe zu den einzelnen Funktionen aufzurufen. Am Ende der Übung sammeln wir die wichtigsten Probleme und Lösungsansätze.</p>
+<p>Hier noch einmal die Übersicht über die Funktionen:</p>
 <ul>
-<li>05.06.2018 - 15:30-17:00 Uhr</li>
-<li>12.06.2018 - <strong>16:30-18:00 Uhr</strong></li>
-<li>26.06.2018 - 15:30-17:00 Uhr</li>
+<li><code>read_tsv</code>: tab-separated file</li>
+<li><code>read_csv</code>: comma-separated file</li>
+<li><code>read_xlsx</code> bzw. <code>read_xls</code>: Excel spread sheet</li>
+<li><code>read_delim</code>: file mit beliebig anzugebendem delimiter, also Trennzeichen</li>
 </ul>
-<p>Wie kaum in einem anderen Fach werden in der Onkologie Erkrankungen auf den verschiedensten Ebenen der Biologie mit Hilfe von Hochdurchsatzdaten (Omics) analysiert. Durch diese Präzisionsonkologie erhofft man sich zielgerichtete (Immun-)Therapien entwickeln und einsetzen zu können. Diesen Prozess aktiv als Onkologe zu begleiten ist herausforderend und spannend und wird in zunehmenden Maße verlangen, Datenanalysen zu verstehen und im besten Falle sogar selber durchführen zu können.</p>
-<p>In diesem Einführungspraktikum möchte ich die Scheu vor angewandter Datenanalye nehmen und aufzeigen, wie einfach man das große Einmaleins der Datenanalyse- und visualisierung mit der Programmiersprache R erlernen kann. Das Praktikum richtet sich hierbei gezielt an Studierende, Ärzte und Wissenschaftler die bisher wenig oder noch keine Berührungspunkte mit einer Programmiersprache hatten.</p>
-<p><strong>Vorbereitungen</strong></p>
-<p>Bitte die folgenden Programme auf eurem Notebook installieren bzw. einrichten, um am Praktikumstag möglichst viel Zeit der Datenanalyse widmen zu können:</p>
-<ul>
-<li>Installation von <a href="https://www.r-project.org">R</a> und <a href="https://www.rstudio.com">RStudio</a></li>
-<li>Falls noch nicht vorhanden Einrichten eines <a href="https://www.urz.uni-heidelberg.de/de/eduroam">eduroam Zugangs</a>, um im Kursraum im NCT das Internet nutzen zu können. Wichtig: Angestellte der Uniklinik (Ärzte und Wissenschaftler) benötigen für die Einrichtung des Zertifikates eine Uni-ID, welche über das URZ Heidelberg zu beziehen ist.</li>
-<li>Bitte eigenes Notebook am Praktikumstag nicht vergessen</li>
-<li>An Tag 3 gibt es die Möglichkeit eigene Datensätze von euch in R zu laden, bitte schon einmal überlegen, welche ihr analysieren möchtet.</li>
-</ul>
-<p><strong>Kursunterlagen Sommersemester 18</strong></p>
-<table>
-<thead>
-<tr class="header">
-<th>Tag 1</th>
-<th>Tag 2</th>
-<th>Tag 3</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="http://andreasmock.github.io/presentations/pres_day1.pdf">Präsentation</a></td>
-<td><a href="http://andreasmock.github.io/presentations/pres_day2.pdf">Präsentation</a></td>
-<td><a href="http://andreasmock.github.io/presentations/pres_day3.pdf">Präsentation</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="http://andreasmock.github.io/day1.html">Übungen</a></td>
-<td><a href="http://andreasmock.github.io/day2.html">Übungen</a></td>
-<td><a href="http://andreasmock.github.io/day3.html">Übungen</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="http://andreasmock.github.io/solution1.html">Lösungen</a></td>
-<td><a href="http://andreasmock.github.io/solution2.html">Lösungen</a></td>
-<td>Lösungen</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>Die Lösungen zu den Übungen werden am Ende des jeweiligen Praktikumstags hochgeladen</p>
+<p>Um Excel files zu laden, benötigt ihr noch das package <code>readxl</code></p>
+<pre class="r"><code>install.packages(&quot;readxl&quot;)
+
+library(tidyverse)
+library(readxl)</code></pre>
+<p><br></p>
+</div>
+<div id="ubung-8---datenmodellierung" class="section level1">
+<h1>Übung 8 - Datenmodellierung</h1>
+<ol style="list-style-type: lower-alpha">
+<li>Benutzt einen Hypothesentest, um herauszufinden, ob es eine signifikante Assoziation zwischen dem Alter und dem Tumorstadium gibt.</li>
+<li>Führt eine Korrelationsanalyse für Alter und days to death durch. Ist dies die beste Art und Weise, diese Assoziation zu eruieren, oder fällt euch eine alternative Möglichkeit ein?</li>
+<li>Möchte man Verteilungen vergleichen, die nur sehr wenige Datenpunkte haben, ist es von Vorteil Rang-basierte Hypothesentest zu verwenden. Findet heraus, was die Rang-basierte Alternative zum T-Test ist und sucht nach der entsprechenden R-Funktion.</li>
+</ol>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
