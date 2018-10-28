@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Hands-on Praktikum: Einführung in die angewandte Datenanalyse mit R</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">AM</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="refs.html">Publications</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Software
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="CVE.html">CVE</a>
+    </li>
+    <li>
+      <a href="MetaboDiff.html">MetaboDiff</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="teaching.html">R-Kurs</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/andreasmock">
+    <span class="fa fa-github-square"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/am0ck">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Hands-on Praktikum: Einführung in die angewandte Datenanalyse mit <code>R</code></h1>
+
+</div>
+
+
+<div id="heicumed-wahlfachtrack-internistische-onkologie-sozitat-czerny-mediss-promotionsprogramm" class="section level4">
+<h4>HeiCuMed | Wahlfachtrack internistische Onkologie, Sozität Czerny &amp; MEDISS Promotionsprogramm</h4>
+<p><code>Andreas Mock</code><br />
+Medizinische Onkologie, Nationales Centrum für Tumorerkrankungen (NCT) Heidelberg</p>
+<hr />
+<p><strong>Termine Wintersemester 2018/2019</strong><br />
+<strong>Ort:</strong> NCT INF 460 Raum K1 1.OG<br />
+<strong>Kurszeiten:</strong></p>
+<ul>
+<li>15.01.2019 - 15:30-17:00 Uhr</li>
+<li>05.02.2019 - 15:30-17:00 Uhr</li>
+<li>12.02.2019 - 15:30-17:00 Uhr</li>
+</ul>
+<p>Wie kaum in einem anderen Fach werden in der Onkologie Erkrankungen auf den verschiedensten Ebenen der Biologie mit Hilfe von Hochdurchsatzdaten (Omics) analysiert. Durch diese Präzisionsonkologie erhofft man sich zielgerichtete (Immun-)Therapien entwickeln und einsetzen zu können. Diesen Prozess aktiv als Onkologe zu begleiten ist herausforderend und spannend und wird in zunehmenden Maße verlangen, Datenanalysen zu verstehen und im besten Falle sogar selber durchführen zu können.</p>
+<p>In diesem Einführungspraktikum möchte ich die Scheu vor angewandter Datenanalye nehmen und aufzeigen, wie einfach man das große Einmaleins der Datenanalyse- und visualisierung mit der Programmiersprache R erlernen kann. Das Praktikum richtet sich hierbei gezielt an Studierende, Ärzte und Wissenschaftler die bisher wenig oder noch keine Berührungspunkte mit einer Programmiersprache hatten.</p>
+<p><strong>Vorbereitungen</strong></p>
+<p>Bitte die folgenden Programme auf eurem Notebook installieren bzw. einrichten, um am Praktikumstag möglichst viel Zeit der Datenanalyse widmen zu können:</p>
+<ul>
+<li>Installation von <a href="https://www.r-project.org">R</a> und <a href="https://www.rstudio.com">RStudio</a></li>
+<li>Falls noch nicht vorhanden Einrichten eines <a href="https://www.urz.uni-heidelberg.de/de/eduroam">eduroam Zugangs</a>, um im Kursraum im NCT das Internet nutzen zu können. Wichtig: Angestellte der Uniklinik (Ärzte und Wissenschaftler) benötigen für die Einrichtung des Zertifikates eine Uni-ID, welche über das URZ Heidelberg zu beziehen ist.</li>
+<li>Bitte eigenes Notebook am Praktikumstag nicht vergessen</li>
+<li>An Tag 3 gibt es die Möglichkeit eigene Datensätze von euch in R zu laden, bitte schon einmal überlegen, welche ihr analysieren möchtet.</li>
+</ul>
+<p><strong>Kursunterlagen Sommersemester 18</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Tag 1</th>
+<th>Tag 2</th>
+<th>Tag 3</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="http://andreasmock.github.io/presentations/pres_day1.pdf">Präsentation</a></td>
+<td><a href="http://andreasmock.github.io/presentations/pres_day2.pdf">Präsentation</a></td>
+<td><a href="http://andreasmock.github.io/presentations/pres_day3.pdf">Präsentation</a></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Übungen</td>
+<td>Übungen</td>
+<td>Übungen</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Lösungen</td>
+<td>Lösungen</td>
+<td>Lösungen</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Die Lösungen zu den Übungen werden am Ende des jeweiligen Praktikumstags hochgeladen</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

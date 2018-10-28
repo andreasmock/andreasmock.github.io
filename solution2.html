@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Angewandte Datenanalyse mit R</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">AM</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="refs.html">Publications</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Software
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="CVE.html">CVE</a>
+    </li>
+    <li>
+      <a href="MetaboDiff.html">MetaboDiff</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="teaching.html">R-Kurs</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/andreasmock">
+    <span class="fa fa-github-square"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/am0ck">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Angewandte Datenanalyse mit <code>R</code></h1>
+<h3 class="subtitle"><em>Tag 2 - Datentransformation und -visualierung</em></h3>
+
+</div>
+
+
+<p><br></p>
+<div id="losungen-ubung-3" class="section level3">
+<h3>Lösungen Übung 3</h3>
+<p>Eigenschaften von Tibbles über klassische Dataframes hinaus</p>
+<ul>
+<li>Trunkierte, zusammengefasste Ausgabe in der Konsole. No need for head().</li>
+<li>Giben Vektortyp einer jeden Spalte an, z.B. Charakter <code>&lt;chr&gt;</code>.</li>
+<li>Zeigen die Dimensionen eines Dataframes vorneweg an, z.B. A tibble: 279 x 11</li>
+</ul>
+<p><br></p>
+</div>
+<div id="losungen-ubung-4" class="section level3">
+<h3>Lösungen Übung 4</h3>
+<ol style="list-style-type: lower-alpha">
+<li>Junge Patienten (&lt; 50 Jahre), Nichtraucher, Zeilen sortiert nach Alter.</li>
+</ol>
+<pre class="r"><code>hnscc %&gt;%
+    filter(age&lt;50, tabacco_group==&quot;Lifelong Non-smoker&quot;) %&gt;%
+    arrange(age)</code></pre>
+<pre><code>## # A tibble: 18 x 11
+##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
+##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+##  1 TCGA…    19 NO                240 MALE   Oral Tongue   G2            NA
+##  2 TCGA…    26 YES               908 MALE   Oral Tongue   G2            NA
+##  3 TCGA…    26 YES              1315 MALE   Oral Tongue   G2            NA
+##  4 TCGA…    29 &lt;NA&gt;              761 FEMALE Oral Tongue   GX            NA
+##  5 TCGA…    32 YES                64 FEMALE Oral Tongue   G2            NA
+##  6 TCGA…    35 YES              1152 FEMALE Tonsil        GX            NA
+##  7 TCGA…    38 YES              1521 MALE   Tonsil        G2            NA
+##  8 TCGA…    39 NO               3836 MALE   Oral Cavity   G2            NA
+##  9 TCGA…    40 NO               1006 MALE   Oral Tongue   G2            NA
+## 10 TCGA…    41 YES               242 FEMALE Oral Tongue   G2            NA
+## 11 TCGA…    43 NO               1149 FEMALE Oral Tongue   G2            NA
+## 12 TCGA…    45 YES               759 MALE   Oral Tongue   G1            NA
+## 13 TCGA…    46 NO                841 FEMALE Oral Tongue   G2            NA
+## 14 TCGA…    47 YES               311 MALE   Tonsil        G2            NA
+## 15 TCGA…    48 NO               2891 MALE   Tonsil        G3            NA
+## 16 TCGA…    48 YES               255 MALE   Oral Tongue   G2            NA
+## 17 TCGA…    49 YES               796 MALE   Oral Tongue   G2            NA
+## 18 TCGA…    49 NO                160 MALE   Oropharynx    G3            NA
+## # ... with 3 more variables: tabacco_group &lt;chr&gt;, tumor_stage &lt;chr&gt;,
+## #   vital_status &lt;chr&gt;</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Dataframe mit Spalten “age” und “grade”. Ändert die Spaltennamen ins Deutsche um.</li>
+</ol>
+<pre class="r"><code>hnscc %&gt;%
+    select(age,grade) %&gt;%
+    rename(Alter=age,Grading=grade)</code></pre>
+<pre><code>## # A tibble: 279 x 2
+##    Alter Grading
+##    &lt;int&gt; &lt;chr&gt;  
+##  1    69 G3     
+##  2    39 G2     
+##  3    45 G2     
+##  4    83 G2     
+##  5    47 G2     
+##  6    72 G1     
+##  7    56 G2     
+##  8    51 G2     
+##  9    54 G2     
+## 10    58 G3     
+## # ... with 269 more rows</code></pre>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Fügt dem hnscc Dataframe eine neue Spalte mit Namen “is_young” hinzu, die mit TRUE und FALSE kodiert, ob jemand &lt; 50 Jahre ist.</li>
+</ol>
+<pre class="r"><code>hnscc &lt;- hnscc %&gt;%
+    mutate(is_young=(age&lt;50))
+
+table(hnscc$is_young)</code></pre>
+<pre><code>## 
+## FALSE  TRUE 
+##   237    42</code></pre>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Berechnet das mediane Gesamtüberleben nach Grading. Ist das Resultat biologisch plausibel?</li>
+</ol>
+<pre class="r"><code>hnscc %&gt;%
+    group_by(grade) %&gt;%
+    summarise(mean_OS = mean(days_to_death, na.rm=TRUE))</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   grade mean_OS
+##   &lt;chr&gt;   &lt;dbl&gt;
+## 1 G1       1348
+## 2 G2        615
+## 3 G3        968
+## 4 G4        360
+## 5 GX       1500</code></pre>
+<p><br></p>
+</div>
+<div id="losungen-ubung-5" class="section level3">
+<h3>Lösungen Übung 5</h3>
+<ol style="list-style-type: lower-alpha">
+<li>In der heutigen Präsentation haben wir neben x-Achse und y-Achse weitere Aesthetics (shape, color, size), sowie das Facetting kennen gelernt. Überlegt euch eine sinnvolle Visualisierung (am besten Dotplot), die insgesamt 5 Dimensionen der Daten abbilden.</li>
+</ol>
+<pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death, color=neoplasm_site, shape=grade)) + 
+    geom_point() +
+    facet_wrap(~alcohol)</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="solution2_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Versucht die Transformationen und Settings des folgenden Barplots nachzuvollziehen. Wie wird hier die Transformation mit dem Plotten verzahnt? Was macht z.B. <code>coord_flip</code>?</li>
+</ol>
+<pre class="r"><code>hnscc  %&gt;%
+    group_by(neoplasm_site) %&gt;%
+    summarize(mean_age=mean(age)) %&gt;%
+    ggplot(aes(x=reorder(neoplasm_site,mean_age),y=mean_age)) +
+    geom_bar(stat=&quot;identity&quot;) +
+    coord_flip() +
+    xlab(&quot;anatomical site&quot;) +
+    ylab(&quot;mean age&quot;)</code></pre>
+<p>In diesem Codebespiel wurde die Transformation mit der Pipefunktion <code>%&gt;%</code> mit dem Plotten verzahnt. Kontraintuitiv ist, dass die Transformation mit einer Pipefunktion und das Plotten mit einem <code>+</code> verbunden ist. <code>coord_flip()</code> dreht die Achsen um, was die Kategorien besser leserlich macht. Zudem wurde die Reihenfolge der anatomischen Region mit <code>reorder</code> nach mittlerem Alter geordnet.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>“Googled” danach, wie man dem folgenden Plot eine Regressionsgrade hinzufügen kann:</li>
+</ol>
+<pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death)) +
+    geom_point() +
+    geom_smooth(method=&quot;lm&quot;)</code></pre>
+<pre><code>## Warning: Removed 1 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="solution2_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><br></p>
+</div>
+<div id="losungen-ubung-6" class="section level3">
+<h3>Lösungen Übung 6</h3>
+<p>Sucht euch andere Faktoren aus den <code>hnscc</code> Metadaten und untersucht deren Einfluss auf das Gesamtüberleben.</p>
+<pre class="r"><code># Overall survival (OS) ist bereits richtig formatiert (als integer in Tagen)
+# Censor muss noch richtig formatiert werden (0 = zensiert, 1 = gestorben)
+hnscc_survival &lt;- hnscc %&gt;%
+    dplyr::rename(OS=days_to_death) %&gt;%
+    mutate(Censor = as.factor(vital_status))
+
+levels(hnscc_survival$Censor) &lt;- c(1,0)    
+
+hnscc_survival$Censor = as.numeric(hnscc_survival$Censor)</code></pre>
+<pre class="r"><code>colnames(hnscc)[-c(1,4,11)]</code></pre>
+<pre><code>## [1] &quot;age&quot;           &quot;alcohol&quot;       &quot;gender&quot;        &quot;neoplasm_site&quot;
+## [5] &quot;grade&quot;         &quot;pack_years&quot;    &quot;tabacco_group&quot; &quot;tumor_stage&quot;  
+## [9] &quot;is_young&quot;</code></pre>
+<pre class="r"><code>#Template
+fit &lt;- survfit(Surv(OS, Censor)~age&lt;50, data=hnscc_survival)
+
+ggsurvplot(fit, hnscc_survival, risk.table = FALSE, 
+           pval=TRUE, tables.height=0.25,
+           xlab=&quot;Time (months)&quot;)</code></pre>
+<p><img src="solution2_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
