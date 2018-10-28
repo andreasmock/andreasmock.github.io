@@ -15,7 +15,7 @@
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -25,7 +25,9 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -94,6 +96,9 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
 }
@@ -103,34 +108,34 @@ button.code-folding-btn:focus {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 51px;
+  padding-top: 60px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 65px;
+  margin-top: -65px;
 }
 
 .section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 65px;
+  margin-top: -65px;
 }
 .section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 65px;
+  margin-top: -65px;
 }
 .section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 65px;
+  margin-top: -65px;
 }
 .section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 65px;
+  margin-top: -65px;
 }
 .section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 65px;
+  margin-top: -65px;
 }
 </style>
 
@@ -335,7 +340,7 @@ div.tocify {
 <p>Eigenschaften von Tibbles über klassische Dataframes hinaus</p>
 <ul>
 <li>Trunkierte, zusammengefasste Ausgabe in der Konsole. No need for head().</li>
-<li>Giben Vektortyp einer jeden Spalte an, z.B. Charakter <chr>.</li>
+<li>Giben Vektortyp einer jeden Spalte an, z.B. Charakter <code>&lt;chr&gt;</code>.</li>
 <li>Zeigen die Dimensionen eines Dataframes vorneweg an, z.B. A tibble: 279 x 11</li>
 </ul>
 <p><br></p>
@@ -354,8 +359,8 @@ div.tocify {
 ##  1 TCGA…    19 NO                240 MALE   Oral Tongue   G2            NA
 ##  2 TCGA…    26 YES               908 MALE   Oral Tongue   G2            NA
 ##  3 TCGA…    26 YES              1315 MALE   Oral Tongue   G2            NA
-##  4 TCGA…    29 &lt;NA&gt;               NA FEMALE Oral Tongue   GX            NA
-##  5 TCGA…    32 YES                NA FEMALE Oral Tongue   G2            NA
+##  4 TCGA…    29 &lt;NA&gt;              761 FEMALE Oral Tongue   GX            NA
+##  5 TCGA…    32 YES                64 FEMALE Oral Tongue   G2            NA
 ##  6 TCGA…    35 YES              1152 FEMALE Tonsil        GX            NA
 ##  7 TCGA…    38 YES              1521 MALE   Tonsil        G2            NA
 ##  8 TCGA…    39 NO               3836 MALE   Oral Cavity   G2            NA
@@ -366,7 +371,7 @@ div.tocify {
 ## 13 TCGA…    46 NO                841 FEMALE Oral Tongue   G2            NA
 ## 14 TCGA…    47 YES               311 MALE   Tonsil        G2            NA
 ## 15 TCGA…    48 NO               2891 MALE   Tonsil        G3            NA
-## 16 TCGA…    48 YES                NA MALE   Oral Tongue   G2            NA
+## 16 TCGA…    48 YES               255 MALE   Oral Tongue   G2            NA
 ## 17 TCGA…    49 YES               796 MALE   Oral Tongue   G2            NA
 ## 18 TCGA…    49 NO                160 MALE   Oropharynx    G3            NA
 ## # ... with 3 more variables: tabacco_group &lt;chr&gt;, tumor_stage &lt;chr&gt;,
@@ -410,11 +415,11 @@ table(hnscc$is_young)</code></pre>
 <pre><code>## # A tibble: 5 x 2
 ##   grade mean_OS
 ##   &lt;chr&gt;   &lt;dbl&gt;
-## 1 G1        890
-## 2 G2        625
-## 3 G3       1121
+## 1 G1       1348
+## 2 G2        615
+## 3 G3        968
 ## 4 G4        360
-## 5 GX        632</code></pre>
+## 5 GX       1500</code></pre>
 <p><br></p>
 </div>
 <div id="losungen-ubung-5" class="section level3">
@@ -425,7 +430,7 @@ table(hnscc$is_young)</code></pre>
 <pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death, color=neoplasm_site, shape=grade)) + 
     geom_point() +
     facet_wrap(~alcohol)</code></pre>
-<pre><code>## Warning: Removed 86 rows containing missing values (geom_point).</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
 <p><img src="solution2_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Versucht die Transformationen und Settings des folgenden Barplots nachzuvollziehen. Wie wird hier die Transformation mit dem Plotten verzahnt? Was macht z.B. <code>coord_flip</code>?</li>
@@ -445,8 +450,8 @@ table(hnscc$is_young)</code></pre>
 <pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death)) +
     geom_point() +
     geom_smooth(method=&quot;lm&quot;)</code></pre>
-<pre><code>## Warning: Removed 86 rows containing non-finite values (stat_smooth).</code></pre>
-<pre><code>## Warning: Removed 86 rows containing missing values (geom_point).</code></pre>
+<pre><code>## Warning: Removed 1 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
 <p><img src="solution2_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p><br></p>
 </div>
