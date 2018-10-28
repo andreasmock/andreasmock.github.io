@@ -1,0 +1,45 @@
+---
+title: "Angewandte Datenanalyse mit `R`"
+subtitle: "Tag 3 - Datenimport und -modellierung"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
+library(tidyverse)
+load(url("http://andreasmock.github.io/data/hnscc.RData"))
+```
+
+<br>
+
+# Übung 7 - Datenimport
+
+Die anfänglichen Probleme mit dem Einlesen von Dateien lassen sich am besten durch die eigene Anwendung erkunden. Sucht euch txt, csv und xls/xlsx Files auf eurem Computer heraus und versucht diese in die *R* Umgebung zu laden. Denkt bitte auch an die Möglichkeit die Hilfe zu den einzelnen Funktionen aufzurufen. Am Ende der Übung sammeln wir die wichtigsten Probleme und Lösungsansätze.
+
+Hier noch einmal die Übersicht über die Funktionen:
+
+- `read_tsv`: tab-separated file
+- `read_csv`: comma-separated file
+- `read_xlsx` bzw. `read_xls`: Excel spread sheet
+- `read_delim`: file mit beliebig anzugebendem delimiter, also Trennzeichen
+
+Um Excel files zu laden, benötigt ihr noch das package `readxl`
+
+```{r, eval=FALSE}
+install.packages("readxl")
+
+library(tidyverse)
+library(readxl)
+```
+
+<br>
+
+# Übung 8 - Datenmodellierung
+
+a) Benutzt einen Hypothesentest, um herauszufinden, ob es eine signifikante Assoziation zwischen dem Alter und dem Tumorstadium gibt.
+b) Führt eine Korrelationsanalyse für Alter und days to death durch. Ist dies die beste Art und Weise, diese Assoziation zu eruieren, oder fällt euch eine alternative Möglichkeit ein?
+c) Möchte man Verteilungen vergleichen, die nur sehr wenige Datenpunkte haben, ist es von Vorteil Rang-basierte Hypothesentest zu verwenden. Findet heraus, was die Rang-basierte Alternative zum T-Test ist und sucht nach der entsprechenden R-Funktion.

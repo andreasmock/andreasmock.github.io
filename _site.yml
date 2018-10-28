@@ -1,0 +1,28 @@
+name: my-website
+navbar:
+  title: AM 
+  left:
+  - text: Home
+    href: index.html
+  - text: Publications
+    href: refs.html
+  - text: Software
+    menu:
+    - text: CVE
+      href: CVE.html
+    - text: MetaboDiff
+      href: MetaboDiff.html
+  - text: R-Kurs
+    href: teaching.html
+  right:
+  - icon: fa-github-square
+    href: https://github.com/andreasmock
+  - icon: fa-twitter
+    href: https://twitter.com/am0ck
+output:
+  html_document:
+    theme: flatly
+    lib_dir: site_libs
+    self_contained: no
+output_dir: _site
+

@@ -1,0 +1,58 @@
+---
+title: "Angewandte Datenanalyse mit `R`"
+subtitle: "Tag 1 - Einführung in Programmierung mit `R` "
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+load(url("http://andreasmock.github.io/data/hnscc.RData"))
+```
+
+
+### Lösungen Übung 1
+
+Nutzt die oben aufgeführten Funktionen um die Metadaten des Objekts `hnscc` zu explorieren:
+
+- Wie viele Patienten trinken regelmäßig Alkohol?
+
+```{r}
+table(hnscc$alcohol)
+```
+
+
+- Was ist die häufigste Lokalisation der Tumoren?
+
+```{r}
+table(hnscc$neoplasm_site)
+```
+
+- Bei wie vielen Patienten ist das Grading unbekannt?
+
+```{r}
+table(hnscc$grade)
+```
+
+- Was ist die maximale Anzahl von Packyears, die angegeben wurde?
+
+```{r}
+summary(hnscc$pack_years)
+```
+
+- Wie viele Angaben fehlen in der Spalte "pack_years"?
+
+```{r}
+table(is.na(hnscc$pack_years))
+```
+
+- In welchem Bereich bewegte sich das Überleben der Patienten?
+
+```{r}
+summary(hnscc$days_to_death)
+```
+
+

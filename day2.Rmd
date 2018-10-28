@@ -1,0 +1,135 @@
+---
+title: "Angewandte Datenanalyse mit `R`"
+subtitle: "Tag 2 - Datentransformation und -visualisierung "
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(survival)
+library(survminer)
+library(tidyverse)
+load(url("http://andreasmock.github.io/data/hnscc.RData"))
+```
+
+<br>
+
+# Übung 3 - Dataframe vs. Tibble
+
+Vergleicht den Output eines "normalen" Dataframes mit einem Tibble. Welche zusätzlichen Informationen bzw. Funktionen beeinhaltet ein Tibble?
+
+```{r}
+#Dataframe
+head(as.data.frame(hnscc))
+
+#Tibble
+hnscc
+```
+
+<br>
+
+# Übung 4 - Datentransformation mit `dplyr`
+
+**Überblick über `dplyr` Funktionen**
+
+|Transformation| Funktion| 
+|-------|-------|
+|Zeilen filtern|`filter()`|
+|Zeilen sortieren|`arrange()`|
+|Spalten selektieren|`select()`|
+|Spaltennamen umbenennen|`rename()`|
+|Neue Spalten hinzufügen|`mutate()`|
+|Gruppenweise transformieren|`group_by()` & `summarize()`|
+|Transformationen kombinieren|pipe Funktion `%>%`|
+
+**Logische Operatoren**
+
+Eine Kategorie auswählen
+
+```{r, eval = FALSE}
+hnscc$neoplasm_site=="Larynx"
+```
+
+Eine Kategorien ausschließen
+
+```{r, eval = FALSE}
+!hnscc$neoplasm_site=="Larynx"
+```
+
+Mehrere Kategorien auswählen
+
+```{r, eval=FALSE}
+hnscc$neoplasm_site %in% c("Tonsil", "Oral Tongue", "Hard Palate")
+```
+
+**Aufgaben**
+
+Erstellt die folgenden Teilmengen des Datensatzes, bzw. führt die folgenden Transformationen aus:
+
+a) Junge Patienten (< 50 Jahre), Nichtraucher, Zeilen sortiert nach Alter.
+b) Dataframe mit Spalten "age" und "grade". Ändert die Spaltennamen ins Deutsche um.
+c) Fügt dem `hnscc` Dataframe eine neue Spalte mit Namen "is_young" hinzu, die mit TRUE und FALSE kodiert, ob jemand < 50 Jahre ist.
+d) Berechnet das mediane Gesamtüberleben nach Grading. Ist das Resultat biologisch plausibel?
+
+<br>
+
+# Übung 5 - Datenvisualisierung mit `ggplot2`
+
+a) In der heutigen Präsentation haben wir neben x-Achse und y-Achse weitere Aesthetics (shape, color, size), sowie das Facetting kennen gelernt. Überlegt euch eine sinnvolle Visualisierung (am besten Dotplot), die insgesamt 5 Dimensionen der Daten abbilden.a) In der heutigen Präsentation haben wir neben x-Achse und y-Achse weitere Aesthetics (shape, color, size), sowie das Facetting kennen gelernt. Überlegt euch eine sinnvolle Visualisierung (am besten Dotplot), die insgesamt 5 Dimensionen der Daten abbilden.
+
+b) Versucht die Transformationen und Settings des folgenden Barplots nachzuvollziehen. Wie wird hier die Transformation mit dem Plotten verzahnt? Was macht z.B. `coord_flip`?
+
+```{r}
+hnscc  %>%
+    group_by(neoplasm_site) %>%
+    summarize(mean_age=mean(age)) %>%
+    ggplot(aes(x=reorder(neoplasm_site,mean_age),y=mean_age)) +
+    geom_bar(stat="identity") +
+    coord_flip() +
+    xlab("anatomical site") +
+    ylab("mean age")
+```
+
+c) "Googled" danach, wie man dem folgenden Plot eine Regressionsgrade hinzufügen kann:
+
+```{r}
+ggplot(hnscc, aes(x=age, y=days_to_death)) +
+    geom_point()
+```
+
+<br>
+
+# Übung 6 - Überlebenszeitanalyse mit `survminer`
+
+Sucht euch andere Faktoren aus den `hnscc` Metadaten und untersucht deren Einfluss auf das Gesamtüberleben.
+
+```{r}
+# Overall survival (OS) ist bereits richtig formatiert (als integer in Tagen)
+# Censor muss noch richtig formatiert werden (0 = zensiert, 1 = gestorben)
+hnscc_survival <- hnscc %>%
+    dplyr::rename(OS=days_to_death) %>%
+    mutate(Censor = as.factor(vital_status))
+
+levels(hnscc_survival$Censor) <- c(1,0)    
+
+hnscc_survival$Censor = as.numeric(hnscc_survival$Censor)
+```
+
+
+```{r}
+#Template
+fit <- survfit(Surv(OS, Censor)~gender, data=hnscc_survival)
+
+ggsurvplot(fit, hnscc_survival, risk.table = FALSE, 
+           pval=TRUE, tables.height=0.25,
+           palette = c("goldenrod","skyblue4"),
+           xlab="Time (months)")
+```
+
+```{r}
+colnames(hnscc)[-c(1,4,11)]
+```
+
