@@ -512,15 +512,15 @@ table(hnscc$is_young)</code></pre>
 </ol>
 <pre class="r"><code>hnscc %&gt;%
     group_by(grade) %&gt;%
-    summarise(mean_OS = mean(days_to_death, na.rm=TRUE))</code></pre>
+    summarise(median_OS = median(days_to_death, na.rm=TRUE))</code></pre>
 <pre><code>## # A tibble: 5 x 2
-##   grade mean_OS
-##   &lt;chr&gt;   &lt;dbl&gt;
-## 1 G1      1348.
-## 2 G2       615.
-## 3 G3       968.
-## 4 G4       360 
-## 5 GX      1500.</code></pre>
+##   grade median_OS
+##   &lt;chr&gt;     &lt;dbl&gt;
+## 1 G1          913
+## 2 G2          395
+## 3 G3          444
+## 4 G4          360
+## 5 GX          715</code></pre>
 <p><br></p>
 </div>
 <div id="losungen-ubung-5" class="section level3">
@@ -554,31 +554,6 @@ table(hnscc$is_young)</code></pre>
 <pre><code>## Warning: Removed 1 rows containing non-finite values (stat_smooth).</code></pre>
 <pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
 <p><img src="solution2_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p><br></p>
-</div>
-<div id="losungen-ubung-6" class="section level3">
-<h3>Lösungen Übung 6</h3>
-<p>Sucht euch andere Faktoren aus den <code>hnscc</code> Metadaten und untersucht deren Einfluss auf das Gesamtüberleben.</p>
-<pre class="r"><code># Overall survival (OS) ist bereits richtig formatiert (als integer in Tagen)
-# Censor muss noch richtig formatiert werden (0 = zensiert, 1 = gestorben)
-hnscc_survival &lt;- hnscc %&gt;%
-    dplyr::rename(OS=days_to_death) %&gt;%
-    mutate(Censor = as.factor(vital_status))
-
-levels(hnscc_survival$Censor) &lt;- c(1,0)    
-
-hnscc_survival$Censor = as.numeric(hnscc_survival$Censor)</code></pre>
-<pre class="r"><code>colnames(hnscc)[-c(1,4,11)]</code></pre>
-<pre><code>## [1] &quot;age&quot;           &quot;alcohol&quot;       &quot;gender&quot;        &quot;neoplasm_site&quot;
-## [5] &quot;grade&quot;         &quot;pack_years&quot;    &quot;tabacco_group&quot; &quot;tumor_stage&quot;  
-## [9] &quot;is_young&quot;</code></pre>
-<pre class="r"><code>#Template
-fit &lt;- survfit(Surv(OS, Censor)~age&lt;50, data=hnscc_survival)
-
-ggsurvplot(fit, hnscc_survival, risk.table = FALSE, 
-           pval=TRUE, tables.height=0.25,
-           xlab=&quot;Time (months)&quot;)</code></pre>
-<p><img src="solution2_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 
 
