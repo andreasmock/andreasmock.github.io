@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -88,7 +89,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -249,48 +249,9 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -437,17 +398,21 @@ div.tocify {
 <p><br></p>
 <div id="section" class="section level3">
 <h3>2019</h3>
+<p><a href="https://esmoopen.bmj.com">Community-driven development of a modified progression-free survival ratio for precision oncology</a><br />
+<strong>Mock A</strong>, Heilig C, Kreutzfeldt S, Hübschmann D, Heining C, Schröck E, Brors B, Stenzinger A, DKTK MASTER Network, Jäger D, Schlenk R, Glimm H, Fröhling S, Horak P.<br />
+<strong>ESMO Open.</strong> 2019 <em>in press</em></p>
+<p><br></p>
 <p><a href="https://www.springer.com/medicine/oncology/journal/262">Serum very long-chain fatty acid-containing lipids predict response to immune checkpoint inhibitors in urological cancers</a><br />
 <strong>Mock A*</strong>, Zschäbitz S*, Kirsten R, Scheffer M, Wolf B, Herold-Mende C, Kreuter R, Busch E, Jenzer M, Jäger D, Grüllich C.<br />
-<strong>Cancer Immunol Immunother.</strong> 2019 <em>in press</em></p>
+<strong>Cancer Immunol Immunother.</strong> 2019 Nov 7. doi: 10.1007/s00262-019-02428-3. [Epub ahead of print]</p>
 <p><br></p>
-<p><a href="https://esmoopen.bmj.com">Community-driven development of a modified progression-free survival ratio for precision oncology</a><br />
-<strong>Mock A</strong>, Heilig C, Kreutzfeldt S, Hüschmann D, Heining C, Schröck E, Brors B, Stenzinger A, DKTK MASTER Network, Jäger D, Schlenk R, Glimm H, Fröhling S, Horak P.<br />
-<strong>ESMO Open.</strong> 2019 <em>in press</em></p>
+<p><a href="https://www.mdpi.com/journal/cancers">Treatment outcome of 227 patients with sinonasal adenoid cystic carcinoma (ACC) after intensity modulated radiotherapy and active raster-scanning carbon ion-boost: a 10-year single-center experience</a><br />
+Akbaba S, Ahmed D, <strong>Mock A</strong>, Held T, Bahadir S, Lang K, Sayed M, Hoerner-Rieber J, Forster T, Federspil P, Herfarth K, Plinkert P, Debus J, Adeberg S.<br />
+<strong>Cancers.</strong> 2019, 11(11), 1705; <a href="https://doi.org/10.3390/cancers11111705" class="uri">https://doi.org/10.3390/cancers11111705</a></p>
 <p><br></p>
 <p><a href="https://www.sciencedirect.com/science/article/pii/S1368837519302933?dgcid=coauthor">The impact of age on the outcome of patients treated with radiotherapy for mucoepidermoid carcinoma (MEC) of the salivary glands in the head and neck: A 15-year single-center experience</a><br />
 Akbaba S, Heusel A, <strong>Mock A</strong>, Held T, Lang K, Hoerner-Rieber J, Forster T, Katayama S, Kargus S, Rieken S, Plinkert P, Herfarth K, Debus J, Adeberg S.<br />
-<strong>Oral Oncology.</strong> 2019 Sep 5;97:115-123. doi: 10.1016/j.oraloncology.2019.08.018. [Epub ahead of print]</p>
+<strong>Oral Oncology.</strong> 2019 Oct;97:115-123. doi: 10.1016/j.oraloncology.2019.08.018. Epub 2019 Sep 5.</p>
 <p><br></p>
 <p><a href="https://www.frontiersin.org/articles/10.3389/fonc.2019.00755/abstract">Treatment outcome of a combined dose-escalated treatment regime with helical TomoTherapy® and active raster-scanning carbon ion boost for adenocarcinomas of the head and neck</a><br />
 Akbaba S, <strong>Mock A</strong>, Hoerner-Rieber J, Held T, Katayama S, Forster T, Freudlsperger C, Rieken S, Herfarth K, Plinkert P, Debus J, Adeberg S.<br />
@@ -563,6 +528,49 @@ $(document).ready(function () {
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
