@@ -7,11 +7,12 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title></title>
+<title>index.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -84,7 +85,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -245,18 +245,6 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
@@ -310,18 +298,7 @@ $(document).ready(function () {
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/andreasmock">
-    <span class="fa fa-github-square"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://twitter.com/am0ck">
-    <span class="fa fa-twitter"></span>
-     
-  </a>
-</li>
+        
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -341,7 +318,9 @@ $(document).ready(function () {
 <h3>Andreas Mock</h3>
 <p><strong>Physician-Scientist</strong><br />
 Resident in Internal Medicine and Hematology and Oncology<br />
+Department of Medical Oncology &amp; Department of Translational Medical Oncology<br />
 National Center for Tumor Diseases (NCT) Heidelberg, Germany</p>
+<p><i class="fab  fa-twitter "></i> <a href="https://twitter.com/am0ck">@am0ck</a></p>
 <p><br></p>
 </div>
 <div id="about-me" class="section level3">
@@ -351,6 +330,7 @@ National Center for Tumor Diseases (NCT) Heidelberg, Germany</p>
 </div>
 <div id="education" class="section level3">
 <h3><code>Education</code></h3>
+<p><i class="fas  fa-leaf "></i> 2016-present — PhD studies (Dr. rer. nat.) in Natural Sciences at DKFZ and University of Heidelberg</p>
 <p><i class="fas  fa-stethoscope "></i> 2008-2017 — Medical studies (Dr. med.) at University of Heidelberg</p>
 <p><i class="fas  fa-laptop "></i> 2014-2015 — Master program in Computational Biology (M.Phil.) at University of Cambridge</p>
 <p><i class="fas  fa-flask "></i> 2012-2013 — Master program in Translational Medical Research (M.Sc.) at University of Heidelberg</p>
@@ -373,6 +353,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

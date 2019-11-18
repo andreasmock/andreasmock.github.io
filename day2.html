@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -25,8 +26,6 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -88,7 +87,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -249,48 +247,9 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -408,18 +367,7 @@ div.tocify {
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/andreasmock">
-    <span class="fa fa-github-square"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://twitter.com/am0ck">
-    <span class="fa fa-twitter"></span>
-     
-  </a>
-</li>
+        
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -436,7 +384,7 @@ div.tocify {
 
 
 <p><br></p>
-<div id="ubung-3---dataframe-vs.tibble" class="section level1">
+<div id="übung-3---dataframe-vs.-tibble" class="section level1">
 <h1>Übung 3 - Dataframe vs. Tibble</h1>
 <p>Vergleicht den Output eines “normalen” Dataframes mit einem Tibble. Welche zusätzlichen Informationen bzw. Funktionen beeinhaltet ein Tibble?</p>
 <pre class="r"><code>#Dataframe
@@ -467,21 +415,21 @@ hnscc</code></pre>
 <pre><code>## # A tibble: 279 x 11
 ##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
 ##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
-##  1 TCGA…    69 YES               461 MALE   Oral Tongue   G3            51
-##  2 TCGA…    39 YES               415 MALE   Larynx        G2            30
-##  3 TCGA…    45 YES              1134 FEMALE Base of Tong… G2            30
-##  4 TCGA…    83 NO                276 MALE   Larynx        G2            75
-##  5 TCGA…    47 YES               248 MALE   Floor of Mou… G2            60
-##  6 TCGA…    72 YES               190 MALE   Buccal Mucosa G1            20
-##  7 TCGA…    56 YES               845 MALE   Alveolar Rid… G2            NA
-##  8 TCGA…    51 YES              1761 MALE   Tonsil        G2            NA
-##  9 TCGA…    54 YES               186 MALE   Larynx        G2            62
-## 10 TCGA…    58 YES               179 FEMALE Floor of Mou… G3            60
-## # … with 269 more rows, and 3 more variables: tabacco_group &lt;chr&gt;,
+##  1 TCGA~    69 YES               461 MALE   Oral Tongue   G3            51
+##  2 TCGA~    39 YES               415 MALE   Larynx        G2            30
+##  3 TCGA~    45 YES              1134 FEMALE Base of Tong~ G2            30
+##  4 TCGA~    83 NO                276 MALE   Larynx        G2            75
+##  5 TCGA~    47 YES               248 MALE   Floor of Mou~ G2            60
+##  6 TCGA~    72 YES               190 MALE   Buccal Mucosa G1            20
+##  7 TCGA~    56 YES               845 MALE   Alveolar Rid~ G2            NA
+##  8 TCGA~    51 YES              1761 MALE   Tonsil        G2            NA
+##  9 TCGA~    54 YES               186 MALE   Larynx        G2            62
+## 10 TCGA~    58 YES               179 FEMALE Floor of Mou~ G3            60
+## # ... with 269 more rows, and 3 more variables: tabacco_group &lt;chr&gt;,
 ## #   tumor_stage &lt;chr&gt;, vital_status &lt;chr&gt;</code></pre>
 <p><br></p>
 </div>
-<div id="ubung-4---datentransformation-mit-dplyr" class="section level1">
+<div id="übung-4---datentransformation-mit-dplyr" class="section level1">
 <h1>Übung 4 - Datentransformation mit <code>dplyr</code></h1>
 <p><strong>Überblick über <code>dplyr</code> Funktionen</strong></p>
 <table>
@@ -539,7 +487,7 @@ hnscc</code></pre>
 </ol>
 <p><br></p>
 </div>
-<div id="ubung-5---datenvisualisierung-mit-ggplot2" class="section level1">
+<div id="übung-5---datenvisualisierung-mit-ggplot2" class="section level1">
 <h1>Übung 5 - Datenvisualisierung mit <code>ggplot2</code></h1>
 <ol style="list-style-type: lower-alpha">
 <li><p>In der heutigen Präsentation haben wir neben x-Achse und y-Achse weitere Aesthetics (shape, color, size), sowie das Facetting kennen gelernt. Überlegt euch eine sinnvolle Visualisierung (am besten Dotplot), die insgesamt 5 Dimensionen der Daten abbilden.a) In der heutigen Präsentation haben wir neben x-Achse und y-Achse weitere Aesthetics (shape, color, size), sowie das Facetting kennen gelernt. Überlegt euch eine sinnvolle Visualisierung (am besten Dotplot), die insgesamt 5 Dimensionen der Daten abbilden.</p></li>
@@ -581,6 +529,49 @@ $(document).ready(function () {
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
