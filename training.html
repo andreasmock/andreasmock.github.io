@@ -12,7 +12,7 @@
 
 
 
-<title>Einführung in R Programming</title>
+<title>Berufsbegleitender R-Kurs</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -248,6 +251,63 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -255,6 +315,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -307,77 +377,64 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Einführung in R Programming</h1>
+<h1 class="title toc-ignore">Berufsbegleitender R-Kurs</h1>
 
 </div>
 
 
-<div id="heicumed-wahlfachtrack-internistische-onkologie-sozität-czerny-mediss-promotionsprogramm" class="section level4">
-<h4>HeiCuMed | Wahlfachtrack internistische Onkologie, Sozität Czerny &amp; MEDISS Promotionsprogramm</h4>
-</div>
-<div id="andreas-mock" class="section level4">
-<h4><code>Andreas Mock</code></h4>
-<p>Nationales Centrum für Tumorerkrankungen (NCT) Heidelberg</p>
-<hr />
-<p><strong>Termine Wintersemester 2020/2021</strong></p>
-<p>Dieses Semester Onlinekurs via <a href="https://www.bluejeans.com/de">BlueJean</a> wg. COVID-19 Pandemie</p>
+<div id="intro" class="section level3">
+<h3>Intro</h3>
+<p><strong>Was ist R?</strong></p>
 <ul>
-<li>Termin 1 (R 101): 21.04.2020 17:00-18:30 Uhr</li>
-<li>Termin 2 (Datentransformation und Plotting): 12.05.2020 17:15-18:45 Uhr</li>
-<li>Termin 3 (Input und statistische Modellierung): 19.05.2020 17:15-18:45 Uhr</li>
-<li>Termin 4 (Überlebenszeitanalyse): 16.06.2020 17:00-18:30 Uhr</li>
-<li>Termin 5 (RNA-seq Analyse): 23.06.2020 17:00-18:30 Uhr</li>
+<li><code>R</code> ist eine <strong>freie Programmiersprache</strong> für statistische Berechnungen und Grafiken.</li>
+<li>Obwohl <code>R</code> bereits alt ist (Erscheinungsjahr 1993) gilt diese als <strong>Standardsprache</strong> für statistische Problemstellungen in Wirtschaft und Wissenschaft</li>
+<li><strong>16102 Formelsammlungen</strong> (Stand 11.06.2019) für spezifische Fragestellungen (sog. Pakete)</li>
+<li>Hoch-qualitative und individuelle <strong>Grafiken</strong> - viele Wissenschaftler benutzen <code>R</code> nur hierzu</li>
+<li>Sowohl <code>R</code>, als auch alle Pakete sind <strong>kostenlos</strong>!!</li>
 </ul>
-<p>Wie kaum in einem anderen Fach werden in der Onkologie Erkrankungen auf den verschiedensten Ebenen der Biologie mit Hilfe von Hochdurchsatzdaten (Omics) analysiert. Durch diese Präzisionsonkologie erhofft man sich zielgerichtete (Immun-)Therapien entwickeln und einsetzen zu können. Diesen Prozess aktiv als Onkologe zu begleiten ist herausforderend und spannend und wird in zunehmenden Maße verlangen, Datenanalysen zu verstehen und im besten Falle sogar selber durchführen zu können.</p>
-<p>In diesem Einführungspraktikum möchte ich die Scheu vor angewandter Datenanalye nehmen und aufzeigen, wie einfach man das große Einmaleins der Datenanalyse- und visualisierung mit der Programmiersprache R erlernen kann. Das Praktikum richtet sich hierbei gezielt an Studierende, Ärzte und Wissenschaftler die bisher wenig oder noch keine Berührungspunkte mit einer Programmiersprache hatten.</p>
-<p><strong>Vorbereitungen</strong></p>
-<p>Bitte die folgenden Programme auf eurem Notebook installieren bzw. einrichten, um am Praktikumstag möglichst viel Zeit der Datenanalyse widmen zu können:</p>
+<p><br></p>
+<p><strong>Lehrbuch der ersten Wochen</strong></p>
+<p>Hands-On Programming with R, Garrett Grolemund<br />
+<a href="https://d1b10bmlvqabco.cloudfront.net/attach/ighbo26t3ua52t/igp9099yy4v10/igz7vp4w5su9/OReilly_HandsOn_Programming_with_R_2014.pdf">Link zum PDF</a></p>
+<p><br></p>
+</div>
+<div id="woche-1---kw24" class="section level3">
+<h3>Woche 1 - KW24</h3>
 <ul>
-<li>Installation von <a href="https://www.r-project.org">R</a> und <a href="https://www.rstudio.com">RStudio</a></li>
-<li>Falls noch nicht vorhanden Einrichten eines <a href="https://www.urz.uni-heidelberg.de/de/eduroam">eduroam Zugangs</a>, um in den Kursräumen das Internet nutzen zu können. Wichtig: Angestellte der Uniklinik (Ärzte und Wissenschaftler) benötigen für die Einrichtung des Zertifikates eine Uni-ID, welche über das URZ Heidelberg zu beziehen ist.</li>
-<li>Bitte eigenes Notebook am Praktikumstag nicht vergessen</li>
-<li>Am Termin 3 gibt es die Möglichkeit eigene Datensätze von euch in R zu laden, bitte schon einmal überlegen, welche ihr analysieren möchtet.</li>
+<li><a href="http://andreasmock.github.io/teaching.html">R Kurs Tag 1</a></li>
+<li>Lehrbuch Kapitel 1 - The Very Basics</li>
+<li>Lehrbuch Kapitel 2 - Packages and Help Pages</li>
 </ul>
-<p><strong>Kursunterlagen</strong></p>
-<table>
-<thead>
-<tr class="header">
-<th>Tag 1</th>
-<th>Tag 2</th>
-<th>Tag 3</th>
-<th>Tag 4</th>
-<th>Tag 5</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="http://andreasmock.github.io/presentations/pres_day1.html">Präsentation</a></td>
-<td>Präsentation</td>
-<td>Präsentation</td>
-<td>Präsentation</td>
-<td>Präsentation</td>
-</tr>
-<tr class="even">
-<td><a href="http://andreasmock.github.io/day1.html">Übung</a></td>
-<td>Übung</td>
-<td>Übung</td>
-<td>Übung</td>
-<td>Übung</td>
-</tr>
-<tr class="odd">
-<td>Lösungen</td>
-<td>Lösungen</td>
-<td>Lösungen</td>
-<td>Lösungen</td>
-<td>Lösungen</td>
-</tr>
-</tbody>
-</table>
-<p>Die Lösungen zu den Übungen werden am Ende des jeweiligen Praktikumstags hochgeladen</p>
+<p><br></p>
+</div>
+<div id="woche-2---kw25" class="section level3">
+<h3>Woche 2 - KW25</h3>
+<ul>
+<li><a href="http://andreasmock.github.io/teaching.html">R Kurs Tag 2</a></li>
+<li>Lehrbuch Kapitel 3 - R Objects</li>
+</ul>
+<p><br></p>
+</div>
+<div id="woche-3---kw26" class="section level3">
+<h3>Woche 3 - KW26</h3>
+<ul>
+<li><a href="http://andreasmock.github.io/teaching.html">R Kurs Tag 3</a></li>
+<li>Lehrbuch Kapitel 4 - R Notation</li>
+</ul>
+<p><br></p>
+</div>
+<div id="woche-4---kw27" class="section level3">
+<h3>Woche 4 - KW27</h3>
+<ul>
+<li><a href="http://andreasmock.github.io/teaching.html">R Kurs Tag 4</a></li>
+<li>Lehrbuch Kapitel 5 - Modifying Values</li>
+</ul>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -410,6 +467,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
