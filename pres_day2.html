@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Andreas Mock" />
+  <title>Einführung in R Programming</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link href="site_libs/slidy-2/styles/slidy.css" rel="stylesheet" />
+  <script src="site_libs/slidy-2/scripts/slidy.js"></script>
+  <script src="site_libs/slidy_shiny-1/slidy_shiny.js"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Einführung in R Programming</h1>
+  <h1 class="subtitle">Tag 2 - Tag 2 - Datentransformation und Plotting</h1>
+  <p class="author">
+Andreas Mock
+  </p>
+  <p class="date">12.05.2020</p>
+</div>
+<div id="ablauf---tag-2" class="slide section level1">
+<h1>Ablauf - Tag 2</h1>
+<ul>
+<li>Datentransformation mit <code>dplyr</code></li>
+<li>Datenvisualisierung mit <code>ggplot2</code></li>
+<li>Überlebenszeitanalyse mit <code>survminer</code></li>
+</ul>
+<p><img src="../pics/data-science-explore.png" width="300" /></p>
+</div>
+<div id="erweiterung-der-r-objektfamilie" class="slide section level1">
+<h1>Erweiterung der R Objektfamilie</h1>
+<p><img src="../pics/R_objects.png" width="400" /></p>
+<ul>
+<li><strong>Faktor</strong>: spezielle Unterform eines Vektors für kategoriale Variablen. Ein Faktor fasst die Kategorien (= Levels) zusammen.</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Vektor</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">head</span>(hnscc<span class="op">$</span>grade)</a></code></pre></div>
+<pre><code>## [1] &quot;G3&quot; &quot;G2&quot; &quot;G2&quot; &quot;G2&quot; &quot;G2&quot; &quot;G1&quot;</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Faktor</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">head</span>(<span class="kw">as.factor</span>(hnscc<span class="op">$</span>grade))</a></code></pre></div>
+<pre><code>## [1] G3 G2 G2 G2 G2 G1
+## Levels: G1 G2 G3 G4 GX</code></pre>
+</div>
+<div id="tibbles---moderne-dataframes" class="slide section level1">
+<h1>Tibbles - moderne Dataframes</h1>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">class</span>(hnscc)</a></code></pre></div>
+<pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<p>Der <code>hnscc</code> Datensatz ist eigentlich streng genommen kein Dataframe, sondern ein sogenannter Tibble, die moderne Weiterentwicklung eines R Dataframes.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">hnscc</a></code></pre></div>
+<pre><code>## # A tibble: 279 x 11
+##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
+##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+##  1 TCGA~    69 YES               461 MALE   Oral Tongue   G3            51
+##  2 TCGA~    39 YES               415 MALE   Larynx        G2            30
+##  3 TCGA~    45 YES              1134 FEMALE Base of Tong~ G2            30
+##  4 TCGA~    83 NO                276 MALE   Larynx        G2            75
+##  5 TCGA~    47 YES               248 MALE   Floor of Mou~ G2            60
+##  6 TCGA~    72 YES               190 MALE   Buccal Mucosa G1            20
+##  7 TCGA~    56 YES               845 MALE   Alveolar Rid~ G2            NA
+##  8 TCGA~    51 YES              1761 MALE   Tonsil        G2            NA
+##  9 TCGA~    54 YES               186 MALE   Larynx        G2            62
+## 10 TCGA~    58 YES               179 FEMALE Floor of Mou~ G3            60
+## # ... with 269 more rows, and 3 more variables: tabacco_group &lt;chr&gt;,
+## #   tumor_stage &lt;chr&gt;, vital_status &lt;chr&gt;</code></pre>
+</div>
+<div id="tibbles---moderne-datenframes" class="slide section level1">
+<h1>Tibbles - moderne Datenframes</h1>
+<p>Im Vergleich dazu der Output eines “normalen” Dataframes. In Übung 3 werdet ihr die Unterschiede herausarbeiten.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">head</span>(<span class="kw">as.data.frame</span>(hnscc))</a></code></pre></div>
+<pre><code>##             id age alcohol days_to_death gender  neoplasm_site grade pack_years
+## 1 TCGA-BA-4074  69     YES           461   MALE    Oral Tongue    G3         51
+## 2 TCGA-BA-4076  39     YES           415   MALE         Larynx    G2         30
+## 3 TCGA-BA-4077  45     YES          1134 FEMALE Base of Tongue    G2         30
+## 4 TCGA-BA-4078  83      NO           276   MALE         Larynx    G2         75
+## 5 TCGA-BA-5149  47     YES           248   MALE Floor of Mouth    G2         60
+## 6 TCGA-BA-5151  72     YES           190   MALE  Buccal Mucosa    G1         20
+##                                 tabacco_group tumor_stage vital_status
+## 1                              Current smoker   Stage IVA     DECEASED
+## 2                              Current smoker        &lt;NA&gt;     DECEASED
+## 3 Current reformed smoker for &lt; or = 15 years   Stage IVA     DECEASED
+## 4 Current reformed smoker for &lt; or = 15 years        &lt;NA&gt;     DECEASED
+## 5                              Current smoker   Stage IVA       LIVING
+## 6      Current reformed smoker for &gt; 15 years   Stage IVA       LIVING</code></pre>
+</div>
+<div id="datentransformation-mit-dplyr" class="slide section level1">
+<h1>Datentransformation mit <code>dplyr</code></h1>
+<p>HNSCC Datensatz laden.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;http://andreasmock.github.io/data/hnscc.RData&quot;</span>))</a></code></pre></div>
+<p><strong>Warum Datentransformation?</strong> Oftmals sind wir nur an Teilmengen eines Datensatzes interessiert, bzw. möchten Proben nach verschiedenen Merkmalen zusammengruppieren.</p>
+<p>Die Funktionen zur Datentransformation sind innerhalb des “Tidyverse” im <code>dplyr</code> Paket zu finden. Habt ihr das <code>tidyverse</code> Paket geladen, so wird automatisch auch das <code>dplyr</code> Paket geladen.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+</div>
+<div id="datentransformation-mit-dplyr---eine-übersicht" class="slide section level1">
+<h1>Datentransformation mit <code>dplyr</code> - eine Übersicht</h1>
+<table>
+<thead>
+<tr class="header">
+<th>Transformation</th>
+<th>Funktion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Zeilen filtern</td>
+<td><code>filter()</code></td>
+</tr>
+<tr class="even">
+<td>Zeilen sortieren</td>
+<td><code>arrange()</code></td>
+</tr>
+<tr class="odd">
+<td>Spalten selektieren</td>
+<td><code>select()</code></td>
+</tr>
+<tr class="even">
+<td>Spaltennamen umbenennen</td>
+<td><code>rename()</code></td>
+</tr>
+<tr class="odd">
+<td>Neue Spalten hinzufügen</td>
+<td><code>mutate()</code></td>
+</tr>
+<tr class="even">
+<td>Gruppenweise transformieren</td>
+<td><code>group_by()</code> &amp; <code>summarize()</code></td>
+</tr>
+<tr class="odd">
+<td>Transformationen kombinieren</td>
+<td>pipe Funktion <code>%&gt;%</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="zeilen-filtern-mit-filter" class="slide section level1">
+<h1>Zeilen filtern mit <code>filter()</code></h1>
+<p>Die Funktion <code>filter()</code> ermöglicht es uns ein Subset aus den Zeilen auszuwählen. Das erste Argument ist das Objekt, die weiteren Argumente sind die Spalten, wonach wir filtern möchten.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">young &lt;-<span class="st"> </span><span class="kw">filter</span>(hnscc, age<span class="op">&lt;</span><span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb13-2" title="2"></a>
+<a class="sourceLine" id="cb13-3" title="3">young</a></code></pre></div>
+<pre><code>## # A tibble: 42 x 11
+##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
+##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+##  1 TCGA~    39 YES               415 MALE   Larynx        G2            30
+##  2 TCGA~    45 YES              1134 FEMALE Base of Tong~ G2            30
+##  3 TCGA~    47 YES               248 MALE   Floor of Mou~ G2            60
+##  4 TCGA~    41 YES               242 FEMALE Oral Tongue   G2            NA
+##  5 TCGA~    47 YES               395 MALE   Floor of Mou~ G2            40
+##  6 TCGA~    28 YES               113 MALE   Oral Tongue   G2             1
+##  7 TCGA~    48 NO               2891 MALE   Tonsil        G3            NA
+##  8 TCGA~    19 NO                240 MALE   Oral Tongue   G2            NA
+##  9 TCGA~    48 YES               397 FEMALE Oral Tongue   G3            20
+## 10 TCGA~    48 YES               252 MALE   Larynx        G3            15
+## # ... with 32 more rows, and 3 more variables: tabacco_group &lt;chr&gt;,
+## #   tumor_stage &lt;chr&gt;, vital_status &lt;chr&gt;</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">larynx &lt;-<span class="st"> </span><span class="kw">filter</span>(hnscc, neoplasm_site<span class="op">==</span><span class="st">&quot;Larynx&quot;</span>)</a>
+<a class="sourceLine" id="cb15-2" title="2"></a>
+<a class="sourceLine" id="cb15-3" title="3">larynx</a></code></pre></div>
+<pre><code>## # A tibble: 72 x 11
+##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
+##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+##  1 TCGA~    39 YES               415 MALE   Larynx        G2            30
+##  2 TCGA~    83 NO                276 MALE   Larynx        G2            75
+##  3 TCGA~    54 YES               186 MALE   Larynx        G2            62
+##  4 TCGA~    53 YES               152 MALE   Larynx        G2            60
+##  5 TCGA~    62 YES               244 MALE   Larynx        G2            46
+##  6 TCGA~    60 YES               450 FEMALE Larynx        G2            40
+##  7 TCGA~    68 YES               186 MALE   Larynx        G3            60
+##  8 TCGA~    67 YES               412 MALE   Larynx        G2            NA
+##  9 TCGA~    56 YES               194 MALE   Larynx        G2            80
+## 10 TCGA~    52 YES               369 MALE   Larynx        G3           120
+## # ... with 62 more rows, and 3 more variables: tabacco_group &lt;chr&gt;,
+## #   tumor_stage &lt;chr&gt;, vital_status &lt;chr&gt;</code></pre>
+<p><strong>Logische Operatoren</strong></p>
+<p>Die doppelten Gleichheitszeichen entsprechen der Frage: Ist der Eintrag in <code>neoplasm_site = "Larynx"</code>. Das Resultat der Frage ist ein Vektor mit den Informationen <code>TRUE</code> oder <code>FALSE</code> pro Eintrag eines Vektors.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">table</span>(hnscc<span class="op">$</span>neoplasm_site<span class="op">==</span><span class="st">&quot;Larynx&quot;</span>)</a></code></pre></div>
+<pre><code>## 
+## FALSE  TRUE 
+##   207    72</code></pre>
+<p>Die Notation um alle Sites außer Larynx zu filtern ist, ein Ausrufezeichen vor den Ausdruck zu setzen:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">filter</span>(hnscc, <span class="op">!</span>neoplasm_site<span class="op">==</span><span class="st">&quot;Larynx&quot;</span>)</a></code></pre></div>
+<p>Mehrere Sites können wie folgt ausgewählt werden:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">filter</span>(hnscc, neoplasm_site <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Tonsil&quot;</span>, <span class="st">&quot;Oral Tongue&quot;</span>, <span class="st">&quot;Hard Palate&quot;</span>))</a></code></pre></div>
+<p>Im Filterprozess können Informationen aus beliebig vielen Spalten miteinander kombiniert werden.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">young_larynx &lt;-<span class="st"> </span><span class="kw">filter</span>(hnscc, age<span class="op">&lt;</span><span class="dv">50</span>, neoplasm_site<span class="op">==</span><span class="st">&quot;Larynx&quot;</span>)</a>
+<a class="sourceLine" id="cb21-2" title="2"></a>
+<a class="sourceLine" id="cb21-3" title="3">young_larynx</a></code></pre></div>
+<pre><code>## # A tibble: 8 x 11
+##   id      age alcohol days_to_death gender neoplasm_site grade pack_years
+##   &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+## 1 TCGA~    39 YES               415 MALE   Larynx        G2            30
+## 2 TCGA~    48 YES               252 MALE   Larynx        G3            15
+## 3 TCGA~    49 &lt;NA&gt;              201 MALE   Larynx        G3            NA
+## 4 TCGA~    47 YES                42 MALE   Larynx        G3            40
+## 5 TCGA~    45 NO                 93 FEMALE Larynx        G2            60
+## 6 TCGA~    49 NO                600 MALE   Larynx        G3            16
+## 7 TCGA~    38 NO                669 MALE   Larynx        GX            21
+## 8 TCGA~    47 YES                35 MALE   Larynx        G2            20
+## # ... with 3 more variables: tabacco_group &lt;chr&gt;, tumor_stage &lt;chr&gt;,
+## #   vital_status &lt;chr&gt;</code></pre>
+</div>
+<div id="zeilen-sortieren-mit-arrange" class="slide section level1">
+<h1>Zeilen sortieren mit <code>arrange()</code></h1>
+<p>Die Funktion <code>arrange()</code> sortiert Zeilen nach Spalteninformationen.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">arrange</span>(hnscc, grade)</a></code></pre></div>
+<pre><code>## # A tibble: 279 x 11
+##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
+##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+##  1 TCGA~    72 YES               190 MALE   Buccal Mucosa G1            20
+##  2 TCGA~    65 YES              1635 MALE   Hard Palate   G1            NA
+##  3 TCGA~    61 YES               236 MALE   Oral Tongue   G1            46
+##  4 TCGA~    55 YES               413 FEMALE Floor of Mou~ G1            60
+##  5 TCGA~    52 YES              1440 MALE   Oral Cavity   G1            45
+##  6 TCGA~    45 YES               759 MALE   Oral Tongue   G1            NA
+##  7 TCGA~    69 YES              1430 MALE   Oral Cavity   G1            54
+##  8 TCGA~    36 YES               913 FEMALE Oral Tongue   G1            NA
+##  9 TCGA~    67 NO                946 FEMALE Oral Tongue   G1            30
+## 10 TCGA~    62 NO                743 MALE   Oral Tongue   G1            NA
+## # ... with 269 more rows, and 3 more variables: tabacco_group &lt;chr&gt;,
+## #   tumor_stage &lt;chr&gt;, vital_status &lt;chr&gt;</code></pre>
+<p>Hierbei kann wie auch beim Filtern eine Sortierung in mehreren Schritten erfolgen.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">arrange</span>(hnscc, age, grade)</a></code></pre></div>
+<pre><code>## # A tibble: 279 x 11
+##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
+##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+##  1 TCGA~    19 NO                240 MALE   Oral Tongue   G2            NA
+##  2 TCGA~    26 YES               908 MALE   Oral Tongue   G2            NA
+##  3 TCGA~    26 YES              1315 MALE   Oral Tongue   G2            NA
+##  4 TCGA~    28 YES               113 MALE   Oral Tongue   G2             1
+##  5 TCGA~    29 &lt;NA&gt;              761 FEMALE Oral Tongue   GX            NA
+##  6 TCGA~    32 YES                64 FEMALE Oral Tongue   G2            NA
+##  7 TCGA~    34 YES               327 MALE   Oral Tongue   G2            NA
+##  8 TCGA~    35 YES              1152 FEMALE Tonsil        GX            NA
+##  9 TCGA~    36 YES               913 FEMALE Oral Tongue   G1            NA
+## 10 TCGA~    38 YES               351 MALE   Tonsil        G2            26
+## # ... with 269 more rows, and 3 more variables: tabacco_group &lt;chr&gt;,
+## #   tumor_stage &lt;chr&gt;, vital_status &lt;chr&gt;</code></pre>
+</div>
+<div id="spalten-selektieren-mit-select" class="slide section level1">
+<h1>Spalten selektieren mit <code>select()</code></h1>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">select</span>(hnscc, days_to_death, vital_status)</a></code></pre></div>
+<pre><code>## # A tibble: 279 x 2
+##    days_to_death vital_status
+##            &lt;int&gt; &lt;chr&gt;       
+##  1           461 DECEASED    
+##  2           415 DECEASED    
+##  3          1134 DECEASED    
+##  4           276 DECEASED    
+##  5           248 LIVING      
+##  6           190 LIVING      
+##  7           845 LIVING      
+##  8          1761 DECEASED    
+##  9           186 LIVING      
+## 10           179 LIVING      
+## # ... with 269 more rows</code></pre>
+<p>Umgekehrt können auch Spalten ausgeschlossen werden</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">select</span>(hnscc, <span class="op">-</span><span class="kw">c</span>(id,age))</a></code></pre></div>
+<pre><code>## # A tibble: 279 x 9
+##    alcohol days_to_death gender neoplasm_site grade pack_years tabacco_group
+##    &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;        
+##  1 YES               461 MALE   Oral Tongue   G3            51 Current smok~
+##  2 YES               415 MALE   Larynx        G2            30 Current smok~
+##  3 YES              1134 FEMALE Base of Tong~ G2            30 Current refo~
+##  4 NO                276 MALE   Larynx        G2            75 Current refo~
+##  5 YES               248 MALE   Floor of Mou~ G2            60 Current smok~
+##  6 YES               190 MALE   Buccal Mucosa G1            20 Current refo~
+##  7 YES               845 MALE   Alveolar Rid~ G2            NA Lifelong Non~
+##  8 YES              1761 MALE   Tonsil        G2            NA Lifelong Non~
+##  9 YES               186 MALE   Larynx        G2            62 Current refo~
+## 10 YES               179 FEMALE Floor of Mou~ G3            60 Current refo~
+## # ... with 269 more rows, and 2 more variables: tumor_stage &lt;chr&gt;,
+## #   vital_status &lt;chr&gt;</code></pre>
+</div>
+<div id="spaltennamen-umbenennen-mit-rename" class="slide section level1">
+<h1>Spaltennamen umbenennen mit <code>rename()</code></h1>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">rename</span>(hnscc, <span class="dt">barcode=</span>id)</a></code></pre></div>
+<pre><code>## # A tibble: 279 x 11
+##    barcode   age alcohol days_to_death gender neoplasm_site grade pack_years
+##    &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+##  1 TCGA-B~    69 YES               461 MALE   Oral Tongue   G3            51
+##  2 TCGA-B~    39 YES               415 MALE   Larynx        G2            30
+##  3 TCGA-B~    45 YES              1134 FEMALE Base of Tong~ G2            30
+##  4 TCGA-B~    83 NO                276 MALE   Larynx        G2            75
+##  5 TCGA-B~    47 YES               248 MALE   Floor of Mou~ G2            60
+##  6 TCGA-B~    72 YES               190 MALE   Buccal Mucosa G1            20
+##  7 TCGA-B~    56 YES               845 MALE   Alveolar Rid~ G2            NA
+##  8 TCGA-B~    51 YES              1761 MALE   Tonsil        G2            NA
+##  9 TCGA-B~    54 YES               186 MALE   Larynx        G2            62
+## 10 TCGA-B~    58 YES               179 FEMALE Floor of Mou~ G3            60
+## # ... with 269 more rows, and 3 more variables: tabacco_group &lt;chr&gt;,
+## #   tumor_stage &lt;chr&gt;, vital_status &lt;chr&gt;</code></pre>
+</div>
+<div id="neue-spalten-hinzufügen-mit-mutate" class="slide section level1">
+<h1>Neue Spalten hinzufügen mit <code>mutate()</code></h1>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">hnscc &lt;-<span class="st"> </span><span class="kw">mutate</span>(hnscc, <span class="dt">years_to_death=</span>(days_to_death<span class="op">/</span><span class="dv">365</span>))</a>
+<a class="sourceLine" id="cb33-2" title="2"></a>
+<a class="sourceLine" id="cb33-3" title="3"><span class="kw">summary</span>(hnscc<span class="op">$</span>years_to_death)</a></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##  0.0000  0.5993  1.2137  2.1615  2.7377 17.5781       1</code></pre>
+</div>
+<div id="gruppenweise-transformieren-group_by-und-summarize" class="slide section level1">
+<h1>Gruppenweise transformieren <code>group_by()</code> und <code>summarize()</code></h1>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">by_site &lt;-<span class="st"> </span><span class="kw">group_by</span>(hnscc, neoplasm_site)</a>
+<a class="sourceLine" id="cb35-2" title="2"></a>
+<a class="sourceLine" id="cb35-3" title="3"><span class="kw">summarize</span>(by_site, <span class="dt">mean_age=</span><span class="kw">mean</span>(age))</a></code></pre></div>
+<pre><code>## # A tibble: 12 x 2
+##    neoplasm_site  mean_age
+##    &lt;chr&gt;             &lt;dbl&gt;
+##  1 Alveolar Ridge     67.7
+##  2 Base of Tongue     61.7
+##  3 Buccal Mucosa      70.6
+##  4 Floor of Mouth     63.4
+##  5 Hard Palate        76.4
+##  6 Hypopharynx        59.5
+##  7 Larynx             61.1
+##  8 Lip                69  
+##  9 Oral Cavity        66.5
+## 10 Oral Tongue        56.9
+## 11 Oropharynx         55.5
+## 12 Tonsil             53.5</code></pre>
+</div>
+<div id="transformationen-kombinieren-mit-der-pipe-funktion" class="slide section level1">
+<h1>Transformationen kombinieren mit der pipe Funktion <code>%&gt;%</code></h1>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">hnscc  <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb37-2" title="2"><span class="st">    </span><span class="kw">filter</span>(<span class="op">!</span>neoplasm_site <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Base of Tongue&quot;</span>,<span class="st">&quot;Oral Tongue&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb37-3" title="3"><span class="st">    </span><span class="kw">group_by</span>(neoplasm_site) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb37-4" title="4"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">count=</span><span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb37-5" title="5">              <span class="dt">mean_age=</span><span class="kw">mean</span>(age))</a></code></pre></div>
+<pre><code>## # A tibble: 10 x 3
+##    neoplasm_site  count mean_age
+##    &lt;chr&gt;          &lt;int&gt;    &lt;dbl&gt;
+##  1 Alveolar Ridge     7     67.7
+##  2 Buccal Mucosa      8     70.6
+##  3 Floor of Mouth    26     63.4
+##  4 Hard Palate        5     76.4
+##  5 Hypopharynx        2     59.5
+##  6 Larynx            72     61.1
+##  7 Lip                1     69  
+##  8 Oral Cavity       49     66.5
+##  9 Oropharynx         2     55.5
+## 10 Tonsil            19     53.5</code></pre>
+</div>
+<div id="datenvisualisierung-mit-ggplot2" class="slide section level1">
+<h1>Datenvisualisierung mit ggplot2</h1>
+<p><strong>Funktionsweise der <code>ggplot</code> Funktion</strong></p>
+<p>Leere Leinwand. <code>age</code> auf der x-Achse und <code>days_to_death</code> auf der y-Achse.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death))</a></code></pre></div>
+<p><img src="pres_day2_files/figure-slidy/unnamed-chunk-22-1.png" width="768" /></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death))</a></code></pre></div>
+<p>Mit den sogenannten Aesthetics <code>aes</code> definieren wir die Dimensionen an Informationen, die wir im Plot darstellen möchten.</p>
+<p>Dieser leeren Leinwand werden nun sogenannte geoms hinzugefügt, z.B. <code>geom_point</code> für einen Dotplot.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb41-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<p><strong>Dotplot</strong></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb42-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="pres_day2_files/figure-slidy/unnamed-chunk-25-1.png" width="768" /></p>
+<p><strong>Boxplot</strong></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>grade, <span class="dt">y=</span>pack_years)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb44-2" title="2"><span class="st">    </span><span class="kw">geom_boxplot</span>()</a></code></pre></div>
+<pre><code>## Warning: Removed 125 rows containing non-finite values (stat_boxplot).</code></pre>
+<p><img src="pres_day2_files/figure-slidy/unnamed-chunk-26-1.png" width="768" /></p>
+<p><strong>Histogramm</strong></p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb46-2" title="2"><span class="st">    </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="pres_day2_files/figure-slidy/unnamed-chunk-27-1.png" width="768" /></p>
+<p><strong>Density plot</strong></p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb48-2" title="2"><span class="st">    </span><span class="kw">geom_density</span>()</a></code></pre></div>
+<p><img src="pres_day2_files/figure-slidy/unnamed-chunk-28-1.png" width="768" /></p>
+</div>
+<div id="transformation-für-barplot" class="slide section level1">
+<h1>Transformation für Barplot</h1>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1">hnscc  <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb49-2" title="2"><span class="st">    </span><span class="kw">group_by</span>(neoplasm_site) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb49-3" title="3"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">mean_age=</span><span class="kw">mean</span>(age)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb49-4" title="4"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(neoplasm_site,mean_age),<span class="dt">y=</span>mean_age)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb49-5" title="5"><span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb49-6" title="6"><span class="st">    </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb49-7" title="7"><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&quot;anatomical site&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb49-8" title="8"><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;mean age&quot;</span>)</a></code></pre></div>
+<p><img src="pres_day2_files/figure-slidy/unnamed-chunk-29-1.png" width="288" /></p>
+</div>
+<div id="aesthetics" class="slide section level1">
+<h1>Aesthetics</h1>
+<p>Bisher haben wir als aesthetics nur die x- und y-Achse verwendet. <code>ggplot2</code> bietet jedoch noch weitere Dimensionen von Daten als aesthetics zu definieren</p>
+<p><strong>Aesthetic - color</strong></p>
+<p>Coloring - kategoriale Variable neoplasm site.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death, <span class="dt">color=</span>neoplasm_site)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb50-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb50-3" title="3"><span class="st">    </span><span class="kw">guides</span>(<span class="dt">color=</span><span class="kw">guide_legend</span>(<span class="dt">ncol=</span><span class="dv">2</span>))</a></code></pre></div>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="pres_day2_files/figure-slidy/unnamed-chunk-30-1.png" width="480" /></p>
+<p>Coloring - numerische Variable packyears.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death, <span class="dt">color=</span>pack_years)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb52-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="pres_day2_files/figure-slidy/unnamed-chunk-31-1.png" width="768" /></p>
+<p><strong>Aesthetic - size</strong></p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death, <span class="dt">size=</span>pack_years)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb54-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<pre><code>## Warning: Removed 126 rows containing missing values (geom_point).</code></pre>
+<p><img src="pres_day2_files/figure-slidy/unnamed-chunk-32-1.png" width="768" /></p>
+<p><strong>Aesthetic - shape</strong></p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death, <span class="dt">shape=</span>grade)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb56-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="pres_day2_files/figure-slidy/unnamed-chunk-33-1.png" width="768" /></p>
+</div>
+<div id="facetting" class="slide section level1">
+<h1>Facetting</h1>
+<p>Über die Aesthetics hinaus gibt es die Möglichkeit Plots nach kategorialen Variablen zu stratefizieren.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death, <span class="dt">color=</span>neoplasm_site)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb58-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb58-3" title="3"><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>alcohol) <span class="op">+</span></a>
+<a class="sourceLine" id="cb58-4" title="4"><span class="st">    </span><span class="kw">guides</span>(<span class="dt">color=</span><span class="kw">guide_legend</span>(<span class="dt">ncol=</span><span class="dv">2</span>))</a></code></pre></div>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="pres_day2_files/figure-slidy/unnamed-chunk-34-1.png" width="576" /></p>
+</div>
+<div id="weiterführende-informationen" class="slide section level1">
+<h1>Weiterführende Informationen</h1>
+<p>Datentransformation mit <code>dplyr</code><br />
+Link: <a href="http://r4ds.had.co.nz/transform.html">http://r4ds.had.co.nz/transform.html</a></p>
+<p>Datenvisualisierung mit <code>ggplot2</code><br />
+Link: <a href="http://r4ds.had.co.nz/data-visualisation.html">http://r4ds.had.co.nz/data-visualisation.html</a></p>
+</div>
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+</body>
+</html>

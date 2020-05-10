@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -20,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -232,6 +234,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -248,6 +251,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -255,6 +321,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -277,23 +353,8 @@ $(document).ready(function () {
 <li>
   <a href="refs.html">Publications</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Software
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="CVE.html">CVE</a>
-    </li>
-    <li>
-      <a href="MetaboDiff.html">MetaboDiff</a>
-    </li>
-  </ul>
-</li>
 <li>
-  <a href="teaching.html">R-Kurs</a>
+  <a href="teaching.html">R Programming</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -312,15 +373,15 @@ $(document).ready(function () {
 </div>
 
 
-<div id="heicumed-wahlfachtrack-internistische-onkologie-sozität-czerny-mediss-promotionsprogramm" class="section level4">
-<h4>HeiCuMed | Wahlfachtrack internistische Onkologie, Sozität Czerny &amp; MEDISS Promotionsprogramm</h4>
-</div>
 <div id="andreas-mock" class="section level4">
 <h4><code>Andreas Mock</code></h4>
 <p>Nationales Centrum für Tumorerkrankungen (NCT) Heidelberg</p>
-<hr />
-<p><strong>Termine Wintersemester 2020/2021</strong></p>
-<p>Dieses Semester Onlinekurs via <a href="https://www.bluejeans.com/de">BlueJeans</a> wg. COVID-19 Pandemie</p>
+<p><br></p>
+</div>
+<div id="kursinformationen" class="section level2">
+<h2>Kursinformationen</h2>
+<p><strong>Sommersemester 2020/2021</strong></p>
+<p><a href="https://elearning-med.uni-heidelberg.de/course/view.php?id=196&amp;sectionid=1742">Link zum Webinar Termin 2 am 12.05.2020 17:15-18:45 Uhr - Heiconf Raum 6</a></p>
 <ul>
 <li>Termin 1 (R 101): 21.04.2020 17:00-18:30 Uhr</li>
 <li>Termin 2 (Datentransformation und Plotting): 12.05.2020 17:15-18:45 Uhr</li>
@@ -328,56 +389,797 @@ $(document).ready(function () {
 <li>Termin 4 (Überlebenszeitanalyse): 16.06.2020 17:00-18:30 Uhr</li>
 <li>Termin 5 (RNA-seq Analyse): 23.06.2020 17:00-18:30 Uhr</li>
 </ul>
-<p>Wie kaum in einem anderen Fach werden in der Onkologie Erkrankungen auf den verschiedensten Ebenen der Biologie mit Hilfe von Hochdurchsatzdaten (Omics) analysiert. Durch diese Präzisionsonkologie erhofft man sich zielgerichtete (Immun-)Therapien entwickeln und einsetzen zu können. Diesen Prozess aktiv als Onkologe zu begleiten ist herausforderend und spannend und wird in zunehmenden Maße verlangen, Datenanalysen zu verstehen und im besten Falle sogar selber durchführen zu können.</p>
-<p>In diesem Einführungspraktikum möchte ich die Scheu vor angewandter Datenanalye nehmen und aufzeigen, wie einfach man das große Einmaleins der Datenanalyse- und visualisierung mit der Programmiersprache R erlernen kann. Das Praktikum richtet sich hierbei gezielt an Studierende, Ärzte und Wissenschaftler die bisher wenig oder noch keine Berührungspunkte mit einer Programmiersprache hatten.</p>
 <p><strong>Vorbereitungen</strong></p>
-<p>Bitte die folgenden Programme auf eurem Notebook installieren bzw. einrichten, um am Praktikumstag möglichst viel Zeit der Datenanalyse widmen zu können:</p>
 <ul>
 <li>Installation von <a href="https://www.r-project.org">R</a> und <a href="https://www.rstudio.com">RStudio</a></li>
-<li>Falls noch nicht vorhanden Einrichten eines <a href="https://www.urz.uni-heidelberg.de/de/eduroam">eduroam Zugangs</a>, um in den Kursräumen das Internet nutzen zu können. Wichtig: Angestellte der Uniklinik (Ärzte und Wissenschaftler) benötigen für die Einrichtung des Zertifikates eine Uni-ID, welche über das URZ Heidelberg zu beziehen ist.</li>
-<li>Bitte eigenes Notebook am Praktikumstag nicht vergessen</li>
-<li>Am Termin 3 gibt es die Möglichkeit eigene Datensätze von euch in R zu laden, bitte schon einmal überlegen, welche ihr analysieren möchtet.</li>
 </ul>
-<p><strong>Kursunterlagen</strong></p>
+<hr />
+</div>
+<div id="r-101" class="section level2">
+<h2>1 | R 101</h2>
+<div id="lehrkapitel" class="section level3">
+<h3>Lehrkapitel</h3>
+<p><a href="http://andreasmock.github.io/pres_day1.html">Präsentation (gleicher Inhalt wie Website)</a></p>
+<blockquote>
+
+</blockquote>
+<div id="einführung" class="section level4">
+<h4>Einführung</h4>
+<div id="was-ist-r" class="section level5">
+<h5><strong>Was ist R?</strong></h5>
+<ul>
+<li><code>R</code> ist eine <strong>freie Programmiersprache</strong> für statistische Berechnungen und Grafiken.</li>
+<li>Obwohl <code>R</code> bereits alt ist (Erscheinungsjahr 1993) gilt diese als <strong>Standardsprache</strong> für statistische Problemstellungen in Wirtschaft und Wissenschaft</li>
+<li><strong>16102 Formelsammlungen</strong> (Stand 11.06.2019) für spezifische Fragestellungen (sog. Pakete)</li>
+<li>Hoch-qualitative und individuelle <strong>Grafiken</strong> - viele Wissenschaftler benutzen <code>R</code> nur hierzu</li>
+<li>Sowohl <code>R</code>, als auch alle Pakete sind <strong>kostenlos</strong>!!</li>
+</ul>
+</div>
+<div id="rstudio" class="section level5">
+<h5><strong>RStudio</strong></h5>
+<ul>
+<li>Grafische Benutzeroberfläche und Entwicklungsumgebung für <code>R</code></li>
+</ul>
+<p><img src="pics/rstudio-console.png" width="600" /></p>
+<p>Abbildung: R for Data Science, Hadley Wickham &amp; Garrett Grolemund 2016</p>
+</div>
+<div id="data-science" class="section level5">
+<h5><strong>Data Science</strong></h5>
+<p>Data Science mit R umfasst den Import, Aufbereitung, Transformation, Visualisierung, Modellierung und Kommunikation von Daten.</p>
+<p><img src="pics/data-science.png" width="600" /></p>
+<p>Abbildung: R for Data Science, Hadley Wickham &amp; Garrett Grolemund 2016</p>
+<blockquote>
+
+</blockquote>
+</div>
+</div>
+<div id="objekttypen" class="section level4">
+<h4>Objekttypen</h4>
+<p>R ist eine Objekt-orientierte Programmiersprache. Es dreht sich daher im Grunde alles darum Objekte herzustellen, zu manipulieren und zu visualisieren.</p>
+<pre class="r"><code># Zuweisung von Zahlen zu einem Objekt
+alter &lt;- 67</code></pre>
+<p>R ist <em>case-sensitive</em> - Groß- und Kleinschreibung ist wichtig!</p>
+<pre class="r"><code># Objekt `alter` ausgeben
+alter</code></pre>
+<pre><code>## [1] 67</code></pre>
+<pre class="r"><code># .. entspricht nicht
+Alter</code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;Alter&#39; not found</code></pre>
+<div id="vektor" class="section level5">
+<h5><strong>Vektor</strong></h5>
+<p>Def: Sammlung mehrerer Objekte gleicher Art (Länge 1 ist möglich).</p>
+<pre class="r"><code># numerischer Vektor mit Länge 1
+x1 &lt;- 5 
+
+# Charaktervektor mit Länge 1 (Text wird in &quot;&quot; gesetzt)
+x2 &lt;- &quot;green&quot;
+
+# Vektoren mit Länge 3
+y1 &lt;- c(1,3,9)
+y2 &lt;- c(&quot;gene1&quot;,&quot;gene2&quot;,&quot;gene3&quot;)</code></pre>
+<p>Subsetting:</p>
+<pre class="r"><code># um den vollständigen Vektor y2 auszugeben
+y2</code></pre>
+<pre><code>## [1] &quot;gene1&quot; &quot;gene2&quot; &quot;gene3&quot;</code></pre>
+<pre class="r"><code># um nur die ersten beiden Einträge des Vektors y2 auszugeben
+y2[1:2]</code></pre>
+<pre><code>## [1] &quot;gene1&quot; &quot;gene2&quot;</code></pre>
+</div>
+<div id="matrix" class="section level5">
+<h5><strong>Matrix</strong></h5>
+<p>Kombination mehrerer Vektoren gleichen Typs (numerisch oder Charakter). Die Matrix kann Zeilen- und Spaltennamen haben.</p>
+<pre class="r"><code>matrix &lt;-  cbind(y1, y1, y1)
+rownames(matrix)  &lt;-  y2
+colnames(matrix) &lt;-  c(&quot;sample1&quot;,&quot;sample2&quot;,&quot;sample3&quot;)
+matrix</code></pre>
+<pre><code>##       sample1 sample2 sample3
+## gene1       1       1       1
+## gene2       3       3       3
+## gene3       9       9       9</code></pre>
+<p>Ein Subset kann man sich mit der folgenden Syntax anzeigen lassen:</p>
+<pre class="r"><code>matrix[Zeile,Spalte]</code></pre>
+<p>Bespiele hierfür sind:</p>
+<pre class="r"><code>matrix[1,]</code></pre>
+<pre><code>## sample1 sample2 sample3 
+##       1       1       1</code></pre>
+<pre class="r"><code>matrix[,3]</code></pre>
+<pre><code>## gene1 gene2 gene3 
+##     1     3     9</code></pre>
+<pre class="r"><code>matrix[1:2,]</code></pre>
+<pre><code>##       sample1 sample2 sample3
+## gene1       1       1       1
+## gene2       3       3       3</code></pre>
+</div>
+<div id="dataframe" class="section level5">
+<h5><strong>Dataframe</strong></h5>
+<p>Im Gegensatz zu Matrizen können in <em>Dataframes</em> Vektoren verschiedenen Typs (z.B. numerischer Vektor und Charaktervektor) miteinander kombiniert werden. Wichtig: Die Vektoren müssen die gleiche Länge haben.</p>
+<pre class="r"><code>df &lt;- data.frame(age=c(50,47,87),
+                gender=c(&quot;male&quot;,&quot;male&quot;,&quot;female&quot;))
+df</code></pre>
+<pre><code>##   age gender
+## 1  50   male
+## 2  47   male
+## 3  87 female</code></pre>
+<p>Somit eignen sich <em>Dataframes</em> insbesondere für die Analyse von Patientenmetadaten im Rahmen von molekularbiologischen Experimenten oder klinischen Studien.</p>
+<pre class="r"><code>df</code></pre>
+<pre><code>##   age gender
+## 1  50   male
+## 2  47   male
+## 3  87 female</code></pre>
+<p>Eine Besonderheit von <em>Dataframes</em> ist die Möglichkeit einzelne Spalten durch den Spaltennamen zu selektieren.</p>
+<pre class="r"><code>df$age</code></pre>
+<pre><code>## [1] 50 47 87</code></pre>
+<p>Dies entspricht der folgenden Matrixnotation</p>
+<pre class="r"><code>df[,1]</code></pre>
+<pre><code>## [1] 50 47 87</code></pre>
+</div>
+<div id="übersicht-objekttypen" class="section level5">
+<h5><strong>Übersicht Objekttypen</strong></h5>
+<p><img src="pics/R_objects.png" width="600" /></p>
+</div>
+<div id="funktionen" class="section level5">
+<h5><strong>Funktionen</strong></h5>
+<p>Die Grundsyntax einer jeden Funktion ist</p>
+<pre class="r"><code>function(Objekt, Argumente)</code></pre>
+<p>Die Argumente sind hierbei fakultativ. R besitzt eine Vielzahl von Funktionen, ohne dass zusätzliche Packete geladen werden müssen.</p>
+<pre class="r"><code>sum(y1)</code></pre>
+<pre><code>## [1] 13</code></pre>
+<pre class="r"><code>mean(y1)</code></pre>
+<pre><code>## [1] 4.333333</code></pre>
+<p>Die Funktion <code>help</code> öffnet die Dokumentation in RStudio und zeigt die notwendigen Objekte und Argumente zu jeder Funktion an. Als Beispiel, was genau macht die Funktion <code>cbind</code>?</p>
+<pre class="r"><code>help(cbind)</code></pre>
+<pre><code>## starting httpd help server ... done</code></pre>
+</div>
+<div id="objekttyp-ausgeben" class="section level5">
+<h5><strong>Objekttyp ausgeben</strong></h5>
+<p>Die Funktion <code>class</code> ermöglicht es den Typ eines Objektes zu eruieren:</p>
+<pre class="r"><code>class(df)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<blockquote>
+
+</blockquote>
+</div>
+</div>
+<div id="pakete" class="section level4">
+<h4>Pakete</h4>
+<p>Ein Paket ist nicht anderes als eine wohldurchdachte Formelsammlung, die für eine spezifische wissenschaftliche Fragestellung (z.B. die Analyse von Sequenzierungsdaten) entwickelt wurde.</p>
+<p>Installation</p>
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;)</code></pre>
+<p>Ins Environment laden</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<blockquote>
+
+</blockquote>
+</div>
+<div id="bespieldaten-des-kurses" class="section level4">
+<h4>Bespieldaten des Kurses</h4>
+<p>Metadaten des <em>The Cancer Genome Atlas (TCGA)</em> zur Analyse von Kopf-Hals-Tumoren (head and neck squamous cell carcinoma; HNSCC). Der Datensatz fasst die wichtigsten klinisch-pathologischen Charakteristika der Studienkohorte (n=279) zusammen.</p>
+<p><a href="https://tcga-data.nci.nih.gov/docs/publications/hnsc_2014/">Link zur Originalpublikation</a></p>
+<pre class="r"><code>#Datensatz in R laden
+load(url(&quot;http://andreasmock.github.io/data/hnscc.RData&quot;))</code></pre>
+<pre class="r"><code>hnscc</code></pre>
+<pre><code>## # A tibble: 279 x 11
+##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
+##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+##  1 TCGA~    69 YES               461 MALE   Oral Tongue   G3            51
+##  2 TCGA~    39 YES               415 MALE   Larynx        G2            30
+##  3 TCGA~    45 YES              1134 FEMALE Base of Tong~ G2            30
+##  4 TCGA~    83 NO                276 MALE   Larynx        G2            75
+##  5 TCGA~    47 YES               248 MALE   Floor of Mou~ G2            60
+##  6 TCGA~    72 YES               190 MALE   Buccal Mucosa G1            20
+##  7 TCGA~    56 YES               845 MALE   Alveolar Rid~ G2            NA
+##  8 TCGA~    51 YES              1761 MALE   Tonsil        G2            NA
+##  9 TCGA~    54 YES               186 MALE   Larynx        G2            62
+## 10 TCGA~    58 YES               179 FEMALE Floor of Mou~ G3            60
+## # ... with 269 more rows, and 3 more variables: tabacco_group &lt;chr&gt;,
+## #   tumor_stage &lt;chr&gt;, vital_status &lt;chr&gt;</code></pre>
+<div id="funktionen-zur-exploration-von-dataframes" class="section level5">
+<h5>Funktionen zur Exploration von Dataframes</h5>
+<pre class="r"><code>colnames(hnscc)</code></pre>
+<pre><code>##  [1] &quot;id&quot;            &quot;age&quot;           &quot;alcohol&quot;       &quot;days_to_death&quot;
+##  [5] &quot;gender&quot;        &quot;neoplasm_site&quot; &quot;grade&quot;         &quot;pack_years&quot;   
+##  [9] &quot;tabacco_group&quot; &quot;tumor_stage&quot;   &quot;vital_status&quot;</code></pre>
+<pre class="r"><code>head(hnscc$age)</code></pre>
+<pre><code>## [1] 69 39 45 83 47 72</code></pre>
+<pre class="r"><code>summary(hnscc$age)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   19.00   53.00   61.00   61.32   69.00   90.00</code></pre>
+<pre class="r"><code>head(hnscc$alcohol)</code></pre>
+<pre><code>## [1] &quot;YES&quot; &quot;YES&quot; &quot;YES&quot; &quot;NO&quot;  &quot;YES&quot; &quot;YES&quot;</code></pre>
+<pre class="r"><code>table(hnscc$alcohol)</code></pre>
+<pre><code>## 
+##  NO YES 
+##  85 188</code></pre>
+<pre class="r"><code>table(is.na(hnscc$alcohol))</code></pre>
+<pre><code>## 
+## FALSE  TRUE 
+##   273     6</code></pre>
+<pre class="r"><code>summary(hnscc$days_to_death)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##     0.0   218.8   443.0   789.0   999.2  6416.0       1</code></pre>
+<pre class="r"><code>table(hnscc$gender)</code></pre>
+<pre><code>## 
+## FEMALE   MALE 
+##     76    203</code></pre>
+<pre class="r"><code>table(hnscc$neoplasm_site)</code></pre>
+<pre><code>## 
+## Alveolar Ridge Base of Tongue  Buccal Mucosa Floor of Mouth    Hard Palate 
+##              7             12              8             26              5 
+##    Hypopharynx         Larynx            Lip    Oral Cavity    Oral Tongue 
+##              2             72              1             49             76 
+##     Oropharynx         Tonsil 
+##              2             19</code></pre>
+<pre class="r"><code>table(hnscc$grade)</code></pre>
+<pre><code>## 
+##  G1  G2  G3  G4  GX 
+##  23 176  71   1   8</code></pre>
+<pre class="r"><code>summary(hnscc$pack_years)</code></pre>
+<pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max.      NA&#39;s 
+##   0.01685  30.00000  45.00000  50.62485  60.00000 300.00000       125</code></pre>
+<pre class="r"><code>table(hnscc$tabacco_group)</code></pre>
+<pre><code>## 
+## Current reformed smoker for &lt; or = 15 years 
+##                                          81 
+##      Current reformed smoker for &gt; 15 years 
+##                                          49 
+##                              Current smoker 
+##                                          90 
+##                         Lifelong Non-smoker 
+##                                          52</code></pre>
+<pre class="r"><code>table(hnscc$tumor_stage)</code></pre>
+<pre><code>## 
+##   Stage I  Stage II Stage III Stage IVA Stage IVB 
+##        14        44        38       139         5</code></pre>
+<pre class="r"><code>table(hnscc$vital_status)</code></pre>
+<pre><code>## 
+## DECEASED   LIVING 
+##      116      163</code></pre>
+<p>Zusammenfassung der Funktionen</p>
+<pre class="r"><code># Tabelle von kategoriellen Daten
+table(&lt;data&gt;)
+
+# Tabelle von fehlenden Informationen
+table(is.na(&lt;data&gt;))
+
+# Summary von kontinuierlichen Daten
+summary(&lt;data&gt;)</code></pre>
+<blockquote>
+
+</blockquote>
+</div>
+</div>
+<div id="literaturempfehlungen" class="section level4">
+<h4>Literaturempfehlungen</h4>
+<p><strong>Programmieren mit R</strong><br />
+Hands-On Programming with R, Garrett Grolemund<br />
+- Kapitel 1, 2, 3, 4, 5, 7, 9<br />
+<a href="https://d1b10bmlvqabco.cloudfront.net/attach/ighbo26t3ua52t/igp9099yy4v10/igz7vp4w5su9/OReilly_HandsOn_Programming_with_R_2014.pdf">Link</a></p>
+<p><strong>Die “Bibel” für R User</strong><br />
+R for Data Science, Hadley Wickham &amp; Garrett Grolemund<br />
+<a href="http://r4ds.had.co.nz">Link</a></p>
+<p><strong>Kochbuch für R Plots</strong><br />
+R Graphics Cookbock, Winston Chang<br />
+<a href="http://www.cookbook-r.com">Link</a></p>
+<blockquote>
+
+</blockquote>
+</div>
+</div>
+<div id="übung" class="section level3">
+<h3>Übung</h3>
+<ol style="list-style-type: lower-alpha">
+<li>Installiert das Paket ‘tidyverse’ und ladet es in euer Environment.</li>
+<li>Ladet den Beispieldatansatz in euer Environment</li>
+</ol>
+<pre class="r"><code>load(url(&quot;http://andreasmock.github.io/data/hnscc.RData&quot;))</code></pre>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Beantwortet die folgenden Fragen zum Datensatz</li>
+</ol>
+<ul>
+<li>Wie viele Patienten trinken regelmäßig Alkohol?</li>
+<li>Was ist die häufigste Lokalisation der Tumoren?</li>
+<li>Bei wie vielen Patienten ist das Grading unbekannt?</li>
+<li>Was ist die maximale Anzahl von Packyears, die angegeben wurde?</li>
+<li>Wie viele Angaben fehlen in der Spalte “pack_years”?</li>
+<li>In welchem Bereich bewegte sich das Überleben der Patienten?</li>
+</ul>
+</div>
+<div id="lösungen" class="section level3">
+<h3>Lösungen</h3>
+<p><a href="http://andreasmock.github.io/solution1.html">Link zu Lösungen der Übung</a></p>
+<hr />
+</div>
+</div>
+<div id="transformation-und-plotting" class="section level2">
+<h2>2 | Transformation und Plotting</h2>
+<div id="lehrkapitel-1" class="section level3">
+<h3>Lehrkapitel</h3>
+<p><a href="http://andreasmock.github.io/pres_day2.html">Präsentation (gleicher Inhalt wie Website)</a></p>
+<blockquote>
+
+</blockquote>
+<div id="objekttypen-2.0" class="section level4">
+<h4>Objekttypen 2.0</h4>
+<div id="faktor" class="section level5">
+<h5><strong>Faktor</strong></h5>
+<p><strong>Faktor</strong>: spezielle Unterform eines Vektors für kategoriale Variablen. Ein Faktor fasst die Kategorien (= Levels) zusammen.</p>
+<pre class="r"><code># Vektor
+head(hnscc$grade)</code></pre>
+<pre><code>## [1] &quot;G3&quot; &quot;G2&quot; &quot;G2&quot; &quot;G2&quot; &quot;G2&quot; &quot;G1&quot;</code></pre>
+<pre class="r"><code># Faktor
+head(as.factor(hnscc$grade))</code></pre>
+<pre><code>## [1] G3 G2 G2 G2 G2 G1
+## Levels: G1 G2 G3 G4 GX</code></pre>
+</div>
+<div id="tibbles" class="section level5">
+<h5><strong>Tibbles</strong></h5>
+<p>Tibbles sind morderne Dataframes.</p>
+<pre class="r"><code>class(hnscc)</code></pre>
+<pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<p>Der <code>hnscc</code> Datensatz ist eigentlich streng genommen kein Dataframe, sondern ein sogenannter Tibble, die moderne Weiterentwicklung eines R Dataframes.</p>
+<pre class="r"><code>hnscc</code></pre>
+<pre><code>## # A tibble: 279 x 11
+##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
+##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+##  1 TCGA~    69 YES               461 MALE   Oral Tongue   G3            51
+##  2 TCGA~    39 YES               415 MALE   Larynx        G2            30
+##  3 TCGA~    45 YES              1134 FEMALE Base of Tong~ G2            30
+##  4 TCGA~    83 NO                276 MALE   Larynx        G2            75
+##  5 TCGA~    47 YES               248 MALE   Floor of Mou~ G2            60
+##  6 TCGA~    72 YES               190 MALE   Buccal Mucosa G1            20
+##  7 TCGA~    56 YES               845 MALE   Alveolar Rid~ G2            NA
+##  8 TCGA~    51 YES              1761 MALE   Tonsil        G2            NA
+##  9 TCGA~    54 YES               186 MALE   Larynx        G2            62
+## 10 TCGA~    58 YES               179 FEMALE Floor of Mou~ G3            60
+## # ... with 269 more rows, and 3 more variables: tabacco_group &lt;chr&gt;,
+## #   tumor_stage &lt;chr&gt;, vital_status &lt;chr&gt;</code></pre>
+<blockquote>
+
+</blockquote>
+</div>
+</div>
+<div id="datentransformation" class="section level4">
+<h4>Datentransformation</h4>
+<p>HNSCC Datensatz laden.</p>
+<pre class="r"><code>load(url(&quot;http://andreasmock.github.io/data/hnscc.RData&quot;))</code></pre>
+<p><strong>Warum Datentransformation?</strong> Oftmals sind wir nur an Teilmengen eines Datensatzes interessiert, bzw. möchten Proben nach verschiedenen Merkmalen zusammengruppieren.</p>
+<p>Die Funktionen zur Datentransformation sind innerhalb des “Tidyverse” im <code>dplyr</code> Paket zu finden. Habt ihr das <code>tidyverse</code> Paket geladen, so wird automatisch auch das <code>dplyr</code> Paket geladen.</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<div id="übersicht" class="section level5">
+<h5><strong>Übersicht</strong></h5>
 <table>
 <thead>
 <tr class="header">
-<th>Tag 1</th>
-<th>Tag 2</th>
-<th>Tag 3</th>
-<th>Tag 4</th>
-<th>Tag 5</th>
+<th>Transformation</th>
+<th>Funktion</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="http://andreasmock.github.io/pres_day1.html">Präsentation</a></td>
-<td>Präsentation</td>
-<td>Präsentation</td>
-<td>Präsentation</td>
-<td>Präsentation</td>
+<td>Zeilen filtern</td>
+<td><code>filter()</code></td>
 </tr>
 <tr class="even">
-<td><a href="http://andreasmock.github.io/day1.html">Übung</a></td>
-<td>Übung</td>
-<td>Übung</td>
-<td>Übung</td>
-<td>Übung</td>
+<td>Zeilen sortieren</td>
+<td><code>arrange()</code></td>
 </tr>
 <tr class="odd">
-<td><a href="http://andreasmock.github.io/solution1.html">Lösungen</a></td>
-<td>Lösungen</td>
-<td>Lösungen</td>
-<td>Lösungen</td>
-<td>Lösungen</td>
+<td>Spalten selektieren</td>
+<td><code>select()</code></td>
+</tr>
+<tr class="even">
+<td>Spaltennamen umbenennen</td>
+<td><code>rename()</code></td>
+</tr>
+<tr class="odd">
+<td>Neue Spalten hinzufügen</td>
+<td><code>mutate()</code></td>
+</tr>
+<tr class="even">
+<td>Gruppenweise transformieren</td>
+<td><code>group_by()</code> &amp; <code>summarize()</code></td>
+</tr>
+<tr class="odd">
+<td>Transformationen kombinieren</td>
+<td>pipe Funktion <code>%&gt;%</code></td>
 </tr>
 </tbody>
 </table>
-<p>Die Lösungen zu den Übungen werden am Ende des jeweiligen Praktikumstags hochgeladen</p>
+</div>
+<div id="zeilen-filtern-mit-filter" class="section level5">
+<h5><strong>Zeilen filtern mit <code>filter()</code></strong></h5>
+<p>Die Funktion <code>filter()</code> ermöglicht es uns ein Subset aus den Zeilen auszuwählen. Das erste Argument ist das Objekt, die weiteren Argumente sind die Spalten, wonach wir filtern möchten.</p>
+<pre class="r"><code>young &lt;- filter(hnscc, age&lt;50)
+
+young</code></pre>
+<pre><code>## # A tibble: 42 x 11
+##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
+##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+##  1 TCGA~    39 YES               415 MALE   Larynx        G2            30
+##  2 TCGA~    45 YES              1134 FEMALE Base of Tong~ G2            30
+##  3 TCGA~    47 YES               248 MALE   Floor of Mou~ G2            60
+##  4 TCGA~    41 YES               242 FEMALE Oral Tongue   G2            NA
+##  5 TCGA~    47 YES               395 MALE   Floor of Mou~ G2            40
+##  6 TCGA~    28 YES               113 MALE   Oral Tongue   G2             1
+##  7 TCGA~    48 NO               2891 MALE   Tonsil        G3            NA
+##  8 TCGA~    19 NO                240 MALE   Oral Tongue   G2            NA
+##  9 TCGA~    48 YES               397 FEMALE Oral Tongue   G3            20
+## 10 TCGA~    48 YES               252 MALE   Larynx        G3            15
+## # ... with 32 more rows, and 3 more variables: tabacco_group &lt;chr&gt;,
+## #   tumor_stage &lt;chr&gt;, vital_status &lt;chr&gt;</code></pre>
+<pre class="r"><code>larynx &lt;- filter(hnscc, neoplasm_site==&quot;Larynx&quot;)
+
+larynx</code></pre>
+<pre><code>## # A tibble: 72 x 11
+##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
+##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+##  1 TCGA~    39 YES               415 MALE   Larynx        G2            30
+##  2 TCGA~    83 NO                276 MALE   Larynx        G2            75
+##  3 TCGA~    54 YES               186 MALE   Larynx        G2            62
+##  4 TCGA~    53 YES               152 MALE   Larynx        G2            60
+##  5 TCGA~    62 YES               244 MALE   Larynx        G2            46
+##  6 TCGA~    60 YES               450 FEMALE Larynx        G2            40
+##  7 TCGA~    68 YES               186 MALE   Larynx        G3            60
+##  8 TCGA~    67 YES               412 MALE   Larynx        G2            NA
+##  9 TCGA~    56 YES               194 MALE   Larynx        G2            80
+## 10 TCGA~    52 YES               369 MALE   Larynx        G3           120
+## # ... with 62 more rows, and 3 more variables: tabacco_group &lt;chr&gt;,
+## #   tumor_stage &lt;chr&gt;, vital_status &lt;chr&gt;</code></pre>
+<p><strong>Logische Operatoren</strong></p>
+<p>Die doppelten Gleichheitszeichen entsprechen der Frage: Ist der Eintrag in <code>neoplasm_site = "Larynx"</code>. Das Resultat der Frage ist ein Vektor mit den Informationen <code>TRUE</code> oder <code>FALSE</code> pro Eintrag eines Vektors.</p>
+<pre class="r"><code>table(hnscc$neoplasm_site==&quot;Larynx&quot;)</code></pre>
+<pre><code>## 
+## FALSE  TRUE 
+##   207    72</code></pre>
+<p>Die Notation um alle Sites außer Larynx zu filtern ist, ein Ausrufezeichen vor den Ausdruck zu setzen:</p>
+<pre class="r"><code>filter(hnscc, !neoplasm_site==&quot;Larynx&quot;)</code></pre>
+<p>Mehrere Sites können wie folgt ausgewählt werden:</p>
+<pre class="r"><code>filter(hnscc, neoplasm_site %in% c(&quot;Tonsil&quot;, &quot;Oral Tongue&quot;, &quot;Hard Palate&quot;))</code></pre>
+<p>Im Filterprozess können Informationen aus beliebig vielen Spalten miteinander kombiniert werden.</p>
+<pre class="r"><code>young_larynx &lt;- filter(hnscc, age&lt;50, neoplasm_site==&quot;Larynx&quot;)
+
+young_larynx</code></pre>
+<pre><code>## # A tibble: 8 x 11
+##   id      age alcohol days_to_death gender neoplasm_site grade pack_years
+##   &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+## 1 TCGA~    39 YES               415 MALE   Larynx        G2            30
+## 2 TCGA~    48 YES               252 MALE   Larynx        G3            15
+## 3 TCGA~    49 &lt;NA&gt;              201 MALE   Larynx        G3            NA
+## 4 TCGA~    47 YES                42 MALE   Larynx        G3            40
+## 5 TCGA~    45 NO                 93 FEMALE Larynx        G2            60
+## 6 TCGA~    49 NO                600 MALE   Larynx        G3            16
+## 7 TCGA~    38 NO                669 MALE   Larynx        GX            21
+## 8 TCGA~    47 YES                35 MALE   Larynx        G2            20
+## # ... with 3 more variables: tabacco_group &lt;chr&gt;, tumor_stage &lt;chr&gt;,
+## #   vital_status &lt;chr&gt;</code></pre>
+</div>
+<div id="zeilen-sortieren-mit-arrange" class="section level5">
+<h5><strong>Zeilen sortieren mit <code>arrange()</code></strong></h5>
+<p>Die Funktion <code>arrange()</code> sortiert Zeilen nach Spalteninformationen.</p>
+<pre class="r"><code>arrange(hnscc, grade)</code></pre>
+<pre><code>## # A tibble: 279 x 11
+##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
+##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+##  1 TCGA~    72 YES               190 MALE   Buccal Mucosa G1            20
+##  2 TCGA~    65 YES              1635 MALE   Hard Palate   G1            NA
+##  3 TCGA~    61 YES               236 MALE   Oral Tongue   G1            46
+##  4 TCGA~    55 YES               413 FEMALE Floor of Mou~ G1            60
+##  5 TCGA~    52 YES              1440 MALE   Oral Cavity   G1            45
+##  6 TCGA~    45 YES               759 MALE   Oral Tongue   G1            NA
+##  7 TCGA~    69 YES              1430 MALE   Oral Cavity   G1            54
+##  8 TCGA~    36 YES               913 FEMALE Oral Tongue   G1            NA
+##  9 TCGA~    67 NO                946 FEMALE Oral Tongue   G1            30
+## 10 TCGA~    62 NO                743 MALE   Oral Tongue   G1            NA
+## # ... with 269 more rows, and 3 more variables: tabacco_group &lt;chr&gt;,
+## #   tumor_stage &lt;chr&gt;, vital_status &lt;chr&gt;</code></pre>
+<p>Hierbei kann wie auch beim Filtern eine Sortierung in mehreren Schritten erfolgen.</p>
+<pre class="r"><code>arrange(hnscc, age, grade)</code></pre>
+<pre><code>## # A tibble: 279 x 11
+##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
+##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+##  1 TCGA~    19 NO                240 MALE   Oral Tongue   G2            NA
+##  2 TCGA~    26 YES               908 MALE   Oral Tongue   G2            NA
+##  3 TCGA~    26 YES              1315 MALE   Oral Tongue   G2            NA
+##  4 TCGA~    28 YES               113 MALE   Oral Tongue   G2             1
+##  5 TCGA~    29 &lt;NA&gt;              761 FEMALE Oral Tongue   GX            NA
+##  6 TCGA~    32 YES                64 FEMALE Oral Tongue   G2            NA
+##  7 TCGA~    34 YES               327 MALE   Oral Tongue   G2            NA
+##  8 TCGA~    35 YES              1152 FEMALE Tonsil        GX            NA
+##  9 TCGA~    36 YES               913 FEMALE Oral Tongue   G1            NA
+## 10 TCGA~    38 YES               351 MALE   Tonsil        G2            26
+## # ... with 269 more rows, and 3 more variables: tabacco_group &lt;chr&gt;,
+## #   tumor_stage &lt;chr&gt;, vital_status &lt;chr&gt;</code></pre>
+</div>
+<div id="spalten-selektieren-mit-select" class="section level5">
+<h5><strong>Spalten selektieren mit <code>select()</code></strong></h5>
+<pre class="r"><code>select(hnscc, days_to_death, vital_status)</code></pre>
+<pre><code>## # A tibble: 279 x 2
+##    days_to_death vital_status
+##            &lt;int&gt; &lt;chr&gt;       
+##  1           461 DECEASED    
+##  2           415 DECEASED    
+##  3          1134 DECEASED    
+##  4           276 DECEASED    
+##  5           248 LIVING      
+##  6           190 LIVING      
+##  7           845 LIVING      
+##  8          1761 DECEASED    
+##  9           186 LIVING      
+## 10           179 LIVING      
+## # ... with 269 more rows</code></pre>
+<p>Umgekehrt können auch Spalten ausgeschlossen werden</p>
+<pre class="r"><code>select(hnscc, -c(id,age))</code></pre>
+<pre><code>## # A tibble: 279 x 9
+##    alcohol days_to_death gender neoplasm_site grade pack_years tabacco_group
+##    &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;        
+##  1 YES               461 MALE   Oral Tongue   G3            51 Current smok~
+##  2 YES               415 MALE   Larynx        G2            30 Current smok~
+##  3 YES              1134 FEMALE Base of Tong~ G2            30 Current refo~
+##  4 NO                276 MALE   Larynx        G2            75 Current refo~
+##  5 YES               248 MALE   Floor of Mou~ G2            60 Current smok~
+##  6 YES               190 MALE   Buccal Mucosa G1            20 Current refo~
+##  7 YES               845 MALE   Alveolar Rid~ G2            NA Lifelong Non~
+##  8 YES              1761 MALE   Tonsil        G2            NA Lifelong Non~
+##  9 YES               186 MALE   Larynx        G2            62 Current refo~
+## 10 YES               179 FEMALE Floor of Mou~ G3            60 Current refo~
+## # ... with 269 more rows, and 2 more variables: tumor_stage &lt;chr&gt;,
+## #   vital_status &lt;chr&gt;</code></pre>
+</div>
+<div id="spaltennamen-umbenennen-mit-rename" class="section level5">
+<h5><strong>Spaltennamen umbenennen mit <code>rename()</code></strong></h5>
+<pre class="r"><code>rename(hnscc, barcode=id)</code></pre>
+<pre><code>## # A tibble: 279 x 11
+##    barcode   age alcohol days_to_death gender neoplasm_site grade pack_years
+##    &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+##  1 TCGA-B~    69 YES               461 MALE   Oral Tongue   G3            51
+##  2 TCGA-B~    39 YES               415 MALE   Larynx        G2            30
+##  3 TCGA-B~    45 YES              1134 FEMALE Base of Tong~ G2            30
+##  4 TCGA-B~    83 NO                276 MALE   Larynx        G2            75
+##  5 TCGA-B~    47 YES               248 MALE   Floor of Mou~ G2            60
+##  6 TCGA-B~    72 YES               190 MALE   Buccal Mucosa G1            20
+##  7 TCGA-B~    56 YES               845 MALE   Alveolar Rid~ G2            NA
+##  8 TCGA-B~    51 YES              1761 MALE   Tonsil        G2            NA
+##  9 TCGA-B~    54 YES               186 MALE   Larynx        G2            62
+## 10 TCGA-B~    58 YES               179 FEMALE Floor of Mou~ G3            60
+## # ... with 269 more rows, and 3 more variables: tabacco_group &lt;chr&gt;,
+## #   tumor_stage &lt;chr&gt;, vital_status &lt;chr&gt;</code></pre>
+</div>
+<div id="neue-spalten-hinzufügen-mit-mutate" class="section level5">
+<h5><strong>Neue Spalten hinzufügen mit <code>mutate()</code></strong></h5>
+<pre class="r"><code>hnscc &lt;- mutate(hnscc, years_to_death=(days_to_death/365))
+
+summary(hnscc$years_to_death)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##  0.0000  0.5993  1.2137  2.1615  2.7377 17.5781       1</code></pre>
+</div>
+<div id="gruppenweise-transformieren-group_by-und-summarize" class="section level5">
+<h5><strong>Gruppenweise transformieren <code>group_by()</code> und <code>summarize()</code></strong></h5>
+<pre class="r"><code>by_site &lt;- group_by(hnscc, neoplasm_site)
+
+summarize(by_site, mean_age=mean(age))</code></pre>
+<pre><code>## # A tibble: 12 x 2
+##    neoplasm_site  mean_age
+##    &lt;chr&gt;             &lt;dbl&gt;
+##  1 Alveolar Ridge     67.7
+##  2 Base of Tongue     61.7
+##  3 Buccal Mucosa      70.6
+##  4 Floor of Mouth     63.4
+##  5 Hard Palate        76.4
+##  6 Hypopharynx        59.5
+##  7 Larynx             61.1
+##  8 Lip                69  
+##  9 Oral Cavity        66.5
+## 10 Oral Tongue        56.9
+## 11 Oropharynx         55.5
+## 12 Tonsil             53.5</code></pre>
+</div>
+<div id="transformationen-kombinieren-mit-der-pipe-funktion" class="section level5">
+<h5><strong>Transformationen kombinieren mit der pipe Funktion <code>%&gt;%</code></strong></h5>
+<pre class="r"><code>hnscc  %&gt;%
+    filter(!neoplasm_site %in% c(&quot;Base of Tongue&quot;,&quot;Oral Tongue&quot;)) %&gt;%
+    group_by(neoplasm_site) %&gt;%
+    summarize(count=n(),
+              mean_age=mean(age))</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    neoplasm_site  count mean_age
+##    &lt;chr&gt;          &lt;int&gt;    &lt;dbl&gt;
+##  1 Alveolar Ridge     7     67.7
+##  2 Buccal Mucosa      8     70.6
+##  3 Floor of Mouth    26     63.4
+##  4 Hard Palate        5     76.4
+##  5 Hypopharynx        2     59.5
+##  6 Larynx            72     61.1
+##  7 Lip                1     69  
+##  8 Oral Cavity       49     66.5
+##  9 Oropharynx         2     55.5
+## 10 Tonsil            19     53.5</code></pre>
+<blockquote>
+
+</blockquote>
+</div>
+</div>
+<div id="datenvisualisierung-mit-ggplot2" class="section level4">
+<h4>Datenvisualisierung mit ggplot2</h4>
+<p><strong>Funktionsweise der <code>ggplot</code> Funktion</strong></p>
+<p>Leere Leinwand. <code>age</code> auf der x-Achse und <code>days_to_death</code> auf der y-Achse.</p>
+<pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death))</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death))</code></pre>
+<p>Mit den sogenannten Aesthetics <code>aes</code> definieren wir die Dimensionen an Informationen, die wir im Plot darstellen möchten.</p>
+<p>Dieser leeren Leinwand werden nun sogenannte geoms hinzugefügt, z.B. <code>geom_point</code> für einen Dotplot.</p>
+<pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death)) +
+    geom_point()</code></pre>
+<p><strong>Dotplot</strong></p>
+<pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death)) +
+    geom_point()</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<p><strong>Boxplot</strong></p>
+<pre class="r"><code>ggplot(hnscc, aes(x=grade, y=pack_years)) +
+    geom_boxplot()</code></pre>
+<pre><code>## Warning: Removed 125 rows containing non-finite values (stat_boxplot).</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<p><strong>Histogramm</strong></p>
+<pre class="r"><code>ggplot(hnscc, aes(x=age)) +
+    geom_histogram()</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<p><strong>Density plot</strong></p>
+<pre class="r"><code>ggplot(hnscc, aes(x=age)) +
+    geom_density()</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<p>Transformation für Barplot</p>
+<pre class="r"><code>hnscc  %&gt;%
+    group_by(neoplasm_site) %&gt;%
+    summarize(mean_age=mean(age)) %&gt;%
+    ggplot(aes(x=reorder(neoplasm_site,mean_age),y=mean_age)) +
+    geom_bar(stat=&quot;identity&quot;) +
+    coord_flip() +
+    xlab(&quot;anatomical site&quot;) +
+    ylab(&quot;mean age&quot;)</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-63-1.png" width="288" /></p>
+<div id="aesthetics" class="section level5">
+<h5><strong>Aesthetics</strong></h5>
+<p>Bisher haben wir als aesthetics nur die x- und y-Achse verwendet. <code>ggplot2</code> bietet jedoch noch weitere Dimensionen von Daten als aesthetics zu definieren</p>
+<p><strong>Aesthetic - color</strong></p>
+<p>Coloring - kategoriale Variable neoplasm site.</p>
+<pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death, color=neoplasm_site)) +
+    geom_point() +
+    guides(color=guide_legend(ncol=2))</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-64-1.png" width="480" /></p>
+<p>Coloring - numerische Variable packyears.</p>
+<pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death, color=pack_years)) +
+    geom_point()</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<p><strong>Aesthetic - size</strong></p>
+<pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death, size=pack_years)) +
+    geom_point()</code></pre>
+<pre><code>## Warning: Removed 126 rows containing missing values (geom_point).</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<p><strong>Aesthetic - shape</strong></p>
+<pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death, shape=grade)) +
+    geom_point()</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+</div>
+<div id="facetting" class="section level5">
+<h5><strong>Facetting</strong></h5>
+<p>Über die Aesthetics hinaus gibt es die Möglichkeit Plots nach kategorialen Variablen zu stratefizieren.</p>
+<pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death, color=neoplasm_site)) +
+    geom_point() +
+    facet_wrap(~alcohol) +
+    guides(color=guide_legend(ncol=2))</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-68-1.png" width="576" /></p>
+<blockquote>
+
+</blockquote>
+</div>
+</div>
+<div id="weiterführende-informationen" class="section level4">
+<h4>Weiterführende Informationen</h4>
+<p>Datentransformation mit <code>dplyr</code><br />
+Link: <a href="http://r4ds.had.co.nz/transform.html">http://r4ds.had.co.nz/transform.html</a></p>
+<p>Datenvisualisierung mit <code>ggplot2</code><br />
+Link: <a href="http://r4ds.had.co.nz/data-visualisation.html">http://r4ds.had.co.nz/data-visualisation.html</a></p>
+<blockquote>
+
+</blockquote>
+</div>
+</div>
+<div id="übung-1" class="section level3">
+<h3>Übung</h3>
+<ol style="list-style-type: decimal">
+<li>Vergleicht den Output eines “normalen” Dataframes mit einem Tibble. Welche zusätzlichen Informationen bzw. Funktionen beeinhaltet ein Tibble?</li>
+</ol>
+<pre class="r"><code>#Dataframe
+head(as.data.frame(hnscc))</code></pre>
+<pre><code>##             id age alcohol days_to_death gender  neoplasm_site grade pack_years
+## 1 TCGA-BA-4074  69     YES           461   MALE    Oral Tongue    G3         51
+## 2 TCGA-BA-4076  39     YES           415   MALE         Larynx    G2         30
+## 3 TCGA-BA-4077  45     YES          1134 FEMALE Base of Tongue    G2         30
+## 4 TCGA-BA-4078  83      NO           276   MALE         Larynx    G2         75
+## 5 TCGA-BA-5149  47     YES           248   MALE Floor of Mouth    G2         60
+## 6 TCGA-BA-5151  72     YES           190   MALE  Buccal Mucosa    G1         20
+##                                 tabacco_group tumor_stage vital_status
+## 1                              Current smoker   Stage IVA     DECEASED
+## 2                              Current smoker        &lt;NA&gt;     DECEASED
+## 3 Current reformed smoker for &lt; or = 15 years   Stage IVA     DECEASED
+## 4 Current reformed smoker for &lt; or = 15 years        &lt;NA&gt;     DECEASED
+## 5                              Current smoker   Stage IVA       LIVING
+## 6      Current reformed smoker for &gt; 15 years   Stage IVA       LIVING
+##   years_to_death
+## 1      1.2630137
+## 2      1.1369863
+## 3      3.1068493
+## 4      0.7561644
+## 5      0.6794521
+## 6      0.5205479</code></pre>
+<pre class="r"><code>#Tibble
+hnscc</code></pre>
+<pre><code>## # A tibble: 279 x 12
+##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
+##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+##  1 TCGA~    69 YES               461 MALE   Oral Tongue   G3            51
+##  2 TCGA~    39 YES               415 MALE   Larynx        G2            30
+##  3 TCGA~    45 YES              1134 FEMALE Base of Tong~ G2            30
+##  4 TCGA~    83 NO                276 MALE   Larynx        G2            75
+##  5 TCGA~    47 YES               248 MALE   Floor of Mou~ G2            60
+##  6 TCGA~    72 YES               190 MALE   Buccal Mucosa G1            20
+##  7 TCGA~    56 YES               845 MALE   Alveolar Rid~ G2            NA
+##  8 TCGA~    51 YES              1761 MALE   Tonsil        G2            NA
+##  9 TCGA~    54 YES               186 MALE   Larynx        G2            62
+## 10 TCGA~    58 YES               179 FEMALE Floor of Mou~ G3            60
+## # ... with 269 more rows, and 4 more variables: tabacco_group &lt;chr&gt;,
+## #   tumor_stage &lt;chr&gt;, vital_status &lt;chr&gt;, years_to_death &lt;dbl&gt;</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Erstellt die folgenden Teilmengen des Datensatzes, bzw. führt die folgenden Transformationen aus:</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Junge Patienten (&lt; 50 Jahre), Nichtraucher, Zeilen sortiert nach Alter.</li>
+<li>Dataframe mit Spalten “age” und “grade”. Ändert die Spaltennamen ins Deutsche um.</li>
+<li>Fügt dem <code>hnscc</code> Dataframe eine neue Spalte mit Namen “is_young” hinzu, die mit TRUE und FALSE kodiert, ob jemand &lt; 50 Jahre ist.</li>
+<li>Berechnet das mediane Gesamtüberleben nach Grading. Ist das Resultat biologisch plausibel?</li>
+</ol>
+<ol start="3" style="list-style-type: decimal">
+<li></li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li><p>In der heutigen Präsentation haben wir neben x-Achse und y-Achse weitere Aesthetics (shape, color, size), sowie das Facetting kennen gelernt. Überlegt euch eine sinnvolle Visualisierung (am besten Dotplot), die insgesamt 5 Dimensionen der Daten abbilden.a) In der heutigen Präsentation haben wir neben x-Achse und y-Achse weitere Aesthetics (shape, color, size), sowie das Facetting kennen gelernt. Überlegt euch eine sinnvolle Visualisierung (am besten Dotplot), die insgesamt 5 Dimensionen der Daten abbilden.</p></li>
+<li><p>Versucht die Transformationen und Settings des folgenden Barplots nachzuvollziehen. Wie wird hier die Transformation mit dem Plotten verzahnt? Was macht z.B. <code>coord_flip</code>?</p></li>
+</ol>
+<pre class="r"><code>hnscc  %&gt;%
+    group_by(neoplasm_site) %&gt;%
+    summarize(mean_age=mean(age)) %&gt;%
+    ggplot(aes(x=reorder(neoplasm_site,mean_age),y=mean_age)) +
+    geom_bar(stat=&quot;identity&quot;) +
+    coord_flip() +
+    xlab(&quot;anatomical site&quot;) +
+    ylab(&quot;mean age&quot;)</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>“Googled” danach, wie man dem folgenden Plot eine Regressionsgrade hinzufügen kann:</li>
+</ol>
+<pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death)) +
+    geom_point()</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
+<blockquote>
+
+</blockquote>
+</div>
+<div id="lösungen-1" class="section level3">
+<h3>Lösungen</h3>
+<p><a href="http://andreasmock.github.io/solution2.html">Link zu Lösungen der Übung</a></p>
+</div>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -410,6 +1212,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
