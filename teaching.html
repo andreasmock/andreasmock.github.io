@@ -381,7 +381,7 @@ div.tocify {
 <div id="kursinformationen" class="section level2">
 <h2>Kursinformationen</h2>
 <p><strong>Sommersemester 2020/2021</strong></p>
-<p><a href="https://elearning-med.uni-heidelberg.de/course/view.php?id=196&amp;sectionid=1742">Link zum Webinar Termin 2 am 12.05.2020 17:15-18:45 Uhr - Heiconf Raum 6</a></p>
+<p><a href="https://heiconf.uni-heidelberg.de/mie-e4v-e99?meeting_access_code=179075">Link zum Webinar Termin 3 am 19.05.2020 17:15-18:45 Uhr - Heiconf Raum 5</a></p>
 <ul>
 <li>Termin 1 (R 101): 21.04.2020 17:00-18:30 Uhr</li>
 <li>Termin 2 (Datentransformation und Plotting): 12.05.2020 17:15-18:45 Uhr</li>
@@ -702,7 +702,7 @@ R Graphics Cookbock, Winston Chang<br />
 <h4>Objekttypen 2.0</h4>
 <div id="faktor" class="section level5">
 <h5><strong>Faktor</strong></h5>
-<p><strong>Faktor</strong>: spezielle Unterform eines Vektors für kategoriale Variablen. Ein Faktor fasst die Kategorien (= Levels) zusammen.</p>
+<p>Spezielle Unterform eines Vektors für kategoriale Variablen. Ein Faktor fasst die Kategorien (= Levels) zusammen.</p>
 <pre class="r"><code># Vektor
 head(hnscc$grade)</code></pre>
 <pre><code>## [1] &quot;G3&quot; &quot;G2&quot; &quot;G2&quot; &quot;G2&quot; &quot;G2&quot; &quot;G1&quot;</code></pre>
@@ -1003,7 +1003,7 @@ summarize(by_site, mean_age=mean(age))</code></pre>
 <p><strong>Funktionsweise der <code>ggplot</code> Funktion</strong></p>
 <p>Leere Leinwand. <code>age</code> auf der x-Achse und <code>days_to_death</code> auf der y-Achse.</p>
 <pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death))</code></pre>
-<p><img src="teaching_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+<p><img src="teaching_files/figure-html/unnamed-chunk-56-1.png" width="288" /></p>
 <pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death))</code></pre>
 <p>Mit den sogenannten Aesthetics <code>aes</code> definieren wir die Dimensionen an Informationen, die wir im Plot darstellen möchten.</p>
 <p>Dieser leeren Leinwand werden nun sogenannte geoms hinzugefügt, z.B. <code>geom_point</code> für einen Dotplot.</p>
@@ -1013,21 +1013,21 @@ summarize(by_site, mean_age=mean(age))</code></pre>
 <pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death)) +
     geom_point()</code></pre>
 <pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
-<p><img src="teaching_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<p><img src="teaching_files/figure-html/unnamed-chunk-59-1.png" width="288" /></p>
 <p><strong>Boxplot</strong></p>
 <pre class="r"><code>ggplot(hnscc, aes(x=grade, y=pack_years)) +
     geom_boxplot()</code></pre>
 <pre><code>## Warning: Removed 125 rows containing non-finite values (stat_boxplot).</code></pre>
-<p><img src="teaching_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<p><img src="teaching_files/figure-html/unnamed-chunk-60-1.png" width="288" /></p>
 <p><strong>Histogramm</strong></p>
 <pre class="r"><code>ggplot(hnscc, aes(x=age)) +
     geom_histogram()</code></pre>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="teaching_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<p><img src="teaching_files/figure-html/unnamed-chunk-61-1.png" width="288" /></p>
 <p><strong>Density plot</strong></p>
 <pre class="r"><code>ggplot(hnscc, aes(x=age)) +
     geom_density()</code></pre>
-<p><img src="teaching_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<p><img src="teaching_files/figure-html/unnamed-chunk-62-1.png" width="288" /></p>
 <p>Transformation für Barplot</p>
 <pre class="r"><code>hnscc  %&gt;%
     group_by(neoplasm_site) %&gt;%
@@ -1047,22 +1047,22 @@ summarize(by_site, mean_age=mean(age))</code></pre>
     geom_point() +
     guides(color=guide_legend(ncol=2))</code></pre>
 <pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
-<p><img src="teaching_files/figure-html/unnamed-chunk-64-1.png" width="480" /></p>
+<p><img src="teaching_files/figure-html/unnamed-chunk-64-1.png" width="768" /></p>
 <p>Coloring - numerische Variable packyears.</p>
 <pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death, color=pack_years)) +
     geom_point()</code></pre>
 <pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
-<p><img src="teaching_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<p><img src="teaching_files/figure-html/unnamed-chunk-65-1.png" width="576" /></p>
 <p><strong>Aesthetic - size</strong></p>
 <pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death, size=pack_years)) +
     geom_point()</code></pre>
 <pre><code>## Warning: Removed 126 rows containing missing values (geom_point).</code></pre>
-<p><img src="teaching_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<p><img src="teaching_files/figure-html/unnamed-chunk-66-1.png" width="576" /></p>
 <p><strong>Aesthetic - shape</strong></p>
 <pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death, shape=grade)) +
     geom_point()</code></pre>
 <pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
-<p><img src="teaching_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+<p><img src="teaching_files/figure-html/unnamed-chunk-67-1.png" width="576" /></p>
 </div>
 <div id="facetting" class="section level5">
 <h5><strong>Facetting</strong></h5>
@@ -1072,7 +1072,7 @@ summarize(by_site, mean_age=mean(age))</code></pre>
     facet_wrap(~alcohol) +
     guides(color=guide_legend(ncol=2))</code></pre>
 <pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
-<p><img src="teaching_files/figure-html/unnamed-chunk-68-1.png" width="576" /></p>
+<p><img src="teaching_files/figure-html/unnamed-chunk-68-1.png" width="768" /></p>
 <blockquote>
 
 </blockquote>
@@ -1173,6 +1173,256 @@ hnscc</code></pre>
 <div id="lösungen-1" class="section level3">
 <h3>Lösungen</h3>
 <p><a href="http://andreasmock.github.io/solution2.html">Link zu Lösungen der Übung</a></p>
+<hr />
+</div>
+</div>
+<div id="input-und-modelling" class="section level2">
+<h2>3 | Input und Modelling</h2>
+<div id="lehrkapitel-2" class="section level3">
+<h3>Lehrkapitel</h3>
+<p><a href="http://andreasmock.github.io/pres_day3.html">Präsentation (gleicher Inhalt wie Website)</a></p>
+<blockquote>
+
+</blockquote>
+<div id="dateipfade" class="section level4">
+<h4>Dateipfade</h4>
+<ol style="list-style-type: decimal">
+<li>Wie finde ich den <strong>absoluten</strong> Dateipfad heraus, in dem sich meine R Umgebung befindet, das so genannte <em>working directory</em>?</li>
+</ol>
+<pre class="r"><code>getwd()</code></pre>
+<pre><code>## [1] &quot;C:/Users/admmock/PowerFolders/git/content/AMhome&quot;</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Welche Dateien befinden sich in dem aktuellen Dateipfad?</li>
+</ol>
+<pre class="r"><code>list.files()</code></pre>
+<pre><code>##  [1] &quot;_site&quot;           &quot;_site.yml&quot;       &quot;AMhome.Rproj&quot;    &quot;data&quot;           
+##  [5] &quot;index.Rmd&quot;       &quot;pics&quot;            &quot;pres_day1.Rmd&quot;   &quot;pres_day1_cache&quot;
+##  [9] &quot;pres_day1_files&quot; &quot;pres_day2.Rmd&quot;   &quot;pres_day2_files&quot; &quot;pres_day3.Rmd&quot;  
+## [13] &quot;pres_day3_files&quot; &quot;refs.Rmd&quot;        &quot;solution1.Rmd&quot;   &quot;solution2.Rmd&quot;  
+## [17] &quot;solution3.Rmd&quot;   &quot;teaching.Rmd&quot;    &quot;teaching_cache&quot;  &quot;teaching_files&quot;</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Wie kann ich ausgehend vom <em>working directory</em> einen <strong>relativen</strong> Dateipfad angeben?</li>
+</ol>
+<p>Mit dem Präfix <code>../</code> lässt sich eine Ordnereben, mit <code>../../</code> entsprechend 2 Ebenen nach oben gehen.</p>
+<p>Der relative Pfad</p>
+<pre class="r"><code>list.files(&quot;../&quot;)</code></pre>
+<pre><code>## [1] &quot;AMhome&quot;                         &quot;Github_page&quot;                   
+## [3] &quot;Github_paper_content&quot;           &quot;Zewener_Kammerkonzerte_Webpage&quot;</code></pre>
+<p>entspricht damit dem <strong>absoluten</strong> Dateipfad</p>
+<pre class="r"><code>list.files(&quot;C:/Users/admmock/PowerFolders/git/content/&quot;)</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Wie kann ich Daten aus dem Internet einlesen?</li>
+</ol>
+<p>Einfach den Webpfad benutzen:</p>
+<pre class="r"><code>library(readxl)
+path &lt;- paste0(&quot;https://tcga-data.nci.nih.gov/docs/publications/sarc_2017/&quot;,
+               &quot;SARC_264_Fusion_Gene_Profiles.txt&quot;)
+
+read_tsv(file = path)</code></pre>
+<blockquote>
+
+</blockquote>
+</div>
+<div id="datenimport" class="section level4">
+<h4>Datenimport</h4>
+<p>Benötigte Packete: <code>readr</code> Paket im <code>tidyverse</code>, sowie das bisher noch nicht verwendete Paket <code>readxl</code>.</p>
+<p>Funktionen zum Import nach Dateityp:</p>
+<ul>
+<li><code>read_tsv</code>: tab-separated file</li>
+<li><code>read_csv</code>: comma-separated file</li>
+<li><code>read_xlsx</code> bzw. <code>read_xls</code>: Excel spread sheet</li>
+<li><code>read_delim</code>: file mit beliebig anzugebendem delimiter, also Trennzeichen</li>
+</ul>
+<blockquote>
+
+</blockquote>
+</div>
+<div id="datenmodellierung" class="section level4">
+<h4>Datenmodellierung</h4>
+<p>HNSCC Datensatz laden</p>
+<pre class="r"><code>load(url(&quot;http://andreasmock.github.io/data/hnscc.RData&quot;))</code></pre>
+<div id="t-test" class="section level5">
+<h5>T-Test</h5>
+<p>Der T-Test ist ein parametrischer (geht von normalverteilten Daten aus) Hypothesentest zum Vergleich von kontinuierlichen Daten zweier Gruppen.</p>
+<pre class="r"><code>ggplot(hnscc, aes(x=gender, y=age)) +
+    geom_boxplot()</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-78-1.png" width="288" /></p>
+<pre class="r"><code>t.test(age ~ gender, data=hnscc)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  age by gender
+## t = 2.5518, df = 116.84, p-value = 0.01201
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  1.008323 7.998547
+## sample estimates:
+## mean in group FEMALE   mean in group MALE 
+##             64.59211             60.08867</code></pre>
+</div>
+<div id="anova-analysis-of-variance" class="section level5">
+<h5>ANOVA (analysis of variance)</h5>
+<p>ANOVA bietet die Möglichkeit mehr als 2 Gruppen miteinander zu vergleichen.</p>
+<pre class="r"><code>ggplot(hnscc, aes(x=tabacco_group, y=age)) +
+    geom_boxplot() +
+    coord_flip()</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-80-1.png" width="576" /></p>
+<pre class="r"><code>summary(aov(age ~ tabacco_group, data=hnscc))</code></pre>
+<pre><code>##                Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## tabacco_group   3   4385  1461.7   10.79 1.02e-06 ***
+## Residuals     268  36294   135.4                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 7 observations deleted due to missingness</code></pre>
+</div>
+<div id="korrelationstest" class="section level5">
+<h5>Korrelationstest</h5>
+<pre class="r"><code>ggplot(hnscc, aes(x=age, y=pack_years)) +
+    geom_point() +
+    geom_smooth(method=&quot;lm&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-82-1.png" width="288" /></p>
+<pre class="r"><code>cor.test(~ age + pack_years, data=hnscc)</code></pre>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  age and pack_years
+## t = 1.7489, df = 152, p-value = 0.08233
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.01811495  0.29211981
+## sample estimates:
+##       cor 
+## 0.1404481</code></pre>
+<blockquote>
+
+</blockquote>
+</div>
+</div>
+<div id="häufige-missverständnisse-über-den-p-wert" class="section level4">
+<h4>Häufige Missverständnisse über den p-Wert</h4>
+<div id="der-erfinder-des-p-wertes" class="section level5">
+<h5>Der Erfinder des p-Wertes</h5>
+
+<p><img src="pics/Fisher.jpg" width="150" /></p>
+<p><strong>Sir Ronald Fisher (1890-1962)</strong><br />
+Gonville &amp; Caius College, Cambridge</p>
+<p> </p>
+<p>”Personally, the writer prefers to set a low standard of significance at the 5 percent point […] A scientific fact should be regarded as experimentally established <strong>only if</strong> a properly designed <strong>experiment rarely fails to give this level of significance</strong>.“</p>
+
+<p></p>
+<p> </p>
+<blockquote>
+
+</blockquote>
+</div>
+<div id="definition-des-p-wertes" class="section level5">
+<h5>Definition des p-Wertes</h5>
+<p>Wahrscheinlichkeit das gleiche Stichprobenergebnis oder ein noch extremeres zu erhalten, wenn die Nullhypothese wahr ist.</p>
+
+<p>Algebraische Definition: P(X <span class="math inline">\(\geq\)</span> x <span class="math inline">\(\mid\)</span>~ <span class="math inline">\(H_0\)</span>) wobei <span class="math inline">\(X\)</span> eine Zufallsvariable und <span class="math inline">\(x\)</span> der beobachte Wert in den Daten ist</p>
+<p><img src="pics/bell_curve.png" width="300" /></p>
+<p>Goodman, 2008</p>
+<blockquote>
+
+</blockquote>
+</div>
+<div id="wenn-p0.05-ist-die-nullhypothese-nur-in-5-wahr" class="section level5">
+<h5>#1 | Wenn p&lt;0.05, ist die Nullhypothese nur in 5% wahr</h5>
+<p>Dies ist die wohl  des p-Wertes. </p>
+<p>Der p-Wert wird unter der Annahme berechnet, dass die Nullhypothese zutrifft (P(Daten <span class="math inline">\(\mid\)</span>~<span class="math inline">\(H_0\)</span>)), er kann daher nicht gleichzeitig die Wahrscheinlichkeit sein, dass die Nullhypothese zutrifft (P(<span class="math inline">\(H_0\)</span> <span class="math inline">\(\mid\)</span> Daten)).</p>
+
+<p><strong>Beispiel</strong>: Die Wahrscheinlichkeit drei Mal hintereinander Kopf beim Münzwurf zu erhalten ist p=0.125. Dies bedeutet jedoch nicht, dass die Wahrscheinlichkeit, dass die Münze fair ist nur 12.5% beträgt.</p>
+<blockquote>
+
+</blockquote>
+</div>
+<div id="p0.05-bedeutet-dass-es-keinen-unterschied-zwischen-den-gruppen-gibt" class="section level5">
+<h5>#2 | p&gt;0.05 bedeutet, dass es keinen Unterschied zwischen den Gruppen gibt</h5>
+<p>Eine nicht signifikante Differenz bedeutet bloß, dass die beobachten <strong>Daten konsistent mit der Nullhypothese</strong> sind und nicht, dass die Nullhypothese wahrscheinlicher ist.</p>
+<blockquote>
+
+</blockquote>
+</div>
+<div id="p0.06-ist-substantiell-schlechter-als-p0.04" class="section level5">
+<h5>#3 | p=0.06 ist substantiell schlechter als p=0.04</h5>
+<p>Fisher hat den p-Wert als <strong>kontinuierliche Variable</strong> eingeführt um abzuschätzen, ob ein Ergebnis es Wert ist weiter untersucht zu werden. Die magische p-Wert Grenze von 0.05 ist völlig arbiträr. p-Werte von 0.04 und 0.06 sind sehr ähnliche Wahrscheinlichkeiten!</p>
+<p><img src="pics/bell_curve.png" width="300" /></p>
+<p>Goodman, 2008</p>
+<blockquote>
+
+</blockquote>
+</div>
+<div id="studien-mit-gleichem-p-wert-zeigen-eine-ähnlich-starke-effektgröße" class="section level5">
+<h5>#4 | Studien mit gleichem p-Wert zeigen eine ähnlich starke Effektgröße</h5>
+<p>Der folgende Plot zeigt, dass dies nicht zutrifft. Der gleiche p-Wert kann einen völlig anderen Effekt indizieren (Fig. B). Umgekehrt, kann es einen identischen Effekt bei unterschiedlichem p-Wert geben (Fig. A):</p>
+<p><img src="pics/effect.png" width="400" /></p>
+<p>Goodman, 2008</p>
+<blockquote>
+
+</blockquote>
+</div>
+<div id="p0.05-bedeutet-dass-man-bei-wiederholung-des-experiments-in-5-ein-nicht-signifikantes-ergebnis-erhält" class="section level5">
+<h5>#5 | p=0.05 bedeutet, dass man bei Wiederholung des Experiments in 5% ein nicht signifikantes Ergebnis erhält</h5>
+<p><img src="pics/simulation.png" width="800" /></p>
+<p>Nur bei einer <strong>großen Effektgröße</strong> bzw. <strong>Power</strong> (i.e. Gruppengrößee) sind p-Werte bei Wiederholung des Experiments mit einer anderen Stichprobe reproduzierbar!</p>
+<blockquote>
+
+</blockquote>
+</div>
+<div id="literatur-zum-thema" class="section level5">
+<h5>Literatur zum Thema</h5>
+<p><strong>A Dirty Dozen: Twelve P-Value Misconceptions</strong><br />
+Goodman, S<br />
+Semin Hematol. 2008 Jul;45(3):135-40.</p>
+
+<p><strong>The fickle P value generates irreproducible results</strong><br />
+Halsey LG, Curran-Everett D, Vowler SL &amp; Drummond GB<br />
+Nat Methods. 2015 Mar;12(3):179-85.</p>
+<blockquote>
+
+</blockquote>
+</div>
+</div>
+</div>
+<div id="übungen" class="section level3">
+<h3>Übungen</h3>
+<div id="teil-1-datenimport" class="section level4">
+<h4>Teil 1) Datenimport</h4>
+<p>Die anfänglichen Probleme mit dem Einlesen von Dateien lassen sich am besten durch die eigene Anwendung erkunden. Sucht euch txt, csv und xls/xlsx Files auf eurem Computer heraus und versucht diese in die <em>R</em> Umgebung zu laden. Denkt bitte auch an die Möglichkeit die Hilfe zu den einzelnen Funktionen aufzurufen. Am Ende der Übung sammeln wir die wichtigsten Probleme und Lösungsansätze.</p>
+<p>Hier noch einmal die Übersicht über die Funktionen:</p>
+<ul>
+<li><code>read_tsv</code>: tab-separated file</li>
+<li><code>read_csv</code>: comma-separated file</li>
+<li><code>read_xlsx</code> bzw. <code>read_xls</code>: Excel spread sheet</li>
+<li><code>read_delim</code>: file mit beliebig anzugebendem delimiter, also Trennzeichen</li>
+</ul>
+<p>Um Excel files zu laden, benötigt ihr noch das package <code>readxl</code></p>
+<pre class="r"><code>install.packages(&quot;readxl&quot;)
+
+library(tidyverse)
+library(readxl)</code></pre>
+<blockquote>
+
+</blockquote>
+</div>
+<div id="teil-2-datenmodellierung" class="section level4">
+<h4>Teil 2) Datenmodellierung</h4>
+<p>Datensatz: HNSCC</p>
+<pre class="r"><code>load(url(&quot;http://andreasmock.github.io/data/hnscc.RData&quot;))</code></pre>
+<ol style="list-style-type: lower-alpha">
+<li>Benutzt einen Hypothesentest, um herauszufinden, ob es eine signifikante Assoziation zwischen dem Alter und dem Tumorstadium gibt.</li>
+<li>Führt eine Korrelationsanalyse für Alter und days to death durch. Ist dies die beste Art und Weise, diese Assoziation zu eruieren, oder fällt euch eine alternative Möglichkeit ein?</li>
+<li>Möchte man Verteilungen vergleichen, die nur sehr wenige Datenpunkte haben, ist es von Vorteil Rang-basierte Hypothesentest zu verwenden. Findet heraus, was die Rang-basierte Alternative zum T-Test ist und sucht nach der entsprechenden R-Funktion.</li>
+</ol>
+<blockquote>
+
+</blockquote>
+</div>
+</div>
+<div id="lösungen-2" class="section level3">
+<h3>Lösungen</h3>
+<p><a href="http://andreasmock.github.io/solution3.html">Link zu Lösungen der Übung</a></p>
 </div>
 </div>
 
