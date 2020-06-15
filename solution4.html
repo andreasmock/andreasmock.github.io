@@ -11,7 +11,7 @@
 
 
 
-<title>solution2.utf8</title>
+<title>solution4.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -297,124 +297,87 @@ $(document).ready(function () {
 
 
 <p><br></p>
-<div id="lösungen-übung-1" class="section level3">
-<h3>Lösungen Übung 1</h3>
-<p>Eigenschaften von Tibbles über klassische Dataframes hinaus</p>
-<ul>
-<li>Trunkierte, zusammengefasste Ausgabe in der Konsole. No need for head().</li>
-<li>Giben Vektortyp einer jeden Spalte an, z.B. Charakter <code>&lt;chr&gt;</code>.</li>
-<li>Zeigen die Dimensionen eines Dataframes vorneweg an, z.B. A tibble: 279 x 11</li>
-</ul>
-<p><br></p>
-</div>
-<div id="lösungen-übung-2" class="section level3">
-<h3>Lösungen Übung 2</h3>
+<div id="lösung-übung-1---datentransformation-für-überlebenszeitanalyse" class="section level1">
+<h1>Lösung Übung 1 - Datentransformation für Überlebenszeitanalyse</h1>
+<p>Erstellt ein neues Objekt, welches ihr <code>hnscc_survival</code> nennt und nehmt in diesem folgende Änderungen vor:</p>
 <ol style="list-style-type: lower-alpha">
-<li>Junge Patienten (&lt; 50 Jahre), Nichtraucher, Zeilen sortiert nach Alter.</li>
+<li>Nennt die Spalte <code>days_to_death</code> in <code>OS</code> um und stellt sicher, dass diese ein numerischer Vektor ist.</li>
+<li>Erstellt eine neue Spalte namens <code>Censor</code>, in der ihr die Spalte <code>vital_status</code> als Faktor speichert (<code>as.factor()</code>).</li>
+<li>Ändert die Level der neu erstellten Spalte <code>Censor</code> von “LIVING” und “DECEASED” in 0 und 1 um. Googled hierzu, wie man die Level eines Faktors ändern kann.</li>
+<li>Anschließend gilt es die Spalte <code>Censor</code> als “normalen” Vektor (<code>as.vector()</code>) zu speichern und dann in einen numerischen Vektor (<code>as.numeric()</code>) zu überführen.</li>
 </ol>
-<pre class="r"><code>hnscc %&gt;%
-    filter(age&lt;50, tabacco_group==&quot;Lifelong Non-smoker&quot;) %&gt;%
-    arrange(age)</code></pre>
-<pre><code>## # A tibble: 18 x 11
-##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
-##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
-##  1 TCGA~    19 NO                240 MALE   Oral Tongue   G2            NA
-##  2 TCGA~    26 YES               908 MALE   Oral Tongue   G2            NA
-##  3 TCGA~    26 YES              1315 MALE   Oral Tongue   G2            NA
-##  4 TCGA~    29 &lt;NA&gt;              761 FEMALE Oral Tongue   GX            NA
-##  5 TCGA~    32 YES                64 FEMALE Oral Tongue   G2            NA
-##  6 TCGA~    35 YES              1152 FEMALE Tonsil        GX            NA
-##  7 TCGA~    38 YES              1521 MALE   Tonsil        G2            NA
-##  8 TCGA~    39 NO               3836 MALE   Oral Cavity   G2            NA
-##  9 TCGA~    40 NO               1006 MALE   Oral Tongue   G2            NA
-## 10 TCGA~    41 YES               242 FEMALE Oral Tongue   G2            NA
-## 11 TCGA~    43 NO               1149 FEMALE Oral Tongue   G2            NA
-## 12 TCGA~    45 YES               759 MALE   Oral Tongue   G1            NA
-## 13 TCGA~    46 NO                841 FEMALE Oral Tongue   G2            NA
-## 14 TCGA~    47 YES               311 MALE   Tonsil        G2            NA
-## 15 TCGA~    48 NO               2891 MALE   Tonsil        G3            NA
-## 16 TCGA~    48 YES               255 MALE   Oral Tongue   G2            NA
-## 17 TCGA~    49 YES               796 MALE   Oral Tongue   G2            NA
-## 18 TCGA~    49 NO                160 MALE   Oropharynx    G3            NA
-## # ... with 3 more variables: tabacco_group &lt;chr&gt;, tumor_stage &lt;chr&gt;,
-## #   vital_status &lt;chr&gt;</code></pre>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Dataframe mit Spalten “age” und “grade”. Ändert die Spaltennamen ins Deutsche um.</li>
-</ol>
-<pre class="r"><code>hnscc %&gt;%
-    select(age,grade) %&gt;%
-    rename(Alter=age,Grading=grade)</code></pre>
-<pre><code>## # A tibble: 279 x 2
-##    Alter Grading
-##    &lt;int&gt; &lt;chr&gt;  
-##  1    69 G3     
-##  2    39 G2     
-##  3    45 G2     
-##  4    83 G2     
-##  5    47 G2     
-##  6    72 G1     
-##  7    56 G2     
-##  8    51 G2     
-##  9    54 G2     
-## 10    58 G3     
-## # ... with 269 more rows</code></pre>
-<ol start="3" style="list-style-type: lower-alpha">
-<li>Fügt dem hnscc Dataframe eine neue Spalte mit Namen “is_young” hinzu, die mit TRUE und FALSE kodiert, ob jemand &lt; 50 Jahre ist.</li>
-</ol>
-<pre class="r"><code>hnscc &lt;- hnscc %&gt;%
-    mutate(is_young=(age&lt;50))
+<pre class="r"><code>hnscc_survival &lt;- hnscc %&gt;%
+dplyr::rename(OS=days_to_death) %&gt;% 
+    mutate(Censor = as.factor(vital_status))
 
-table(hnscc$is_young)</code></pre>
-<pre><code>## 
-## FALSE  TRUE 
-##   237    42</code></pre>
-<ol start="4" style="list-style-type: lower-alpha">
-<li>Berechnet das mediane Gesamtüberleben nach Grading. Ist das Resultat biologisch plausibel?</li>
-</ol>
-<pre class="r"><code>hnscc %&gt;%
-    group_by(grade) %&gt;%
-    summarise(median_OS = median(days_to_death, na.rm=TRUE))</code></pre>
-<pre><code>## # A tibble: 5 x 2
-##   grade median_OS
-##   &lt;chr&gt;     &lt;dbl&gt;
-## 1 G1          913
-## 2 G2          395
-## 3 G3          444
-## 4 G4          360
-## 5 GX          715</code></pre>
-<p><br></p>
+levels(hnscc_survival$Censor) &lt;- c(1,0) 
+hnscc_survival$Censor = as.numeric(as.vector(hnscc_survival$Censor))</code></pre>
 </div>
-<div id="lösungen-übung-3" class="section level3">
-<h3>Lösungen Übung 3</h3>
+<div id="lösung-übung-2---erstellung-eines-survival-objektes" class="section level1">
+<h1>Lösung Übung 2 - Erstellung eines “survival” Objektes</h1>
+<p>Die Erstellung des survival Objektes ist gleichzeitig die Kontrolle, ob die Datentransformation geklappt hat. Der Output sollte wie folgt ausschauen:</p>
+<pre class="r"><code>Surv(hnscc_survival$OS, hnscc_survival$Censor)</code></pre>
+<pre><code>##   [1]  461   415  1134   276   248+  190+  845+ 1761   186+  179+  242+ 1635+
+##  [13] 1747+  152+  244+  450    63+  395   113+  236+  186+ 2891+  275+  140+
+##  [25]  557+  412+  310+  142   194+  325+  166+  343+  383+  522+  369+  395 
+##  [37]  240+  436   348+  810+  875+  397   279+  289+  173+  377   866+  252 
+##  [49]  493   351   360   352   380   259   413+  274+  207+  228+  143+  154+
+##  [61]  201+  159+   45+  134+   97+  276   201+  188+  224+   42+  177+   83+
+##  [73]  119+  112   100+   46+ 1465+ 1207+  654    89   841+  896+ 1028+  317 
+##  [85]  128   870+  984  1000+ 1057+  984+  403   128   455   814+ 1006+  693+
+##  [97] 2562+  358+ 1662+ 1152+  798+ 1777+ 1521+ 1202  1050+ 1125+  563   514+
+## [109]  183   311+  345+  354+  233+  379+  350+  479+  282  1435+ 1190+ 1440+
+## [121] 1244+ 1090   104+   93   759+  889+   30+  972+   NA+ 1036+  606   796+
+## [133]  521   997+ 1430+  822   392+  907+  913+  946+  908+  898+  929+  216+
+## [145]  156+  180+ 1077+  910+ 1471+ 4115+  522  3930+ 3314  2318   584   546 
+## [157] 2732+ 2663+ 2326+ 2567+ 1969+  545   406   540+ 1736+ 1478+ 1007+  215 
+## [169] 1315+ 1246+  405+  743+  291  2740    65   295   166   624   143   665 
+## [181]  804   342  3835+  602   366  1288   458   914   185  1640  2002   334 
+## [193]  217   255   861    76   126  1971  3836+ 3380+  572   385   243   274 
+## [205]  159    56  1591   392   662  2166   327  3496+ 1724+  144  1444+ 1095+
+## [217]  953+  797+  577   520  2900   151   361  1459    64  1099+  560  1748 
+## [229] 1081  6416  2717   294    14   695   761   789     2  1037  3058   452 
+## [241] 4760   106   495  2570   600   217  4334+  505   194   669   316+  321+
+## [253]  236+  828+  403   325+  250+  238+   77+  152+  153+ 1149+ 1058+  516+
+## [265]  477+  548   427   360+  299+   35+   30+    2+    5+   25+    0+    0+
+## [277]  160+  122+  113+</code></pre>
 <ol style="list-style-type: lower-alpha">
-<li>In der heutigen Präsentation haben wir neben x-Achse und y-Achse weitere Aesthetics (shape, color, size), sowie das Facetting kennen gelernt. Überlegt euch eine sinnvolle Visualisierung (am besten Dotplot), die insgesamt 5 Dimensionen der Daten abbilden.</li>
+<li>Erstellt mit Hilfe der <code>survfit</code> Funktion ein Objekt mit Namen <code>fit</code> für die Kaplan-Meier-Kurve, in der ihr das Geschlecht analysiert.</li>
 </ol>
-<pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death, color=neoplasm_site, shape=grade)) + 
-    geom_point() +
-    facet_wrap(~alcohol)</code></pre>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
-<p><img src="solution2_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>fit &lt;- survfit(Surv(OS, Censor)~gender, data=hnscc_survival)</code></pre>
+</div>
+<div id="lösung-übung-3---kaplan-meier-kurve-und-univariate-überlebenszeitanalyse" class="section level1">
+<h1>Lösung Übung 3 - Kaplan-Meier Kurve und univariate Überlebenszeitanalyse</h1>
+<ol style="list-style-type: lower-alpha">
+<li>Erstellt die Kaplan-Meier-Kurve zum Objekt <code>fit</code>, welches ihr in Übung 2 erstellt habt.</li>
+</ol>
+<pre class="r"><code>ggsurvplot(fit, hnscc_survival)</code></pre>
+<p><img src="solution4_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: lower-alpha">
-<li>Versucht die Transformationen und Settings des folgenden Barplots nachzuvollziehen. Wie wird hier die Transformation mit dem Plotten verzahnt? Was macht z.B. <code>coord_flip</code>?</li>
+<li>Findet heraus, wie man einen Risk-Table erstellen kann</li>
 </ol>
-<pre class="r"><code>hnscc  %&gt;%
-    group_by(neoplasm_site) %&gt;%
-    summarize(mean_age=mean(age)) %&gt;%
-    ggplot(aes(x=reorder(neoplasm_site,mean_age),y=mean_age)) +
-    geom_bar(stat=&quot;identity&quot;) +
-    coord_flip() +
-    xlab(&quot;anatomical site&quot;) +
-    ylab(&quot;mean age&quot;)</code></pre>
-<p>In diesem Codebespiel wurde die Transformation mit der Pipefunktion <code>%&gt;%</code> mit dem Plotten verzahnt. Kontraintuitiv ist, dass die Transformation mit einer Pipefunktion und das Plotten mit einem <code>+</code> verbunden ist. <code>coord_flip()</code> dreht die Achsen um, was die Kategorien besser leserlich macht. Zudem wurde die Reihenfolge der anatomischen Region mit <code>reorder</code> nach mittlerem Alter geordnet.</p>
-<ol start="3" style="list-style-type: lower-alpha">
-<li>“Googled” danach, wie man dem folgenden Plot eine Regressionsgrade hinzufügen kann:</li>
-</ol>
-<pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death)) +
-    geom_point() +
-    geom_smooth(method=&quot;lm&quot;)</code></pre>
-<pre><code>## Warning: Removed 1 rows containing non-finite values (stat_smooth).</code></pre>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
-<p><img src="solution2_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>ggsurvplot(fit, 
+           hnscc_survival, 
+           risk.table = TRUE)</code></pre>
+<p><img src="solution4_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="lösung-übung-4---multivariate-überlebenszeitanalyse" class="section level1">
+<h1>Lösung Übung 4 - Multivariate Überlebenszeitanalyse</h1>
+<pre class="r"><code># Beispielmodel: Alter und Tabacco group
+tidy(coxph(Surv(OS, Censor)~age + tabacco_group, data=hnscc_survival),
+     exponentiate = TRUE)</code></pre>
+<pre><code>## # A tibble: 4 x 7
+##   term                   estimate std.error statistic p.value conf.low conf.high
+##   &lt;chr&gt;                     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 age                       1.02    0.00931     2.58  0.00986    1.01      1.04 
+## 2 tabacco_groupCurrent ~    0.520   0.292      -2.23  0.0255     0.293     0.923
+## 3 tabacco_groupCurrent ~    1.22    0.235       0.838 0.402      0.768     1.93 
+## 4 tabacco_groupLifelong~    0.553   0.309      -1.92  0.0552     0.301     1.01</code></pre>
+<p>Alter und Tabacco Group sind unabhängige prognostische Einflussgrößen.</p>
+</div>
+<div id="lösung-zugabe" class="section level1">
+<h1>Lösung Zugabe</h1>
+<p>Nein</p>
 </div>
 
 

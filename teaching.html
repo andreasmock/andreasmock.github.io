@@ -1423,6 +1423,236 @@ library(readxl)</code></pre>
 <div id="lösungen-2" class="section level3">
 <h3>Lösungen</h3>
 <p><a href="http://andreasmock.github.io/solution3.html">Link zu Lösungen der Übung</a></p>
+<hr />
+</div>
+</div>
+<div id="überlebenszeitanalysen" class="section level2">
+<h2>4 | Überlebenszeitanalysen</h2>
+<div id="lehrkapitel-3" class="section level3">
+<h3>Lehrkapitel</h3>
+<p><a href="http://andreasmock.github.io/pres_day4.html">Präsentation (gleicher Inhalt wie Website)</a></p>
+<blockquote>
+
+</blockquote>
+<p>Kaum eine klinische Studie kommt ohne Überlebenszeitanalysen aus. Deshalb sollte die sachkundige Durchführung und Interpretation dieser zum Rüstzeug jedes Mediziners gehören.</p>
+<div id="terminologie" class="section level4">
+<h4>Terminologie</h4>
+<ul>
+<li><p>Hazard Ratio (HR)</p></li>
+<li><p>Censor</p></li>
+<li><p>univariat</p></li>
+<li><p>multivariat</p></li>
+<li><p><strong>Hazard Ratio (HR):</strong> Relative Wahrscheinlichkeit zwischen den Gruppen innerhalb eines Zeitintervalls (z.B. innerhalb eines Monats oder Jahres) ein Event zu haben (z.B. Tod oder Progress)</p></li>
+<li><p><strong>Censor:</strong> 1 = Event eingetroffen (z.B. Tod oder Progress), 0 = Event noch nicht eingetroffen</p></li>
+<li><p><strong>univariat:</strong> Es wird nur der Einfluss eines Faktors (z.B. Geschlecht) auf den Endpunkt (z.B. Gesamtüberleben) untersucht.</p></li>
+<li><p><strong>multivariat:</strong> Es wird nur der Einfluss mehrerer Faktoren auf den Endpunkt untersucht.</p></li>
+</ul>
+</div>
+<div id="pakete-1" class="section level4">
+<h4>Pakete</h4>
+<ul>
+<li><code>survival</code>: Paket für statistischen Berechnungen</li>
+<li><code>survminer</code>: Paket für Visualisierung der Kaplan-Meier-Kurven auf Basis von ggplot2</li>
+<li><code>broom</code>: Paket für Ergebnisstabellen</li>
+</ul>
+</div>
+<div id="datensatz" class="section level4">
+<h4>Datensatz</h4>
+<p>Wir werden wieder mit dem <code>hnscc</code>-Datensatz arbeiten.</p>
+</div>
+<div id="benötigte-daten" class="section level4">
+<h4>Benötigte Daten</h4>
+<p>Für eine vergleichende Überlebenszeitanalysen benötigen wir drei Informationen:</p>
+<ol style="list-style-type: decimal">
+<li>die Zeit bis zu einem Event (z.B. Tod oder Progress)</li>
+<li>der Censor (binäre Info ob Event eingetroffen ist, z.B. 1 = tod, 0 = lebend)</li>
+<li>den zu untersuchenden Einflussfaktor (diskrete oder kontinuierliche Daten)</li>
+</ol>
+<pre class="r"><code># 1. Zeit bis zum Tod
+summary(hnscc$days_to_death)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##     0.0   218.8   443.0   789.0   999.2  6416.0       1</code></pre>
+<pre class="r"><code># 2. Censor
+table(hnscc$vital_status)</code></pre>
+<pre><code>## 
+## DECEASED   LIVING 
+##      116      163</code></pre>
+<pre class="r"><code># 3. den zu untersuchenden Einflussfaktor
+colnames(hnscc)[-c(1,4,11)]</code></pre>
+<pre><code>## [1] &quot;age&quot;            &quot;alcohol&quot;        &quot;gender&quot;         &quot;neoplasm_site&quot; 
+## [5] &quot;grade&quot;          &quot;pack_years&quot;     &quot;tabacco_group&quot;  &quot;tumor_stage&quot;   
+## [9] &quot;years_to_death&quot;</code></pre>
+</div>
+<div id="datentransformation-für-überlebenszeitanalyse" class="section level4">
+<h4>Datentransformation für Überlebenszeitanalyse</h4>
+<ol style="list-style-type: decimal">
+<li>Der Censor muss ein <strong>numerischer Vektor</strong> aus 0 (=Event nicht eingetreten) und 1 (=Event eingetreten) sein.</li>
+<li>Die Zeit bis zu einem Event (z.B. Tod) muss <strong>numerisch</strong> sein.</li>
+</ol>
+<p>Diese Datentransformation entspricht der Übung 1 des heutigen Tages. Hierbei werden wir für die weitere Analyse ein eigenes Objekt <code>hnscc_survival</code> erstellen.</p>
+</div>
+<div id="erstellung-eines-survival-objektes" class="section level4">
+<h4>Erstellung eines survival Objektes</h4>
+<p>Für Überlebenszeitanalysen in R gilt es von so genannten <code>survival</code> Objekten gebrauch zu machen. Diese sind Teil des <code>survival</code> Pakets.</p>
+<p>Die Syntax ist straightforward:</p>
+<pre class="r"><code>head(Surv(hnscc_survival$OS, hnscc_survival$Censor))</code></pre>
+<pre><code>## [1]  461   415  1134   276   248+  190+</code></pre>
+</div>
+<div id="kaplan-meier-kurve" class="section level4">
+<h4>Kaplan-Meier-Kurve</h4>
+<p>Der Klassiker der Visualisierung von Überlebenszeitanalysen ist die so genannte Kaplan-Meier-Kurve.</p>
+<p>Wichtig: Überlebenszeitanalysen können auch für kontinuierliche Einflussfaktoren durchgeführt werden. Hier macht natürlich eine Visualisierung mittels Kaplan-Meier-Kurve keinen Sinn.</p>
+<p>Für diese müssen wir noch die Gruppenzugehörigkeit angeben, und das Objekt für den Plot mit <code>survfit</code> herstellen:</p>
+<pre class="r"><code>median(hnscc_survival$age)</code></pre>
+<pre><code>## [1] 61</code></pre>
+<pre class="r"><code>fit &lt;- survfit(Surv(OS, Censor)~age&gt;61, data=hnscc_survival)
+fit</code></pre>
+<pre><code>## Call: survfit(formula = Surv(OS, Censor) ~ age &gt; 61, data = hnscc_survival)
+## 
+##    1 observation deleted due to missingness 
+##                  n events median 0.95LCL 0.95UCL
+## age &gt; 61=FALSE 139     50   1591    1037    3314
+## age &gt; 61=TRUE  139     66    822     572    2166</code></pre>
+<pre class="r"><code>ggsurvplot(fit, hnscc_survival)</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
+</div>
+<div id="univariate-überlebenszeitanalyse" class="section level4">
+<h4>Univariate Überlebenszeitanalyse</h4>
+<pre class="r"><code>library(broom)
+
+# Beispiel 1: Alter dichotomisiert nach &gt; Median (= 61 Jahre)
+tidy(coxph(Surv(OS, Censor)~age&gt;61, data=hnscc_survival),
+     exponentiate = TRUE)</code></pre>
+<pre><code>## # A tibble: 1 x 7
+##   term         estimate std.error statistic p.value conf.low conf.high
+##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 age &gt; 61TRUE     1.54     0.189      2.27  0.0229     1.06      2.23</code></pre>
+<pre class="r"><code># Beispiel 2: Alter als kontiniuerliche Variable
+tidy(coxph(Surv(OS, Censor)~age, data=hnscc_survival),
+     exponentiate = TRUE)</code></pre>
+<pre><code>## # A tibble: 1 x 7
+##   term  estimate std.error statistic p.value conf.low conf.high
+##   &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 age       1.02   0.00827      2.69 0.00718     1.01      1.04</code></pre>
+<p>Estimate = HR</p>
+<pre class="r"><code># Bespiel 3: Tabacco Group
+
+table(hnscc_survival$tabacco_group)</code></pre>
+<pre><code>## 
+## Current reformed smoker for &lt; or = 15 years 
+##                                          81 
+##      Current reformed smoker for &gt; 15 years 
+##                                          49 
+##                              Current smoker 
+##                                          90 
+##                         Lifelong Non-smoker 
+##                                          52</code></pre>
+<pre class="r"><code>tidy(coxph(Surv(OS, Censor)~tabacco_group, data=hnscc_survival),
+     exponentiate = TRUE)</code></pre>
+<pre><code>## # A tibble: 3 x 7
+##   term                   estimate std.error statistic p.value conf.low conf.high
+##   &lt;chr&gt;                     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 tabacco_groupCurrent ~    0.572     0.290    -1.93   0.0542    0.324     1.01 
+## 2 tabacco_groupCurrent ~    1.14      0.234     0.551  0.582     0.719     1.80 
+## 3 tabacco_groupLifelong~    0.482     0.307    -2.38   0.0173    0.264     0.879</code></pre>
+</div>
+<div id="multivariate-überlebenszeitanalyse" class="section level4">
+<h4>Multivariate Überlebenszeitanalyse</h4>
+<p>In der multivariaten Überlebenszeitanalyse kombinieren wir die Einflussfaktoren zusammen, die univariat signifikant waren. Wir wollen herausfinden, ob diese <strong>unabhängige</strong> Einflussfaktoren sind.</p>
+<pre class="r"><code># Beispielmodel: Alter und Tabacco group
+tidy(coxph(Surv(OS, Censor)~age + tabacco_group, data=hnscc_survival),
+     exponentiate = TRUE)</code></pre>
+<pre><code>## # A tibble: 4 x 7
+##   term                   estimate std.error statistic p.value conf.low conf.high
+##   &lt;chr&gt;                     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 age                       1.02    0.00931     2.58  0.00986    1.01      1.04 
+## 2 tabacco_groupCurrent ~    0.520   0.292      -2.23  0.0255     0.293     0.923
+## 3 tabacco_groupCurrent ~    1.22    0.235       0.838 0.402      0.768     1.93 
+## 4 tabacco_groupLifelong~    0.553   0.309      -1.92  0.0552     0.301     1.01</code></pre>
+<blockquote>
+
+</blockquote>
+</div>
+</div>
+<div id="übungen-1" class="section level3">
+<h3>Übungen</h3>
+<div id="übung-1---datentransformation-für-überlebenszeitanalyse" class="section level4">
+<h4>Übung 1 - Datentransformation für Überlebenszeitanalyse</h4>
+<p>Erstellt ein neues Objekt, welches ihr <code>hnscc_survival</code> nennt und nehmt in diesem folgende Änderungen vor:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Nennt die Spalte <code>days_to_death</code> in <code>OS</code> um und stellt sicher, dass diese ein numerischer Vektor ist.</li>
+<li>Erstellt eine neue Spalte namens <code>Censor</code>, in der ihr die Spalte <code>vital_status</code> als Faktor speichert (<code>as.factor()</code>).</li>
+<li>Ändert die Level der neu erstellten Spalte <code>Censor</code> von “LIVING” und “DECEASED” in 0 und 1 um. Googled hierzu, wie man die Level eines Faktors ändern kann.</li>
+<li>Anschließend gilt es die Spalte <code>Censor</code> als “normalen” Vektor (<code>as.vector()</code>) zu speichern und dann in einen numerischen Vektor (<code>as.numeric()</code>) zu überführen.</li>
+</ol>
+</div>
+<div id="übung-2---erstellung-eines-survival-objektes" class="section level4">
+<h4>Übung 2 - Erstellung eines “survival” Objektes</h4>
+<p>Die Erstellung des survival Objektes ist gleichzeitig die Kontrolle, ob die Datentransformation geklappt hat. Der Output sollte wie folgt ausschauen:</p>
+<pre class="r"><code>Surv(hnscc_survival$OS, hnscc_survival$Censor)</code></pre>
+<pre><code>##   [1]  461   415  1134   276   248+  190+  845+ 1761   186+  179+  242+ 1635+
+##  [13] 1747+  152+  244+  450    63+  395   113+  236+  186+ 2891+  275+  140+
+##  [25]  557+  412+  310+  142   194+  325+  166+  343+  383+  522+  369+  395 
+##  [37]  240+  436   348+  810+  875+  397   279+  289+  173+  377   866+  252 
+##  [49]  493   351   360   352   380   259   413+  274+  207+  228+  143+  154+
+##  [61]  201+  159+   45+  134+   97+  276   201+  188+  224+   42+  177+   83+
+##  [73]  119+  112   100+   46+ 1465+ 1207+  654    89   841+  896+ 1028+  317 
+##  [85]  128   870+  984  1000+ 1057+  984+  403   128   455   814+ 1006+  693+
+##  [97] 2562+  358+ 1662+ 1152+  798+ 1777+ 1521+ 1202  1050+ 1125+  563   514+
+## [109]  183   311+  345+  354+  233+  379+  350+  479+  282  1435+ 1190+ 1440+
+## [121] 1244+ 1090   104+   93   759+  889+   30+  972+   NA+ 1036+  606   796+
+## [133]  521   997+ 1430+  822   392+  907+  913+  946+  908+  898+  929+  216+
+## [145]  156+  180+ 1077+  910+ 1471+ 4115+  522  3930+ 3314  2318   584   546 
+## [157] 2732+ 2663+ 2326+ 2567+ 1969+  545   406   540+ 1736+ 1478+ 1007+  215 
+## [169] 1315+ 1246+  405+  743+  291  2740    65   295   166   624   143   665 
+## [181]  804   342  3835+  602   366  1288   458   914   185  1640  2002   334 
+## [193]  217   255   861    76   126  1971  3836+ 3380+  572   385   243   274 
+## [205]  159    56  1591   392   662  2166   327  3496+ 1724+  144  1444+ 1095+
+## [217]  953+  797+  577   520  2900   151   361  1459    64  1099+  560  1748 
+## [229] 1081  6416  2717   294    14   695   761   789     2  1037  3058   452 
+## [241] 4760   106   495  2570   600   217  4334+  505   194   669   316+  321+
+## [253]  236+  828+  403   325+  250+  238+   77+  152+  153+ 1149+ 1058+  516+
+## [265]  477+  548   427   360+  299+   35+   30+    2+    5+   25+    0+    0+
+## [277]  160+  122+  113+</code></pre>
+<ol style="list-style-type: lower-alpha">
+<li>Erstellt mit Hilfe der <code>survfit</code> Funktion ein Objekt mit Namen <code>fit</code> für die Kaplan-Meier-Kurve, in der ihr das Geschlecht analysiert.</li>
+</ol>
+</div>
+<div id="übung-3---kaplan-meier-kurve-und-univariate-überlebenszeitanalyse" class="section level4">
+<h4>Übung 3 - Kaplan-Meier Kurve und univariate Überlebenszeitanalyse</h4>
+<ol style="list-style-type: lower-alpha">
+<li>Erstellt die Kaplan-Meier-Kurve zum Objekt <code>fit</code>, welches ihr in Übung 2 erstellt habt.</li>
+<li>Findet heraus, wie man einen Risk-Table erstellen kann</li>
+<li>Ist das Geschlecht ein signifikanter prognostischer Faktor?</li>
+</ol>
+</div>
+<div id="übung-4---multivariate-überlebenszeitanalyse" class="section level4">
+<h4>Übung 4 - Multivariate Überlebenszeitanalyse</h4>
+<pre class="r"><code># Beispielmodel: Alter und Tabacco group
+tidy(coxph(Surv(OS, Censor)~age + tabacco_group, data=hnscc_survival),
+     exponentiate = TRUE)</code></pre>
+<pre><code>## # A tibble: 4 x 7
+##   term                   estimate std.error statistic p.value conf.low conf.high
+##   &lt;chr&gt;                     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 age                       1.02    0.00931     2.58  0.00986    1.01      1.04 
+## 2 tabacco_groupCurrent ~    0.520   0.292      -2.23  0.0255     0.293     0.923
+## 3 tabacco_groupCurrent ~    1.22    0.235       0.838 0.402      0.768     1.93 
+## 4 tabacco_groupLifelong~    0.553   0.309      -1.92  0.0552     0.301     1.01</code></pre>
+<ol style="list-style-type: lower-alpha">
+<li>Interprätiert den Output. Welche Faktoren sind unabhängige Prädiktoren?</li>
+</ol>
+</div>
+<div id="zugabe" class="section level4">
+<h4>Zugabe</h4>
+<p>Gibt es weitere signifikante Prädiktoren jenseits von Age und Tabacco Group?</p>
+<blockquote>
+
+</blockquote>
+</div>
+</div>
+<div id="lösungen-3" class="section level3">
+<h3>Lösungen</h3>
+<p><a href="http://andreasmock.github.io/solution4.html">Link zu Lösungen der Übung</a></p>
 </div>
 </div>
 
