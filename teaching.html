@@ -1653,6 +1653,227 @@ tidy(coxph(Surv(OS, Censor)~age + tabacco_group, data=hnscc_survival),
 <div id="lösungen-3" class="section level3">
 <h3>Lösungen</h3>
 <p><a href="http://andreasmock.github.io/solution4.html">Link zu Lösungen der Übung</a></p>
+<hr />
+</div>
+</div>
+<div id="rna-seq-analyse" class="section level2">
+<h2>5 | RNA-seq Analyse</h2>
+<div id="lehrkapitel-4" class="section level3">
+<h3>Lehrkapitel</h3>
+<p><a href="http://andreasmock.github.io/pres_day5.html">Präsentation (gleicher Inhalt wie Website)</a></p>
+<blockquote>
+
+</blockquote>
+<div id="kursmaterial-zur-rna-seq-analyse" class="section level4">
+<h4>Kursmaterial zur RNA-seq Analyse</h4>
+<p>Das Kursmaterial des heutigen Tages entspricht in großen Teilen Kapitel 8 des hervorragenden Buchs <em>Modern Statistics for Modern Biology</em> von Susan Holmes und Wolfgang Huber.</p>
+<p><a href="https://www.huber.embl.de/msmb/Chap-CountData.html">Link zu Kapitel 8</a></p>
+</div>
+<div id="einführung-1" class="section level4">
+<h4>Einführung</h4>
+<p>An diesem Kurstag möchten wir uns mit der Auswertung von Daten aus einer RNA Sequenzierung (RNA-seq) beschäftigen.</p>
+<p>RNA-seq Daten sind so genannte <code>high-throughput count</code> Daten, in denen wir in vielen parallelen Analysen zählen, wieviele reads pro Gen oder Transkript im Sample detektiert wurden.</p>
+<ul>
+<li><strong>Sequenzierungsbibliothek</strong>: alle Nukleotide eines Samples, welche den Input für unser Sequenzierungsexperiment darstellen</li>
+<li><strong>Fragmente</strong>: Da der aktuelle technologische Goldstandard (Illumina Sequenzierung) nur Nukleotide von wenigen hundert Basenpaaren analysieren kann, müssen diese vor der Analyse fragmentiert werden</li>
+<li><strong>Read</strong>: Sequenz welche von einem Fragment erhoben wird. Ca. 150 bp bei Illumina. Bei RNA-seq und doppelsträngiger cDNA bezieht sich dies auf jeweils einen Strang</li>
+</ul>
+<p>Zeitliche Abfolge: 1. Sequenzierung &gt; 2. Counting</p>
+</div>
+<div id="benötigte-pakete" class="section level4">
+<h4>Benötigte Pakete</h4>
+<ul>
+<li><code>pasilla</code>: Paket, welches die Bespieldaten enthält</li>
+<li><code>DESeq2</code>: DAS Paket für die Analyse von RNA-seq Daten</li>
+<li><code>pheatmap</code>: Paket zur Erstellung von Heatmaps (sehr gute Alternative <code>ComplexHeatmap</code> Paket)</li>
+<li><code>broom</code>: Paket für Ergebnisstabellen</li>
+</ul>
+</div>
+<div id="beispieldatensatz" class="section level4">
+<h4>Beispieldatensatz</h4>
+<p>Unseren Bespieldatensatz beziehen wir aus dem Paket <code>pasilla</code></p>
+<pre class="r"><code>fn &lt;- system.file(&quot;extdata&quot;, &quot;pasilla_gene_counts.tsv&quot;,
+                  package = &quot;pasilla&quot;, mustWork = TRUE)
+
+counts &lt;- as.matrix(read.csv(fn, sep = &quot;\t&quot;, row.names = &quot;gene_id&quot;))</code></pre>
+<p>Sequenzierungsdaten sollten als Matrix gespeichert sein und nicht als Dataframe bzw. Tibble!</p>
+<pre class="r"><code>dim(counts)</code></pre>
+<pre><code>## [1] 14599     7</code></pre>
+<pre class="r"><code>counts[1:3,]</code></pre>
+<pre><code>##             untreated1 untreated2 untreated3 untreated4 treated1 treated2
+## FBgn0000003          0          0          0          0        0        0
+## FBgn0000008         92        161         76         70      140       88
+## FBgn0000014          5          1          0          0        4        0
+##             treated3
+## FBgn0000003        1
+## FBgn0000008       70
+## FBgn0000014        0</code></pre>
+<p>Diese Matrix wird auch <code>count table</code> genannt. Wir haben Countdaten zu 14,599 Genen von 7 Samples. Hierbei handelt es sich um die “raw” Counts.</p>
+</div>
+<div id="herausforderungen-der-datenanalyse" class="section level4">
+<h4>Herausforderungen der Datenanalyse</h4>
+<ul>
+<li>großer Wertebereich (0-Millionen)</li>
+<li>Die nicht-negativen Count Daten (Integers) folgen keine symmetrischen Verteilung und damit keiner! Normalverteilung</li>
+</ul>
+<pre class="r"><code>plot(density(counts), xlim=c(0,10000), xlab = &quot;Counts&quot;, main = &quot;&quot;, bty=&quot;none&quot;)</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-100-1.png" width="384" /></p>
+<ul>
+<li>Im Count Daten zwischen Samples zu vergleichen bedarf es einer Normalisierung. Faktoren sind hier u.a. die Sequenzierungsbibliothek, Sequenzierungstiefe, Genlänge, GC content.</li>
+</ul>
+</div>
+<div id="beispieldatensatz---informationen-zu-samples-und-zum-experiment" class="section level4">
+<h4>Beispieldatensatz - Informationen zu Samples und zum Experiment</h4>
+<p>RNAi Knockdown Experiment des Splicingfaktors <em>pasilla</em> in D. melanogaster. Zwei Konditionen: treated und untreated. Den Annotationfile laden wir mit:</p>
+<pre class="r"><code>annotationFile &lt;- system.file(&quot;extdata&quot;,
+  &quot;pasilla_sample_annotation.csv&quot;,
+  package = &quot;pasilla&quot;, mustWork = TRUE)
+pasillaSampleAnno &lt;- readr::read_csv(annotationFile)
+
+pasillaSampleAnno &lt;- mutate(pasillaSampleAnno,
+condition &lt;- factor(condition, levels = c(&quot;untreated&quot;, &quot;treated&quot;)),
+type &lt;- factor(sub(&quot;-.*&quot;, &quot;&quot;, type), levels = c(&quot;single&quot;, &quot;paired&quot;)))</code></pre>
+<pre class="r"><code>pasillaSampleAnno</code></pre>
+<pre><code>## # A tibble: 7 x 8
+##   file  condition type  `number of lane~ `total number o~ `exon counts`
+##   &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;                    &lt;dbl&gt;
+## 1 trea~ treated   sing~                5 35158667              15679615
+## 2 trea~ treated   pair~                2 12242535 (x2)         15620018
+## 3 trea~ treated   pair~                2 12443664 (x2)         12733865
+## 4 untr~ untreated sing~                2 17812866              14924838
+## 5 untr~ untreated sing~                6 34284521              20764558
+## 6 untr~ untreated pair~                2 10542625 (x2)         10283129
+## 7 untr~ untreated pair~                2 12214974 (x2)         11653031
+## # ... with 2 more variables: `condition &lt;- factor(condition, levels =
+## #   c(&quot;untreated&quot;, &quot;treated&quot;))` &lt;fct&gt;, `type &lt;- factor(sub(&quot;-.*&quot;, &quot;&quot;, type),
+## #   levels = c(&quot;single&quot;, &quot;paired&quot;))` &lt;fct&gt;</code></pre>
+<pre class="r"><code>with(pasillaSampleAnno,
+       table(condition, type))</code></pre>
+<pre><code>##            type
+## condition   paired-end single-read
+##   treated            2           1
+##   untreated          2           2</code></pre>
+</div>
+<div id="deseq2---das-r-paket-für-die-analyse-von-rna-seq-daten" class="section level4">
+<h4>DESeq2 - DAS R Paket für die Analyse von RNA-seq Daten</h4>
+<p>Das DESeq2 gehört zu den weltweit meist genutzen Pakten zur Analyse von RNA-seq Datensätzen.</p>
+<p>Bevor wir mit der Analyse starten können, gilt es aus der Matrix <code>counts</code> und dem Dataframe der die Sampleinfo beschreibt <code>pasillaSampleAnno</code> ein sogenanntes <code>DESeqDataSet</code> zu erstellen:</p>
+<pre class="r"><code>mt &lt;- match(colnames(counts), sub(&quot;fb$&quot;, &quot;&quot;, pasillaSampleAnno$file))
+stopifnot(!any(is.na(mt)))
+
+pasilla &lt;- DESeqDataSetFromMatrix(
+  countData = counts,
+  colData   = pasillaSampleAnno[mt, ],
+  design    = ~ condition)</code></pre>
+<pre class="r"><code>pasilla</code></pre>
+<pre><code>## class: DESeqDataSet 
+## dim: 14599 7 
+## metadata(1): version
+## assays(1): counts
+## rownames(14599): FBgn0000003 FBgn0000008 ... FBgn0261574 FBgn0261575
+## rowData names(0):
+## colnames(7): untreated1 untreated2 ... treated2 treated3
+## colData names(8): file condition ... condition &lt;- factor(condition,
+##   levels = c(&quot;untreated&quot;, &quot;treated&quot;)) type &lt;- factor(sub(&quot;-.*&quot;, &quot;&quot;,
+##   type), levels = c(&quot;single&quot;, &quot;paired&quot;))</code></pre>
+</div>
+<div id="durchführung-der-differentiellen-expressionsanalyse" class="section level4">
+<h4>Durchführung der differentiellen Expressionsanalyse</h4>
+<p>Ziel: Gene identifizieren, die zwischen treated und untreated Samples unterschiedlich sind. Wir wenden hier einen Hypothesentest an, der mit dem t-Test mathematisch verwandt ist.</p>
+<pre class="r"><code>pasilla &lt;- DESeq(pasilla)</code></pre>
+<pre class="r"><code>pasilla</code></pre>
+<pre><code>## class: DESeqDataSet 
+## dim: 14599 7 
+## metadata(1): version
+## assays(4): counts mu H cooks
+## rownames(14599): FBgn0000003 FBgn0000008 ... FBgn0261574 FBgn0261575
+## rowData names(22): baseMean baseVar ... deviance maxCooks
+## colnames(7): untreated1 untreated2 ... treated2 treated3
+## colData names(9): file condition ... type &lt;- factor(sub(&quot;-.*&quot;, &quot;&quot;,
+##   type), levels = c(&quot;single&quot;, &quot;paired&quot;)) sizeFactor</code></pre>
+<p>Results</p>
+<pre class="r"><code>res &lt;- results(pasilla)
+res[order(res$padj), ] %&gt;% head</code></pre>
+<pre><code>## log2 fold change (MLE): condition untreated vs treated 
+## Wald test p-value: condition untreated vs treated 
+## DataFrame with 6 rows and 6 columns
+##                     baseMean    log2FoldChange              lfcSE
+##                    &lt;numeric&gt;         &lt;numeric&gt;          &lt;numeric&gt;
+## FBgn0039155 730.595806139728    4.619013535193  0.168706755496974
+## FBgn0025111 1501.41051323996 -2.89986418283187  0.126920467532813
+## FBgn0029167 3706.11653071978  2.19700028710382 0.0969888689039936
+## FBgn0003360 4343.03539692487  3.17967242210135  0.143526226262858
+## FBgn0035085 638.232608936723  2.56041205175815  0.137295199514033
+## FBgn0039827 261.916235943103  4.16251610026134  0.232588756794067
+##                          stat                pvalue                  padj
+##                     &lt;numeric&gt;             &lt;numeric&gt;             &lt;numeric&gt;
+## FBgn0039155  27.3789482915866 4.88534640286228e-165 4.06607381110228e-161
+## FBgn0025111 -22.8478844996546 1.53390416993678e-115 6.38334220319191e-112
+## FBgn0029167  22.6520869036895 1.33057630038134e-113 3.69146218269131e-110
+## FBgn0003360  22.1539470861445 9.55682092175738e-109 1.98853551329467e-105
+## FBgn0035085  18.6489553955341  1.28768628708899e-77  2.14348259348833e-74
+## FBgn0039827   17.896463086334  1.25652932702639e-71  1.74301559814011e-68</code></pre>
+<p>Im folgenden möchten wir die Results der differentiellen Expressionsanalyse mithilfe von Visualisierungen explorieren.</p>
+<div id="histogramm-der-p-werte" class="section level5">
+<h5>Histogramm der p-Werte</h5>
+<pre class="r"><code>ggplot(as(res, &quot;data.frame&quot;), aes(x = pvalue)) +
+  geom_histogram(binwidth = 0.01, fill = &quot;Royalblue&quot;, boundary = 0) +
+    theme_classic()</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-108-1.png" width="432" /></p>
+<pre class="r"><code>ggplot(as(res, &quot;data.frame&quot;), aes(x = pvalue)) +
+  geom_histogram(binwidth = 0.005, fill = &quot;Royalblue&quot;, boundary = 0) +
+    xlim(c(0,0.1)) +
+    theme_classic()</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-109-1.png" width="432" /></p>
+<div id="ma-plot" class="section level6">
+<h6>MA plot</h6>
+<p>Fold change (M-value) vs. average counts (A-value)</p>
+<pre class="r"><code>plotMA(pasilla, ylim = c( -2, 2))</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-110-1.png" width="432" /></p>
+<p>Roten Punkte = adjustierter P-Wert &lt; 0.1</p>
+</div>
+</div>
+<div id="pca-plot" class="section level5">
+<h5>PCA plot</h5>
+<p>Die Principle Component Analysis (PCA) ist eine Methodik zur Dimensionsreduktion. Hierbei werden für jeden Sample die Infos zu allen 14,599 Genen auf zwei Dimensionen (x- und y-Achse) reduziert. Ein Sample ist ein Punkt auf dem Plot.</p>
+<pre class="r"><code>pas_rlog &lt;- rlogTransformation(pasilla)
+plotPCA(pas_rlog, intgroup=c(&quot;condition&quot;, &quot;type&quot;)) + 
+    coord_fixed() +
+    theme_classic()</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-111-1.png" width="432" /></p>
+</div>
+<div id="heatmap" class="section level5">
+<h5>Heatmap</h5>
+<p>Eine Heatmap aller Gene darzustellen macht keinen Sinn. Es gilt Filterkriterien zu definieren.</p>
+<p>Filter 1) Top 30 most expressed genes.</p>
+<pre class="r"><code>select &lt;- order(rowMeans(assay(pas_rlog)), decreasing = TRUE)[1:30]
+
+pheatmap( assay(pas_rlog)[select, ],
+     scale = &quot;row&quot;,
+     annotation_col = as.data.frame(
+        colData(pas_rlog)[, c(&quot;condition&quot;, &quot;type&quot;)] ))</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-112-1.png" width="576" /></p>
+<p>Filter 2) Adjusted p-Value &lt; 0.01 und absolute log2 Fold Change &gt; 2</p>
+<pre class="r"><code>select2 &lt;- (res$padj&lt;0.01 &amp; abs(res$log2FoldChange)&gt;2)*1
+
+pheatmap( assay(pas_rlog)[select2 %in% 1, ],
+     scale = &quot;row&quot;,
+     annotation_col = as.data.frame(
+        colData(pas_rlog)[, c(&quot;condition&quot;, &quot;type&quot;)] ))</code></pre>
+<p><img src="teaching_files/figure-html/unnamed-chunk-113-1.png" width="576" /></p>
+</div>
+</div>
+<div id="export-der-results-als-csv-file" class="section level4">
+<h4>Export der Results als csv File</h4>
+<pre class="r"><code>write.csv(as.data.frame(res), file = &quot;treated_vs_untreated.csv&quot;)</code></pre>
+<blockquote>
+
+</blockquote>
+</div>
+</div>
+<div id="übung-2" class="section level3">
+<h3>Übung</h3>
+<p>Die Übung des heutigen Tages besteht im Ausführen und Nachvollziehen des R Codes der Slides.</p>
 </div>
 </div>
 
