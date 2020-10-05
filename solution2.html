@@ -360,6 +360,7 @@ table(hnscc$is_young)</code></pre>
 <pre class="r"><code>hnscc %&gt;%
     group_by(grade) %&gt;%
     summarise(median_OS = median(days_to_death, na.rm=TRUE))</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 5 x 2
 ##   grade median_OS
 ##   &lt;chr&gt;     &lt;dbl&gt;
@@ -398,6 +399,7 @@ table(hnscc$is_young)</code></pre>
 <pre class="r"><code>ggplot(hnscc, aes(x=age, y=days_to_death)) +
     geom_point() +
     geom_smooth(method=&quot;lm&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <pre><code>## Warning: Removed 1 rows containing non-finite values (stat_smooth).</code></pre>
 <pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
 <p><img src="solution2_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>

@@ -359,6 +359,8 @@ hnscc_survival$Censor = as.numeric(as.vector(hnscc_survival$Censor))</code></pre
 <pre class="r"><code>ggsurvplot(fit, 
            hnscc_survival, 
            risk.table = TRUE)</code></pre>
+<pre><code>## Warning: Vectorized input to `element_text()` is not officially supported.
+## Results may be unexpected or may change in future versions of ggplot2.</code></pre>
 <p><img src="solution4_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="lösung-übung-4---multivariate-überlebenszeitanalyse" class="section level1">
@@ -366,13 +368,13 @@ hnscc_survival$Censor = as.numeric(as.vector(hnscc_survival$Censor))</code></pre
 <pre class="r"><code># Beispielmodel: Alter und Tabacco group
 tidy(coxph(Surv(OS, Censor)~age + tabacco_group, data=hnscc_survival),
      exponentiate = TRUE)</code></pre>
-<pre><code>## # A tibble: 4 x 7
-##   term                   estimate std.error statistic p.value conf.low conf.high
-##   &lt;chr&gt;                     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-## 1 age                       1.02    0.00931     2.58  0.00986    1.01      1.04 
-## 2 tabacco_groupCurrent ~    0.520   0.292      -2.23  0.0255     0.293     0.923
-## 3 tabacco_groupCurrent ~    1.22    0.235       0.838 0.402      0.768     1.93 
-## 4 tabacco_groupLifelong~    0.553   0.309      -1.92  0.0552     0.301     1.01</code></pre>
+<pre><code>## # A tibble: 4 x 5
+##   term                                      estimate std.error statistic p.value
+##   &lt;chr&gt;                                        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 age                                          1.02    0.00931     2.58  0.00986
+## 2 tabacco_groupCurrent reformed smoker for~    0.520   0.292      -2.23  0.0255 
+## 3 tabacco_groupCurrent smoker                  1.22    0.235       0.838 0.402  
+## 4 tabacco_groupLifelong Non-smoker             0.553   0.309      -1.92  0.0552</code></pre>
 <p>Alter und Tabacco Group sind unabhängige prognostische Einflussgrößen.</p>
 </div>
 <div id="lösung-zugabe" class="section level1">

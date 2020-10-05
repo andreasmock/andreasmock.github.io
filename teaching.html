@@ -380,18 +380,23 @@ div.tocify {
 </div>
 <div id="kursinformationen" class="section level2">
 <h2>Kursinformationen</h2>
-<p><strong>Sommersemester 2020/2021</strong></p>
-<p><a href="https://heiconf.uni-heidelberg.de/mie-qr6-7qm?meeting_access_code=682431">Link zum Webinar Termin 4 am 16.06.2020 17:00-18:30 Uhr - Heiconf Raum 7</a></p>
+<p><strong>Wintermesemster 2020/2021</strong></p>
 <ul>
-<li>Termin 1 (R 101): 21.04.2020 17:00-18:30 Uhr</li>
-<li>Termin 2 (Datentransformation und Plotting): 12.05.2020 17:15-18:45 Uhr</li>
-<li>Termin 3 (Input und statistische Modellierung): 19.05.2020 17:15-18:45 Uhr</li>
-<li>Termin 4 (Überlebenszeitanalyse): 16.06.2020 17:00-18:30 Uhr</li>
-<li>Termin 5 (RNA-seq Analyse): 23.06.2020 17:00-18:30 Uhr</li>
+<li>Termin 1 (Intro): 13.10.2020 | 17:00-18:30 Uhr | Raum 99-13 INF 450 HIT</li>
+<li>Termin 2 (Transformation und Plotting): 12.11.2020 | 16:45-18:15 | Raum tbd</li>
+<li>Termin 3 (Dateninput und statistische Modellierung): 24.11.2020 | 17:15-18:45 | Raum tbd</li>
+<li>Termin 4 (Überlebenszeitanalyse): 14.01.2021 | 15:00-16:30 | Raum tbd</li>
+<li>Termin 5 (RNA-seq Analyse): 09.02.2021 | 17:00-18:30 Uhr | Raum 99-13 INF 450 HIT</li>
+<li>Termin 6 (Machine Learning): 25.02.2021 | 17:00-18:30 Uhr | Raum 99-13 INF 450 HIT</li>
 </ul>
 <p><strong>Vorbereitungen</strong></p>
 <ul>
 <li>Installation von <a href="https://www.r-project.org">R</a> und <a href="https://www.rstudio.com">RStudio</a></li>
+</ul>
+<p><strong>Zusätzliches Kursangebot - Data Science Seminars</strong></p>
+<ul>
+<li>Seminar 1 (Welche Programmiersprache als Mediziner erlernen? Pros und Cons von R und Python.) | 22.10.2020 | 15:00-16:30 Uhr | Virtuell</li>
+<li>Seminar 2 (Weiterbildungsmöglichkeiten und Karrierewege) | 05.11.2020 | 15:00-16:30 Uhr | Virtuell</li>
 </ul>
 <hr />
 </div>
@@ -1927,7 +1932,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
