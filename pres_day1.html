@@ -10,9 +10,9 @@
   <title>Einführung in R Programming</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -22,16 +22,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -40,9 +38,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -85,19 +83,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <p class="author">
 Andreas Mock
   </p>
-  <p class="date">21.04.2020</p>
 </div>
 <div id="welcome-to-the-world-of-r" class="slide section level2">
 <h1>Welcome to the World of R!</h1>
 <p>Kursunterlagen: <a href="http://studyr.de">studyr.de</a></p>
-<p>Dieses Semester Onlinekurs via <a href="https://www.bluejeans.com/de">BlueJean</a> wg. COVID-19 Pandemie</p>
-<ul>
-<li>Termin 1 (R 101): 21.04.2020 17:00-18:30 Uhr</li>
-<li>Termin 2 (Datentransformation und Plotting): 12.05.2020 17:15-18:45 Uhr</li>
-<li>Termin 3 (Input und statistische Modellierung): 19.05.2020 17:15-18:45 Uhr</li>
-<li>Termin 4 (Überlebenszeitanalyse): 16.06.2020 17:00-18:30 Uhr</li>
-<li>Termin 5 (RNA-seq Analyse): 23.06.2020 17:00-18:30 Uhr</li>
-</ul>
 </div>
 <div id="translationale-onkologie-2020" class="slide section level2">
 <h1>Translationale Onkologie 2020</h1>
@@ -121,7 +110,7 @@ Andreas Mock
 </div>
 <div id="data-science" class="slide section level2">
 <h1>Data Science</h1>
-<p><img src="../pics/data-science.png" width="600" /></p>
+<p><img src="pics/data-science.png" width="600" /></p>
 <p>R for Data Science, Hadley Wickham &amp; Garrett Grolemund 2016</p>
 </div>
 <div id="weiterführende-literatur" class="slide section level2">
@@ -146,57 +135,57 @@ R Graphics Cookbock, Winston Chang<br />
 <div id="r-architektur" class="slide section level2">
 <h1>R Architektur</h1>
 <p>R ist eine Objekt-orientierte Programmiersprache. Es dreht sich daher im Grunde alles darum Objekte herzustellen, zu manipulieren und zu visualisieren.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Zuweisung von Zahlen zu einem Objekt</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>alter &lt;-<span class="st"> </span><span class="dv">67</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Zuweisung von Zahlen zu einem Objekt</span></a>
+<a class="sourceLine" id="cb1-2" title="2">alter &lt;-<span class="st"> </span><span class="dv">67</span></a></code></pre></div>
 <p>R ist <em>case-sensitive</em> - Groß- und Kleinschreibung ist wichtig!</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Objekt `alter` ausgeben</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>alter</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Objekt `alter` ausgeben</span></a>
+<a class="sourceLine" id="cb2-2" title="2">alter</a></code></pre></div>
 <pre><code>## [1] 67</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># .. entspricht nicht</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>Alter</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># .. entspricht nicht</span></a>
+<a class="sourceLine" id="cb4-2" title="2">Alter</a></code></pre></div>
 <pre><code>## Error in eval(expr, envir, enclos): object &#39;Alter&#39; not found</code></pre>
 </div>
 <div id="r-objekttypen---vektor" class="slide section level2">
 <h1>R Objekttypen - Vektor</h1>
 <p>Def: Sammlung mehrerer Objekte gleicher Art (Länge 1 ist möglich).</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># numerischer Vektor mit Länge 1</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>x1 &lt;-<span class="st"> </span><span class="dv">5</span> </span>
-<span id="cb6-3"><a href="#cb6-3"></a></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># Charaktervektor mit Länge 1 (Text wird in &quot;&quot; gesetzt)</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>x2 &lt;-<span class="st"> &quot;green&quot;</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># Vektoren mit Länge 3</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a>y1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">9</span>)</span>
-<span id="cb6-9"><a href="#cb6-9"></a>y2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;gene1&quot;</span>,<span class="st">&quot;gene2&quot;</span>,<span class="st">&quot;gene3&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># numerischer Vektor mit Länge 1</span></a>
+<a class="sourceLine" id="cb6-2" title="2">x1 &lt;-<span class="st"> </span><span class="dv">5</span> </a>
+<a class="sourceLine" id="cb6-3" title="3"></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co"># Charaktervektor mit Länge 1 (Text wird in &quot;&quot; gesetzt)</span></a>
+<a class="sourceLine" id="cb6-5" title="5">x2 &lt;-<span class="st"> &quot;green&quot;</span></a>
+<a class="sourceLine" id="cb6-6" title="6"></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="co"># Vektoren mit Länge 3</span></a>
+<a class="sourceLine" id="cb6-8" title="8">y1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">9</span>)</a>
+<a class="sourceLine" id="cb6-9" title="9">y2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;gene1&quot;</span>,<span class="st">&quot;gene2&quot;</span>,<span class="st">&quot;gene3&quot;</span>)</a></code></pre></div>
 <p>Subsetting:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># um den vollständigen Vektor y2 auszugeben</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>y2</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># um den vollständigen Vektor y2 auszugeben</span></a>
+<a class="sourceLine" id="cb7-2" title="2">y2</a></code></pre></div>
 <pre><code>## [1] &quot;gene1&quot; &quot;gene2&quot; &quot;gene3&quot;</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># um nur die ersten beiden Einträge des Vektors y2 auszugeben</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>y2[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># um nur die ersten beiden Einträge des Vektors y2 auszugeben</span></a>
+<a class="sourceLine" id="cb9-2" title="2">y2[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a></code></pre></div>
 <pre><code>## [1] &quot;gene1&quot; &quot;gene2&quot;</code></pre>
 </div>
 <div id="r-objekttypen---matrix" class="slide section level2">
 <h1>R Objekttypen - Matrix</h1>
 <p>Kombination mehrerer Vektoren gleichen Typs (numerisch oder Charakter). Die Matrix kann Zeilen- und Spaltennamen haben.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>matrix &lt;-<span class="st">  </span><span class="kw">cbind</span>(y1, y1, y1)</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">rownames</span>(matrix)  &lt;-<span class="st">  </span>y2</span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="kw">colnames</span>(matrix) &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;sample1&quot;</span>,<span class="st">&quot;sample2&quot;</span>,<span class="st">&quot;sample3&quot;</span>)</span>
-<span id="cb11-4"><a href="#cb11-4"></a>matrix</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">matrix &lt;-<span class="st">  </span><span class="kw">cbind</span>(y1, y1, y1)</a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="kw">rownames</span>(matrix)  &lt;-<span class="st">  </span>y2</a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="kw">colnames</span>(matrix) &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;sample1&quot;</span>,<span class="st">&quot;sample2&quot;</span>,<span class="st">&quot;sample3&quot;</span>)</a>
+<a class="sourceLine" id="cb11-4" title="4">matrix</a></code></pre></div>
 <pre><code>##       sample1 sample2 sample3
 ## gene1       1       1       1
 ## gene2       3       3       3
 ## gene3       9       9       9</code></pre>
 <p>Ein Subset kann man sich mit der folgenden Syntax anzeigen lassen:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>matrix[Zeile,Spalte]</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">matrix[Zeile,Spalte]</a></code></pre></div>
 <p>Bespiele hierfür sind:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>matrix[<span class="dv">1</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">matrix[<span class="dv">1</span>,]</a></code></pre></div>
 <pre><code>## sample1 sample2 sample3 
 ##       1       1       1</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>matrix[,<span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">matrix[,<span class="dv">3</span>]</a></code></pre></div>
 <pre><code>## gene1 gene2 gene3 
 ##     1     3     9</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>matrix[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">matrix[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,]</a></code></pre></div>
 <pre><code>##       sample1 sample2 sample3
 ## gene1       1       1       1
 ## gene2       3       3       3</code></pre>
@@ -204,61 +193,61 @@ R Graphics Cookbock, Winston Chang<br />
 <div id="r-objekttypen---dataframe" class="slide section level2">
 <h1>R Objekttypen - Dataframe</h1>
 <p>Im Gegensatz zu Matrizen können in <em>Dataframes</em> Vektoren verschiedenen Typs (z.B. numerischer Vektor und Charaktervektor) miteinander kombiniert werden. Wichtig: Die Vektoren müssen die gleiche Länge haben.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">age=</span><span class="kw">c</span>(<span class="dv">50</span>,<span class="dv">47</span>,<span class="dv">87</span>),</span>
-<span id="cb20-2"><a href="#cb20-2"></a>                <span class="dt">gender=</span><span class="kw">c</span>(<span class="st">&quot;male&quot;</span>,<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>))</span>
-<span id="cb20-3"><a href="#cb20-3"></a>df</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">age=</span><span class="kw">c</span>(<span class="dv">50</span>,<span class="dv">47</span>,<span class="dv">87</span>),</a>
+<a class="sourceLine" id="cb20-2" title="2">                <span class="dt">gender=</span><span class="kw">c</span>(<span class="st">&quot;male&quot;</span>,<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>))</a>
+<a class="sourceLine" id="cb20-3" title="3">df</a></code></pre></div>
 <pre><code>##   age gender
 ## 1  50   male
 ## 2  47   male
 ## 3  87 female</code></pre>
 <p>Somit eignen sich <em>Dataframes</em> insbesondere für die Analyse von Patientenmetadaten im Rahmen von molekularbiologischen Experimenten oder klinischen Studien.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>df</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">df</a></code></pre></div>
 <pre><code>##   age gender
 ## 1  50   male
 ## 2  47   male
 ## 3  87 female</code></pre>
 <p>Eine Besonderheit von <em>Dataframes</em> ist die Möglichkeit einzelne Spalten durch den Spaltennamen zu selektieren.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>df<span class="op">$</span>age</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">df<span class="op">$</span>age</a></code></pre></div>
 <pre><code>## [1] 50 47 87</code></pre>
 <p>Dies entspricht der folgenden Matrixnotation</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>df[,<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">df[,<span class="dv">1</span>]</a></code></pre></div>
 <pre><code>## [1] 50 47 87</code></pre>
 </div>
 <div id="r-objekttypen" class="slide section level2">
 <h1>R Objekttypen</h1>
 <p><embed src="../pics/R_objects.pdf" /></p>
 <p>Die Funktion <code>class</code> ermöglicht es den Typ eines Objektes zu eruieren:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">class</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">class</span>(df)</a></code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
 </div>
 <div id="r-objekttypen---funktionen" class="slide section level2">
 <h1>R Objekttypen - Funktionen</h1>
 <p>Die Grundsyntax einer jeden Funktion ist</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="cf">function</span>(Objekt, Argumente)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="cf">function</span>(Objekt, Argumente)</a></code></pre></div>
 <p>Die Argumente sind hierbei fakultativ. R besitzt eine Vielzahl von Funktionen, ohne dass zusätzliche Packete geladen werden müssen.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw">sum</span>(y1)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">sum</span>(y1)</a></code></pre></div>
 <pre><code>## [1] 13</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="kw">mean</span>(y1)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">mean</span>(y1)</a></code></pre></div>
 <pre><code>## [1] 4.333333</code></pre>
 <p>Die Funktion <code>help</code> öffnet die Dokumentation in RStudio und zeigt die notwendigen Objekte und Argumente zu jeder Funktion an. Als Beispiel, was genau macht die Funktion <code>cbind</code>?</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="kw">help</span>(cbind)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">help</span>(cbind)</a></code></pre></div>
 <pre><code>## starting httpd help server ... done</code></pre>
 </div>
 <div id="r-packete" class="slide section level2">
 <h1>R Packete</h1>
 <p>Ein Paket ist nicht anderes als eine wohldurchdachte Formelsammlung, die für eine spezifische wissenschaftliche Fragestellung (z.B. die Analyse von Sequenzierungsdaten) entwickelt wurde.</p>
 <p>Installation</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</a></code></pre></div>
 <p>Ins Environment laden</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
 </div>
 <div id="bespieldaten-des-kurses" class="slide section level2">
 <h1>Bespieldaten des Kurses</h1>
 <p>Metadaten des <em>The Cancer Genome Atlas (TCGA)</em> zur Analyse von Kopf-Hals-Tumoren (head and neck squamous cell carcinoma; HNSCC). Der Datensatz fasst die wichtigsten klinisch-pathologischen Charakteristika der Studienkohorte (n=279) zusammen.</p>
 <p><a href="https://tcga-data.nci.nih.gov/docs/publications/hnsc_2014/">Link zur Originalpublikation</a></p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co">#Datensatz in R laden</span></span>
-<span id="cb39-2"><a href="#cb39-2"></a><span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;http://andreasmock.github.io/data/hnscc.RData&quot;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>hnscc</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="co">#Datensatz in R laden</span></a>
+<a class="sourceLine" id="cb39-2" title="2"><span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;http://andreasmock.github.io/data/hnscc.RData&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">hnscc</a></code></pre></div>
 <pre><code>## # A tibble: 279 x 11
 ##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
 ##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
@@ -277,33 +266,33 @@ R Graphics Cookbock, Winston Chang<br />
 </div>
 <div id="exploration-des-hnscc-datensatzes" class="slide section level2">
 <h1>Exploration des <code>hnscc</code> Datensatzes</h1>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="kw">colnames</span>(hnscc)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">colnames</span>(hnscc)</a></code></pre></div>
 <pre><code>##  [1] &quot;id&quot;            &quot;age&quot;           &quot;alcohol&quot;       &quot;days_to_death&quot;
 ##  [5] &quot;gender&quot;        &quot;neoplasm_site&quot; &quot;grade&quot;         &quot;pack_years&quot;   
 ##  [9] &quot;tabacco_group&quot; &quot;tumor_stage&quot;   &quot;vital_status&quot;</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="kw">head</span>(hnscc<span class="op">$</span>age)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">head</span>(hnscc<span class="op">$</span>age)</a></code></pre></div>
 <pre><code>## [1] 69 39 45 83 47 72</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="kw">summary</span>(hnscc<span class="op">$</span>age)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">summary</span>(hnscc<span class="op">$</span>age)</a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   19.00   53.00   61.00   61.32   69.00   90.00</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="kw">head</span>(hnscc<span class="op">$</span>alcohol)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">head</span>(hnscc<span class="op">$</span>alcohol)</a></code></pre></div>
 <pre><code>## [1] &quot;YES&quot; &quot;YES&quot; &quot;YES&quot; &quot;NO&quot;  &quot;YES&quot; &quot;YES&quot;</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">table</span>(hnscc<span class="op">$</span>alcohol)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">table</span>(hnscc<span class="op">$</span>alcohol)</a></code></pre></div>
 <pre><code>## 
 ##  NO YES 
 ##  85 188</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="kw">table</span>(<span class="kw">is.na</span>(hnscc<span class="op">$</span>alcohol))</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">table</span>(<span class="kw">is.na</span>(hnscc<span class="op">$</span>alcohol))</a></code></pre></div>
 <pre><code>## 
 ## FALSE  TRUE 
 ##   273     6</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="kw">summary</span>(hnscc<span class="op">$</span>days_to_death)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="kw">summary</span>(hnscc<span class="op">$</span>days_to_death)</a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
 ##     0.0   218.8   443.0   789.0   999.2  6416.0       1</code></pre>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="kw">table</span>(hnscc<span class="op">$</span>gender)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="kw">table</span>(hnscc<span class="op">$</span>gender)</a></code></pre></div>
 <pre><code>## 
 ## FEMALE   MALE 
 ##     76    203</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="kw">table</span>(hnscc<span class="op">$</span>neoplasm_site)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">table</span>(hnscc<span class="op">$</span>neoplasm_site)</a></code></pre></div>
 <pre><code>## 
 ## Alveolar Ridge Base of Tongue  Buccal Mucosa Floor of Mouth    Hard Palate 
 ##              7             12              8             26              5 
@@ -311,14 +300,14 @@ R Graphics Cookbock, Winston Chang<br />
 ##              2             72              1             49             76 
 ##     Oropharynx         Tonsil 
 ##              2             19</code></pre>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="kw">table</span>(hnscc<span class="op">$</span>grade)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="kw">table</span>(hnscc<span class="op">$</span>grade)</a></code></pre></div>
 <pre><code>## 
 ##  G1  G2  G3  G4  GX 
 ##  23 176  71   1   8</code></pre>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="kw">summary</span>(hnscc<span class="op">$</span>pack_years)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1"><span class="kw">summary</span>(hnscc<span class="op">$</span>pack_years)</a></code></pre></div>
 <pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max.      NA&#39;s 
 ##   0.01685  30.00000  45.00000  50.62485  60.00000 300.00000       125</code></pre>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="kw">table</span>(hnscc<span class="op">$</span>tabacco_group)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="kw">table</span>(hnscc<span class="op">$</span>tabacco_group)</a></code></pre></div>
 <pre><code>## 
 ## Current reformed smoker for &lt; or = 15 years 
 ##                                          81 
@@ -328,41 +317,41 @@ R Graphics Cookbock, Winston Chang<br />
 ##                                          90 
 ##                         Lifelong Non-smoker 
 ##                                          52</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="kw">table</span>(hnscc<span class="op">$</span>tumor_stage)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="kw">table</span>(hnscc<span class="op">$</span>tumor_stage)</a></code></pre></div>
 <pre><code>## 
 ##   Stage I  Stage II Stage III Stage IVA Stage IVB 
 ##        14        44        38       139         5</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="kw">table</span>(hnscc<span class="op">$</span>vital_status)</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="kw">table</span>(hnscc<span class="op">$</span>vital_status)</a></code></pre></div>
 <pre><code>## 
 ## DECEASED   LIVING 
 ##      116      163</code></pre>
 </div>
 <div id="funktionen-zur-exploration-von-datensätzen" class="slide section level2">
 <h1>Funktionen zur Exploration von Datensätzen</h1>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="co"># Tabelle von kategoriellen Daten</span></span>
-<span id="cb70-2"><a href="#cb70-2"></a><span class="kw">table</span>(<span class="op">&lt;</span>data<span class="op">&gt;</span>)</span>
-<span id="cb70-3"><a href="#cb70-3"></a></span>
-<span id="cb70-4"><a href="#cb70-4"></a><span class="co"># Tabelle von fehlenden Informationen</span></span>
-<span id="cb70-5"><a href="#cb70-5"></a><span class="kw">table</span>(<span class="kw">is.na</span>(<span class="op">&lt;</span>data<span class="op">&gt;</span>))</span>
-<span id="cb70-6"><a href="#cb70-6"></a></span>
-<span id="cb70-7"><a href="#cb70-7"></a><span class="co"># Summary von kontinuierlichen Daten</span></span>
-<span id="cb70-8"><a href="#cb70-8"></a><span class="kw">summary</span>(<span class="op">&lt;</span>data<span class="op">&gt;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="co"># Tabelle von kategoriellen Daten</span></a>
+<a class="sourceLine" id="cb70-2" title="2"><span class="kw">table</span>(<span class="op">&lt;</span>data<span class="op">&gt;</span>)</a>
+<a class="sourceLine" id="cb70-3" title="3"></a>
+<a class="sourceLine" id="cb70-4" title="4"><span class="co"># Tabelle von fehlenden Informationen</span></a>
+<a class="sourceLine" id="cb70-5" title="5"><span class="kw">table</span>(<span class="kw">is.na</span>(<span class="op">&lt;</span>data<span class="op">&gt;</span>))</a>
+<a class="sourceLine" id="cb70-6" title="6"></a>
+<a class="sourceLine" id="cb70-7" title="7"><span class="co"># Summary von kontinuierlichen Daten</span></a>
+<a class="sourceLine" id="cb70-8" title="8"><span class="kw">summary</span>(<span class="op">&lt;</span>data<span class="op">&gt;</span>)</a></code></pre></div>
 </div>
 <div id="r-plotting-101---ggplot2-paket" class="slide section level2">
 <h1>R Plotting 101 - ggplot2 Paket</h1>
 <p>Visualisierungen mit dem <code>ggplot2</code> Paket (Teil des <code>tidyverse</code> Pakets) neuer Standard in R.</p>
 <p>Prinzip: Malen eines Gemähldes - Schicht für Schicht.</p>
 <p>Metadaten des Bespieldatensatzes, die wir explorieren können:</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="kw">colnames</span>(hnscc)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1"><span class="kw">colnames</span>(hnscc)</a></code></pre></div>
 <pre><code>##  [1] &quot;id&quot;            &quot;age&quot;           &quot;alcohol&quot;       &quot;days_to_death&quot;
 ##  [5] &quot;gender&quot;        &quot;neoplasm_site&quot; &quot;grade&quot;         &quot;pack_years&quot;   
 ##  [9] &quot;tabacco_group&quot; &quot;tumor_stage&quot;   &quot;vital_status&quot;</code></pre>
 <p>Leere Leinwand. <code>age</code> auf der x-Achse und <code>days_to_death</code> auf der y-Achse.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death))</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death))</a></code></pre></div>
 <p><img src="pres_day1_files/figure-slidy/unnamed-chunk-37-1.png" width="768" /></p>
 <p>Dotplot</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death)) <span class="op">+</span></span>
-<span id="cb74-2"><a href="#cb74-2"></a><span class="st">    </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb74-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <p><img src="pres_day1_files/figure-slidy/unnamed-chunk-38-1.png" width="768" /></p>
 </div>
 <div id="fragen" class="slide section level2">

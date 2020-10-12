@@ -10,9 +10,9 @@
   <title>Einführung in R Programming</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -22,16 +22,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -40,9 +38,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -85,7 +83,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <p class="author">
 Andreas Mock
   </p>
-  <p class="date">12.05.2020</p>
 </div>
 <div id="ablauf---tag-2" class="slide section level1">
 <h1>Ablauf - Tag 2</h1>
@@ -101,20 +98,20 @@ Andreas Mock
 <ul>
 <li><strong>Faktor</strong>: spezielle Unterform eines Vektors für kategoriale Variablen. Ein Faktor fasst die Kategorien (= Levels) zusammen.</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Vektor</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">head</span>(hnscc<span class="op">$</span>grade)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Vektor</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">head</span>(hnscc<span class="op">$</span>grade)</a></code></pre></div>
 <pre><code>## [1] &quot;G3&quot; &quot;G2&quot; &quot;G2&quot; &quot;G2&quot; &quot;G2&quot; &quot;G1&quot;</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Faktor</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">head</span>(<span class="kw">as.factor</span>(hnscc<span class="op">$</span>grade))</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Faktor</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">head</span>(<span class="kw">as.factor</span>(hnscc<span class="op">$</span>grade))</a></code></pre></div>
 <pre><code>## [1] G3 G2 G2 G2 G2 G1
 ## Levels: G1 G2 G3 G4 GX</code></pre>
 </div>
 <div id="tibbles---moderne-dataframes" class="slide section level1">
 <h1>Tibbles - moderne Dataframes</h1>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">class</span>(hnscc)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">class</span>(hnscc)</a></code></pre></div>
 <pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
 <p>Der <code>hnscc</code> Datensatz ist eigentlich streng genommen kein Dataframe, sondern ein sogenannter Tibble, die moderne Weiterentwicklung eines R Dataframes.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>hnscc</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">hnscc</a></code></pre></div>
 <pre><code>## # A tibble: 279 x 11
 ##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
 ##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
@@ -134,7 +131,7 @@ Andreas Mock
 <div id="tibbles---moderne-datenframes" class="slide section level1">
 <h1>Tibbles - moderne Datenframes</h1>
 <p>Im Vergleich dazu der Output eines “normalen” Dataframes. In Übung 3 werdet ihr die Unterschiede herausarbeiten.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">head</span>(<span class="kw">as.data.frame</span>(hnscc))</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">head</span>(<span class="kw">as.data.frame</span>(hnscc))</a></code></pre></div>
 <pre><code>##             id age alcohol days_to_death gender  neoplasm_site grade pack_years
 ## 1 TCGA-BA-4074  69     YES           461   MALE    Oral Tongue    G3         51
 ## 2 TCGA-BA-4076  39     YES           415   MALE         Larynx    G2         30
@@ -153,10 +150,10 @@ Andreas Mock
 <div id="datentransformation-mit-dplyr" class="slide section level1">
 <h1>Datentransformation mit <code>dplyr</code></h1>
 <p>HNSCC Datensatz laden.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;http://andreasmock.github.io/data/hnscc.RData&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;http://andreasmock.github.io/data/hnscc.RData&quot;</span>))</a></code></pre></div>
 <p><strong>Warum Datentransformation?</strong> Oftmals sind wir nur an Teilmengen eines Datensatzes interessiert, bzw. möchten Proben nach verschiedenen Merkmalen zusammengruppieren.</p>
 <p>Die Funktionen zur Datentransformation sind innerhalb des “Tidyverse” im <code>dplyr</code> Paket zu finden. Habt ihr das <code>tidyverse</code> Paket geladen, so wird automatisch auch das <code>dplyr</code> Paket geladen.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
 </div>
 <div id="datentransformation-mit-dplyr---eine-übersicht" class="slide section level1">
 <h1>Datentransformation mit <code>dplyr</code> - eine Übersicht</h1>
@@ -202,9 +199,9 @@ Andreas Mock
 <div id="zeilen-filtern-mit-filter" class="slide section level1">
 <h1>Zeilen filtern mit <code>filter()</code></h1>
 <p>Die Funktion <code>filter()</code> ermöglicht es uns ein Subset aus den Zeilen auszuwählen. Das erste Argument ist das Objekt, die weiteren Argumente sind die Spalten, wonach wir filtern möchten.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>young &lt;-<span class="st"> </span><span class="kw">filter</span>(hnscc, age<span class="op">&lt;</span><span class="dv">50</span>)</span>
-<span id="cb13-2"><a href="#cb13-2"></a></span>
-<span id="cb13-3"><a href="#cb13-3"></a>young</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">young &lt;-<span class="st"> </span><span class="kw">filter</span>(hnscc, age<span class="op">&lt;</span><span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb13-2" title="2"></a>
+<a class="sourceLine" id="cb13-3" title="3">young</a></code></pre></div>
 <pre><code>## # A tibble: 42 x 11
 ##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
 ##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
@@ -220,9 +217,9 @@ Andreas Mock
 ## 10 TCGA~    48 YES               252 MALE   Larynx        G3            15
 ## # ... with 32 more rows, and 3 more variables: tabacco_group &lt;chr&gt;,
 ## #   tumor_stage &lt;chr&gt;, vital_status &lt;chr&gt;</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>larynx &lt;-<span class="st"> </span><span class="kw">filter</span>(hnscc, neoplasm_site<span class="op">==</span><span class="st">&quot;Larynx&quot;</span>)</span>
-<span id="cb15-2"><a href="#cb15-2"></a></span>
-<span id="cb15-3"><a href="#cb15-3"></a>larynx</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">larynx &lt;-<span class="st"> </span><span class="kw">filter</span>(hnscc, neoplasm_site<span class="op">==</span><span class="st">&quot;Larynx&quot;</span>)</a>
+<a class="sourceLine" id="cb15-2" title="2"></a>
+<a class="sourceLine" id="cb15-3" title="3">larynx</a></code></pre></div>
 <pre><code>## # A tibble: 72 x 11
 ##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
 ##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
@@ -240,18 +237,18 @@ Andreas Mock
 ## #   tumor_stage &lt;chr&gt;, vital_status &lt;chr&gt;</code></pre>
 <p><strong>Logische Operatoren</strong></p>
 <p>Die doppelten Gleichheitszeichen entsprechen der Frage: Ist der Eintrag in <code>neoplasm_site = "Larynx"</code>. Das Resultat der Frage ist ein Vektor mit den Informationen <code>TRUE</code> oder <code>FALSE</code> pro Eintrag eines Vektors.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">table</span>(hnscc<span class="op">$</span>neoplasm_site<span class="op">==</span><span class="st">&quot;Larynx&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">table</span>(hnscc<span class="op">$</span>neoplasm_site<span class="op">==</span><span class="st">&quot;Larynx&quot;</span>)</a></code></pre></div>
 <pre><code>## 
 ## FALSE  TRUE 
 ##   207    72</code></pre>
 <p>Die Notation um alle Sites außer Larynx zu filtern ist, ein Ausrufezeichen vor den Ausdruck zu setzen:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">filter</span>(hnscc, <span class="op">!</span>neoplasm_site<span class="op">==</span><span class="st">&quot;Larynx&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">filter</span>(hnscc, <span class="op">!</span>neoplasm_site<span class="op">==</span><span class="st">&quot;Larynx&quot;</span>)</a></code></pre></div>
 <p>Mehrere Sites können wie folgt ausgewählt werden:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">filter</span>(hnscc, neoplasm_site <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Tonsil&quot;</span>, <span class="st">&quot;Oral Tongue&quot;</span>, <span class="st">&quot;Hard Palate&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">filter</span>(hnscc, neoplasm_site <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Tonsil&quot;</span>, <span class="st">&quot;Oral Tongue&quot;</span>, <span class="st">&quot;Hard Palate&quot;</span>))</a></code></pre></div>
 <p>Im Filterprozess können Informationen aus beliebig vielen Spalten miteinander kombiniert werden.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>young_larynx &lt;-<span class="st"> </span><span class="kw">filter</span>(hnscc, age<span class="op">&lt;</span><span class="dv">50</span>, neoplasm_site<span class="op">==</span><span class="st">&quot;Larynx&quot;</span>)</span>
-<span id="cb21-2"><a href="#cb21-2"></a></span>
-<span id="cb21-3"><a href="#cb21-3"></a>young_larynx</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">young_larynx &lt;-<span class="st"> </span><span class="kw">filter</span>(hnscc, age<span class="op">&lt;</span><span class="dv">50</span>, neoplasm_site<span class="op">==</span><span class="st">&quot;Larynx&quot;</span>)</a>
+<a class="sourceLine" id="cb21-2" title="2"></a>
+<a class="sourceLine" id="cb21-3" title="3">young_larynx</a></code></pre></div>
 <pre><code>## # A tibble: 8 x 11
 ##   id      age alcohol days_to_death gender neoplasm_site grade pack_years
 ##   &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
@@ -269,7 +266,7 @@ Andreas Mock
 <div id="zeilen-sortieren-mit-arrange" class="slide section level1">
 <h1>Zeilen sortieren mit <code>arrange()</code></h1>
 <p>Die Funktion <code>arrange()</code> sortiert Zeilen nach Spalteninformationen.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">arrange</span>(hnscc, grade)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">arrange</span>(hnscc, grade)</a></code></pre></div>
 <pre><code>## # A tibble: 279 x 11
 ##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
 ##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
@@ -286,7 +283,7 @@ Andreas Mock
 ## # ... with 269 more rows, and 3 more variables: tabacco_group &lt;chr&gt;,
 ## #   tumor_stage &lt;chr&gt;, vital_status &lt;chr&gt;</code></pre>
 <p>Hierbei kann wie auch beim Filtern eine Sortierung in mehreren Schritten erfolgen.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">arrange</span>(hnscc, age, grade)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">arrange</span>(hnscc, age, grade)</a></code></pre></div>
 <pre><code>## # A tibble: 279 x 11
 ##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
 ##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
@@ -305,7 +302,7 @@ Andreas Mock
 </div>
 <div id="spalten-selektieren-mit-select" class="slide section level1">
 <h1>Spalten selektieren mit <code>select()</code></h1>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">select</span>(hnscc, days_to_death, vital_status)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">select</span>(hnscc, days_to_death, vital_status)</a></code></pre></div>
 <pre><code>## # A tibble: 279 x 2
 ##    days_to_death vital_status
 ##            &lt;int&gt; &lt;chr&gt;       
@@ -321,7 +318,7 @@ Andreas Mock
 ## 10           179 LIVING      
 ## # ... with 269 more rows</code></pre>
 <p>Umgekehrt können auch Spalten ausgeschlossen werden</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw">select</span>(hnscc, <span class="op">-</span><span class="kw">c</span>(id,age))</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">select</span>(hnscc, <span class="op">-</span><span class="kw">c</span>(id,age))</a></code></pre></div>
 <pre><code>## # A tibble: 279 x 9
 ##    alcohol days_to_death gender neoplasm_site grade pack_years tabacco_group
 ##    &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;        
@@ -340,7 +337,7 @@ Andreas Mock
 </div>
 <div id="spaltennamen-umbenennen-mit-rename" class="slide section level1">
 <h1>Spaltennamen umbenennen mit <code>rename()</code></h1>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw">rename</span>(hnscc, <span class="dt">barcode=</span>id)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">rename</span>(hnscc, <span class="dt">barcode=</span>id)</a></code></pre></div>
 <pre><code>## # A tibble: 279 x 11
 ##    barcode   age alcohol days_to_death gender neoplasm_site grade pack_years
 ##    &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
@@ -359,18 +356,17 @@ Andreas Mock
 </div>
 <div id="neue-spalten-hinzufügen-mit-mutate" class="slide section level1">
 <h1>Neue Spalten hinzufügen mit <code>mutate()</code></h1>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>hnscc &lt;-<span class="st"> </span><span class="kw">mutate</span>(hnscc, <span class="dt">years_to_death=</span>(days_to_death<span class="op">/</span><span class="dv">365</span>))</span>
-<span id="cb33-2"><a href="#cb33-2"></a></span>
-<span id="cb33-3"><a href="#cb33-3"></a><span class="kw">summary</span>(hnscc<span class="op">$</span>years_to_death)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">hnscc &lt;-<span class="st"> </span><span class="kw">mutate</span>(hnscc, <span class="dt">years_to_death=</span>(days_to_death<span class="op">/</span><span class="dv">365</span>))</a>
+<a class="sourceLine" id="cb33-2" title="2"></a>
+<a class="sourceLine" id="cb33-3" title="3"><span class="kw">summary</span>(hnscc<span class="op">$</span>years_to_death)</a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
 ##  0.0000  0.5993  1.2137  2.1615  2.7377 17.5781       1</code></pre>
 </div>
 <div id="gruppenweise-transformieren-group_by-und-summarize" class="slide section level1">
 <h1>Gruppenweise transformieren <code>group_by()</code> und <code>summarize()</code></h1>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>by_site &lt;-<span class="st"> </span><span class="kw">group_by</span>(hnscc, neoplasm_site)</span>
-<span id="cb35-2"><a href="#cb35-2"></a></span>
-<span id="cb35-3"><a href="#cb35-3"></a><span class="kw">summarize</span>(by_site, <span class="dt">mean_age=</span><span class="kw">mean</span>(age))</span></code></pre></div>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">by_site &lt;-<span class="st"> </span><span class="kw">group_by</span>(hnscc, neoplasm_site)</a>
+<a class="sourceLine" id="cb35-2" title="2"></a>
+<a class="sourceLine" id="cb35-3" title="3"><span class="kw">summarize</span>(by_site, <span class="dt">mean_age=</span><span class="kw">mean</span>(age))</a></code></pre></div>
 <pre><code>## # A tibble: 12 x 2
 ##    neoplasm_site  mean_age
 ##    &lt;chr&gt;             &lt;dbl&gt;
@@ -389,12 +385,11 @@ Andreas Mock
 </div>
 <div id="transformationen-kombinieren-mit-der-pipe-funktion" class="slide section level1">
 <h1>Transformationen kombinieren mit der pipe Funktion <code>%&gt;%</code></h1>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>hnscc  <span class="op">%&gt;%</span></span>
-<span id="cb38-2"><a href="#cb38-2"></a><span class="st">    </span><span class="kw">filter</span>(<span class="op">!</span>neoplasm_site <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Base of Tongue&quot;</span>,<span class="st">&quot;Oral Tongue&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb38-3"><a href="#cb38-3"></a><span class="st">    </span><span class="kw">group_by</span>(neoplasm_site) <span class="op">%&gt;%</span></span>
-<span id="cb38-4"><a href="#cb38-4"></a><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">count=</span><span class="kw">n</span>(),</span>
-<span id="cb38-5"><a href="#cb38-5"></a>              <span class="dt">mean_age=</span><span class="kw">mean</span>(age))</span></code></pre></div>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">hnscc  <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb37-2" title="2"><span class="st">    </span><span class="kw">filter</span>(<span class="op">!</span>neoplasm_site <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Base of Tongue&quot;</span>,<span class="st">&quot;Oral Tongue&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb37-3" title="3"><span class="st">    </span><span class="kw">group_by</span>(neoplasm_site) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb37-4" title="4"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">count=</span><span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb37-5" title="5">              <span class="dt">mean_age=</span><span class="kw">mean</span>(age))</a></code></pre></div>
 <pre><code>## # A tibble: 10 x 3
 ##    neoplasm_site  count mean_age
 ##    &lt;chr&gt;          &lt;int&gt;    &lt;dbl&gt;
@@ -413,44 +408,43 @@ Andreas Mock
 <h1>Datenvisualisierung mit ggplot2</h1>
 <p><strong>Funktionsweise der <code>ggplot</code> Funktion</strong></p>
 <p>Leere Leinwand. <code>age</code> auf der x-Achse und <code>days_to_death</code> auf der y-Achse.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death))</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death))</a></code></pre></div>
 <p><img src="pres_day2_files/figure-slidy/unnamed-chunk-22-1.png" width="768" /></p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death))</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death))</a></code></pre></div>
 <p>Mit den sogenannten Aesthetics <code>aes</code> definieren wir die Dimensionen an Informationen, die wir im Plot darstellen möchten.</p>
 <p>Dieser leeren Leinwand werden nun sogenannte geoms hinzugefügt, z.B. <code>geom_point</code> für einen Dotplot.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death)) <span class="op">+</span></span>
-<span id="cb43-2"><a href="#cb43-2"></a><span class="st">    </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb41-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <p><strong>Dotplot</strong></p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death)) <span class="op">+</span></span>
-<span id="cb44-2"><a href="#cb44-2"></a><span class="st">    </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb42-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
 <p><img src="pres_day2_files/figure-slidy/unnamed-chunk-25-1.png" width="768" /></p>
 <p><strong>Boxplot</strong></p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>grade, <span class="dt">y=</span>pack_years)) <span class="op">+</span></span>
-<span id="cb46-2"><a href="#cb46-2"></a><span class="st">    </span><span class="kw">geom_boxplot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>grade, <span class="dt">y=</span>pack_years)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb44-2" title="2"><span class="st">    </span><span class="kw">geom_boxplot</span>()</a></code></pre></div>
 <pre><code>## Warning: Removed 125 rows containing non-finite values (stat_boxplot).</code></pre>
 <p><img src="pres_day2_files/figure-slidy/unnamed-chunk-26-1.png" width="768" /></p>
 <p><strong>Histogramm</strong></p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age)) <span class="op">+</span></span>
-<span id="cb48-2"><a href="#cb48-2"></a><span class="st">    </span><span class="kw">geom_histogram</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb46-2" title="2"><span class="st">    </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="pres_day2_files/figure-slidy/unnamed-chunk-27-1.png" width="768" /></p>
 <p><strong>Density plot</strong></p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age)) <span class="op">+</span></span>
-<span id="cb50-2"><a href="#cb50-2"></a><span class="st">    </span><span class="kw">geom_density</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb48-2" title="2"><span class="st">    </span><span class="kw">geom_density</span>()</a></code></pre></div>
 <p><img src="pres_day2_files/figure-slidy/unnamed-chunk-28-1.png" width="768" /></p>
 </div>
 <div id="transformation-für-barplot" class="slide section level1">
 <h1>Transformation für Barplot</h1>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>hnscc  <span class="op">%&gt;%</span></span>
-<span id="cb51-2"><a href="#cb51-2"></a><span class="st">    </span><span class="kw">group_by</span>(neoplasm_site) <span class="op">%&gt;%</span></span>
-<span id="cb51-3"><a href="#cb51-3"></a><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">mean_age=</span><span class="kw">mean</span>(age)) <span class="op">%&gt;%</span></span>
-<span id="cb51-4"><a href="#cb51-4"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(neoplasm_site,mean_age),<span class="dt">y=</span>mean_age)) <span class="op">+</span></span>
-<span id="cb51-5"><a href="#cb51-5"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="op">+</span></span>
-<span id="cb51-6"><a href="#cb51-6"></a><span class="st">    </span><span class="kw">coord_flip</span>() <span class="op">+</span></span>
-<span id="cb51-7"><a href="#cb51-7"></a><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&quot;anatomical site&quot;</span>) <span class="op">+</span></span>
-<span id="cb51-8"><a href="#cb51-8"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;mean age&quot;</span>)</span></code></pre></div>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1">hnscc  <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb49-2" title="2"><span class="st">    </span><span class="kw">group_by</span>(neoplasm_site) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb49-3" title="3"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">mean_age=</span><span class="kw">mean</span>(age)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb49-4" title="4"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(neoplasm_site,mean_age),<span class="dt">y=</span>mean_age)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb49-5" title="5"><span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb49-6" title="6"><span class="st">    </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb49-7" title="7"><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&quot;anatomical site&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb49-8" title="8"><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;mean age&quot;</span>)</a></code></pre></div>
 <p><img src="pres_day2_files/figure-slidy/unnamed-chunk-29-1.png" width="288" /></p>
 </div>
 <div id="aesthetics" class="slide section level1">
@@ -458,34 +452,34 @@ Andreas Mock
 <p>Bisher haben wir als aesthetics nur die x- und y-Achse verwendet. <code>ggplot2</code> bietet jedoch noch weitere Dimensionen von Daten als aesthetics zu definieren</p>
 <p><strong>Aesthetic - color</strong></p>
 <p>Coloring - kategoriale Variable neoplasm site.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death, <span class="dt">color=</span>neoplasm_site)) <span class="op">+</span></span>
-<span id="cb53-2"><a href="#cb53-2"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb53-3"><a href="#cb53-3"></a><span class="st">    </span><span class="kw">guides</span>(<span class="dt">color=</span><span class="kw">guide_legend</span>(<span class="dt">ncol=</span><span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death, <span class="dt">color=</span>neoplasm_site)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb50-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb50-3" title="3"><span class="st">    </span><span class="kw">guides</span>(<span class="dt">color=</span><span class="kw">guide_legend</span>(<span class="dt">ncol=</span><span class="dv">2</span>))</a></code></pre></div>
 <pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
 <p><img src="pres_day2_files/figure-slidy/unnamed-chunk-30-1.png" width="480" /></p>
 <p>Coloring - numerische Variable packyears.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death, <span class="dt">color=</span>pack_years)) <span class="op">+</span></span>
-<span id="cb55-2"><a href="#cb55-2"></a><span class="st">    </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death, <span class="dt">color=</span>pack_years)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb52-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
 <p><img src="pres_day2_files/figure-slidy/unnamed-chunk-31-1.png" width="768" /></p>
 <p><strong>Aesthetic - size</strong></p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death, <span class="dt">size=</span>pack_years)) <span class="op">+</span></span>
-<span id="cb57-2"><a href="#cb57-2"></a><span class="st">    </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death, <span class="dt">size=</span>pack_years)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb54-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <pre><code>## Warning: Removed 126 rows containing missing values (geom_point).</code></pre>
 <p><img src="pres_day2_files/figure-slidy/unnamed-chunk-32-1.png" width="768" /></p>
 <p><strong>Aesthetic - shape</strong></p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death, <span class="dt">shape=</span>grade)) <span class="op">+</span></span>
-<span id="cb59-2"><a href="#cb59-2"></a><span class="st">    </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death, <span class="dt">shape=</span>grade)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb56-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
 <p><img src="pres_day2_files/figure-slidy/unnamed-chunk-33-1.png" width="768" /></p>
 </div>
 <div id="facetting" class="slide section level1">
 <h1>Facetting</h1>
 <p>Über die Aesthetics hinaus gibt es die Möglichkeit Plots nach kategorialen Variablen zu stratefizieren.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death, <span class="dt">color=</span>neoplasm_site)) <span class="op">+</span></span>
-<span id="cb61-2"><a href="#cb61-2"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb61-3"><a href="#cb61-3"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>alcohol) <span class="op">+</span></span>
-<span id="cb61-4"><a href="#cb61-4"></a><span class="st">    </span><span class="kw">guides</span>(<span class="dt">color=</span><span class="kw">guide_legend</span>(<span class="dt">ncol=</span><span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>days_to_death, <span class="dt">color=</span>neoplasm_site)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb58-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb58-3" title="3"><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>alcohol) <span class="op">+</span></a>
+<a class="sourceLine" id="cb58-4" title="4"><span class="st">    </span><span class="kw">guides</span>(<span class="dt">color=</span><span class="kw">guide_legend</span>(<span class="dt">ncol=</span><span class="dv">2</span>))</a></code></pre></div>
 <pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
 <p><img src="pres_day2_files/figure-slidy/unnamed-chunk-34-1.png" width="576" /></p>
 </div>

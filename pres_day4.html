@@ -10,9 +10,9 @@
   <title>Einführung in R Programming</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -22,16 +22,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -40,9 +38,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -85,7 +83,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <p class="author">
 Andreas Mock
   </p>
-  <p class="date">16.06.2020</p>
 </div>
 <div id="überlebenszeitanalyse" class="slide section level2">
 <h1>Überlebenszeitanalyse</h1>
@@ -127,17 +124,17 @@ Andreas Mock
 <li>der Censor (binäre Info ob Event eingetroffen ist, z.B. 1 = tod, 0 = lebend)</li>
 <li>den zu untersuchenden Einflussfaktor (diskrete oder kontinuierliche Daten)</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># 1. Zeit bis zum Tod</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">summary</span>(hnscc<span class="op">$</span>days_to_death)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># 1. Zeit bis zum Tod</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">summary</span>(hnscc<span class="op">$</span>days_to_death)</a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
 ##     0.0   218.8   443.0   789.0   999.2  6416.0       1</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># 2. Censor</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">table</span>(hnscc<span class="op">$</span>vital_status)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># 2. Censor</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">table</span>(hnscc<span class="op">$</span>vital_status)</a></code></pre></div>
 <pre><code>## 
 ## DECEASED   LIVING 
 ##      116      163</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># 3. den zu untersuchenden Einflussfaktor</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">colnames</span>(hnscc)[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">11</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># 3. den zu untersuchenden Einflussfaktor</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw">colnames</span>(hnscc)[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">11</span>)]</a></code></pre></div>
 <pre><code>## [1] &quot;age&quot;           &quot;alcohol&quot;       &quot;gender&quot;        &quot;neoplasm_site&quot;
 ## [5] &quot;grade&quot;         &quot;pack_years&quot;    &quot;tabacco_group&quot; &quot;tumor_stage&quot;</code></pre>
 </div>
@@ -153,7 +150,7 @@ Andreas Mock
 <h1>Erstellung eines survival Objektes</h1>
 <p>Für Überlebenszeitanalysen in R gilt es von so genannten <code>survival</code> Objekten gebrauch zu machen. Diese sind Teil des <code>survival</code> Pakets.</p>
 <p>Die Syntax ist straightforward:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">head</span>(<span class="kw">Surv</span>(hnscc_survival<span class="op">$</span>OS, hnscc_survival<span class="op">$</span>Censor))</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">head</span>(<span class="kw">Surv</span>(hnscc_survival<span class="op">$</span>OS, hnscc_survival<span class="op">$</span>Censor))</a></code></pre></div>
 <pre><code>## [1]  461   415  1134   276   248+  190+</code></pre>
 </div>
 <div id="kaplan-meier-kurve" class="slide section level2">
@@ -161,10 +158,10 @@ Andreas Mock
 <p>Der Klassiker der Visualisierung von Überlebenszeitanalysen ist die so genannte Kaplan-Meier-Kurve.</p>
 <p>Wichtig: Überlebenszeitanalysen können auch für kontinuierliche Einflussfaktoren durchgeführt werden. Hier macht natürlich eine Visualisierung mittels Kaplan-Meier-Kurve keinen Sinn.</p>
 <p>Für diese müssen wir noch die Gruppenzugehörigkeit angeben, und das Objekt für den Plot mit <code>survfit</code> herstellen:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">median</span>(hnscc_survival<span class="op">$</span>age)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">median</span>(hnscc_survival<span class="op">$</span>age)</a></code></pre></div>
 <pre><code>## [1] 61</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>fit &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(OS, Censor)<span class="op">~</span>age<span class="op">&gt;</span><span class="dv">61</span>, <span class="dt">data=</span>hnscc_survival)</span>
-<span id="cb11-2"><a href="#cb11-2"></a>fit</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">fit &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(OS, Censor)<span class="op">~</span>age<span class="op">&gt;</span><span class="dv">61</span>, <span class="dt">data=</span>hnscc_survival)</a>
+<a class="sourceLine" id="cb11-2" title="2">fit</a></code></pre></div>
 <pre><code>## Call: survfit(formula = Surv(OS, Censor) ~ age &gt; 61, data = hnscc_survival)
 ## 
 ##    1 observation deleted due to missingness 
@@ -174,34 +171,34 @@ Andreas Mock
 </div>
 <div id="kaplan-meier-kurve-1" class="slide section level2">
 <h1>Kaplan-Meier-Kurve</h1>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">ggsurvplot</span>(fit, hnscc_survival)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">ggsurvplot</span>(fit, hnscc_survival)</a></code></pre></div>
 <p><img src="pres_day4_files/figure-slidy/unnamed-chunk-6-1.png" width="768" /></p>
 </div>
 <div id="univariate-überlebenszeitanalyse" class="slide section level2">
 <h1>Univariate Überlebenszeitanalyse</h1>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">library</span>(broom)</span>
-<span id="cb14-2"><a href="#cb14-2"></a></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="co"># Beispiel 1: Alter dichotomisiert nach &gt; Median (= 61 Jahre)</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="kw">tidy</span>(<span class="kw">coxph</span>(<span class="kw">Surv</span>(OS, Censor)<span class="op">~</span>age<span class="op">&gt;</span><span class="dv">61</span>, <span class="dt">data=</span>hnscc_survival),</span>
-<span id="cb14-5"><a href="#cb14-5"></a>     <span class="dt">exponentiate =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 5
-##   term         estimate std.error statistic p.value
-##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 age &gt; 61TRUE     1.54     0.189      2.27  0.0229</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Beispiel 2: Alter als kontiniuerliche Variable</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">tidy</span>(<span class="kw">coxph</span>(<span class="kw">Surv</span>(OS, Censor)<span class="op">~</span>age, <span class="dt">data=</span>hnscc_survival),</span>
-<span id="cb16-3"><a href="#cb16-3"></a>     <span class="dt">exponentiate =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 5
-##   term  estimate std.error statistic p.value
-##   &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 age       1.02   0.00827      2.69 0.00718</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">library</span>(broom)</a>
+<a class="sourceLine" id="cb14-2" title="2"></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="co"># Beispiel 1: Alter dichotomisiert nach &gt; Median (= 61 Jahre)</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="kw">tidy</span>(<span class="kw">coxph</span>(<span class="kw">Surv</span>(OS, Censor)<span class="op">~</span>age<span class="op">&gt;</span><span class="dv">61</span>, <span class="dt">data=</span>hnscc_survival),</a>
+<a class="sourceLine" id="cb14-5" title="5">     <span class="dt">exponentiate =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 1 x 7
+##   term         estimate std.error statistic p.value conf.low conf.high
+##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 age &gt; 61TRUE     1.54     0.189      2.27  0.0229     1.06      2.23</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co"># Beispiel 2: Alter als kontiniuerliche Variable</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="kw">tidy</span>(<span class="kw">coxph</span>(<span class="kw">Surv</span>(OS, Censor)<span class="op">~</span>age, <span class="dt">data=</span>hnscc_survival),</a>
+<a class="sourceLine" id="cb16-3" title="3">     <span class="dt">exponentiate =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 1 x 7
+##   term  estimate std.error statistic p.value conf.low conf.high
+##   &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 age       1.02   0.00827      2.69 0.00718     1.01      1.04</code></pre>
 <p>Estimate = HR</p>
 </div>
 <div id="univariate-überlebenszeitanalyse-1" class="slide section level2">
 <h1>Univariate Überlebenszeitanalyse</h1>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Bespiel 3: Tabacco Group</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a></span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">table</span>(hnscc_survival<span class="op">$</span>tabacco_group)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co"># Bespiel 3: Tabacco Group</span></a>
+<a class="sourceLine" id="cb18-2" title="2"></a>
+<a class="sourceLine" id="cb18-3" title="3"><span class="kw">table</span>(hnscc_survival<span class="op">$</span>tabacco_group)</a></code></pre></div>
 <pre><code>## 
 ## Current reformed smoker for &lt; or = 15 years 
 ##                                          81 
@@ -211,14 +208,14 @@ Andreas Mock
 ##                                          90 
 ##                         Lifelong Non-smoker 
 ##                                          52</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">tidy</span>(<span class="kw">coxph</span>(<span class="kw">Surv</span>(OS, Censor)<span class="op">~</span>tabacco_group, <span class="dt">data=</span>hnscc_survival),</span>
-<span id="cb20-2"><a href="#cb20-2"></a>     <span class="dt">exponentiate =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 3 x 5
-##   term                                      estimate std.error statistic p.value
-##   &lt;chr&gt;                                        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 tabacco_groupCurrent reformed smoker for~    0.572     0.290    -1.93   0.0542
-## 2 tabacco_groupCurrent smoker                  1.14      0.234     0.551  0.582 
-## 3 tabacco_groupLifelong Non-smoker             0.482     0.307    -2.38   0.0173</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">tidy</span>(<span class="kw">coxph</span>(<span class="kw">Surv</span>(OS, Censor)<span class="op">~</span>tabacco_group, <span class="dt">data=</span>hnscc_survival),</a>
+<a class="sourceLine" id="cb20-2" title="2">     <span class="dt">exponentiate =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 7
+##   term                   estimate std.error statistic p.value conf.low conf.high
+##   &lt;chr&gt;                     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 tabacco_groupCurrent ~    0.572     0.290    -1.93   0.0542    0.324     1.01 
+## 2 tabacco_groupCurrent ~    1.14      0.234     0.551  0.582     0.719     1.80 
+## 3 tabacco_groupLifelong~    0.482     0.307    -2.38   0.0173    0.264     0.879</code></pre>
 </div>
 <div id="multivariate-überlebenszeitanalyse" class="slide section level2">
 <h1>Multivariate Überlebenszeitanalyse</h1>
@@ -226,16 +223,16 @@ Andreas Mock
 <blockquote>
 
 </blockquote>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Beispielmodel: Alter und Tabacco group</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="kw">tidy</span>(<span class="kw">coxph</span>(<span class="kw">Surv</span>(OS, Censor)<span class="op">~</span>age <span class="op">+</span><span class="st"> </span>tabacco_group, <span class="dt">data=</span>hnscc_survival),</span>
-<span id="cb22-3"><a href="#cb22-3"></a>     <span class="dt">exponentiate =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 4 x 5
-##   term                                      estimate std.error statistic p.value
-##   &lt;chr&gt;                                        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 age                                          1.02    0.00931     2.58  0.00986
-## 2 tabacco_groupCurrent reformed smoker for~    0.520   0.292      -2.23  0.0255 
-## 3 tabacco_groupCurrent smoker                  1.22    0.235       0.838 0.402  
-## 4 tabacco_groupLifelong Non-smoker             0.553   0.309      -1.92  0.0552</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co"># Beispielmodel: Alter und Tabacco group</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="kw">tidy</span>(<span class="kw">coxph</span>(<span class="kw">Surv</span>(OS, Censor)<span class="op">~</span>age <span class="op">+</span><span class="st"> </span>tabacco_group, <span class="dt">data=</span>hnscc_survival),</a>
+<a class="sourceLine" id="cb22-3" title="3">     <span class="dt">exponentiate =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 7
+##   term                   estimate std.error statistic p.value conf.low conf.high
+##   &lt;chr&gt;                     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 age                       1.02    0.00931     2.58  0.00986    1.01      1.04 
+## 2 tabacco_groupCurrent ~    0.520   0.292      -2.23  0.0255     0.293     0.923
+## 3 tabacco_groupCurrent ~    1.22    0.235       0.838 0.402      0.768     1.93 
+## 4 tabacco_groupLifelong~    0.553   0.309      -1.92  0.0552     0.301     1.01</code></pre>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
