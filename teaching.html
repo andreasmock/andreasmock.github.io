@@ -25,6 +25,17 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -380,14 +391,16 @@ div.tocify {
 </div>
 <div id="kursinformationen" class="section level2">
 <h2>Kursinformationen</h2>
-<p><strong>Wintermesemster 2020/2021</strong></p>
+<p><strong>Sommersemester 2021</strong> - jeweils 17:00-18:30 Uhr</p>
 <ul>
-<li>Termin 1 (Intro): 13.10.2020 | 17:00-18:30 Uhr | SR 1 INF 400 Kopfklinik</li>
-<li>Termin 2 (Transformation und Plotting): 12.11.2020 | 16:45-18:15 | SR 1 INF 400 Kopfklinik</li>
-<li>Termin 3 (Dateninput und statistische Modellierung): 24.11.2020 | 17:00-18:30 | Raum 00.261 INF 440 Frauenklinik</li>
-<li>Termin 4 (Überlebenszeitanalyse): 14.01.2021 | 15:00-16:30 | Raum 718/719 INF 410 Medizinische Klinik</li>
-<li>Termin 5 (RNA-seq Analyse): 09.02.2021 | 17:00-18:30 Uhr | SR 1 INF 400 Kopfklinik</li>
-<li>Termin 6 (Machine Learning): 25.02.2021 | 17:00-18:30 Uhr | SR 1 INF 400 Kopfklinik</li>
+<li>Termin 1 (Intro): 13.04.2021</li>
+<li>Termin 2 (Transformation und Plotting): 20.04.2021</li>
+<li>Termin 3 (Dateninput und statistische Modellierung): 29.04.2021</li>
+<li>Termin 4 (Überlebenszeitanalyse): 06.05.2021</li>
+<li>Termin 5 (RNA-seq Analyse): 18.05.2021</li>
+<li>Termin 6 (scRNA-seq Analyse): 10.06.2021<br />
+</li>
+<li>Termin 7 (Bildanalyse und Machine Learning): 24.06.2021</li>
 </ul>
 <p><strong>Vorbereitungen</strong></p>
 <ul>
@@ -395,8 +408,9 @@ div.tocify {
 </ul>
 <p><strong>Zusätzliches Kursangebot - Data Science Seminars</strong></p>
 <ul>
-<li>Seminar 1 (Welche Programmiersprache als Mediziner erlernen? Pros und Cons von R und Python.) | 22.10.2020 | 15:00-16:30 Uhr | Virtuell <a href="https://heiconf.uni-heidelberg.de/mie-e4v-e99?meeting_access_code=179075">Heiconf Raum 5</a></li>
-<li>Seminar 2 (Weiterbildungsmöglichkeiten und Karrierewege) | 05.11.2020 | 15:00-16:30 Uhr | Virtuell <a href="https://heiconf.uni-heidelberg.de/mie-e4v-e99?meeting_access_code=179075">Heiconf Raum 5</a></li>
+<li>Seminar 1 (Welche Programmiersprache als Mediziner erlernen? Pros und Cons von R und Python.) | 04.05.2021 | 17:00-18:30 Uhr<br />
+</li>
+<li>Seminar 2 (Weiterbildungsmöglichkeiten und Karrierewege) | 11.05.2021 | 17:00-18:30 Uhr</li>
 </ul>
 <hr />
 </div>
@@ -1893,7 +1907,7 @@ pheatmap( assay(pas_rlog)[select2 %in% 1, ],
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
