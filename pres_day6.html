@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Andreas Mock" />
+  <title>Einführung in R Programming</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+              </style>
+  <link href="site_libs/slidy-2/styles/slidy.css" rel="stylesheet" />
+  <script src="site_libs/slidy-2/scripts/slidy.js"></script>
+  <script src="site_libs/slidy_shiny-1/slidy_shiny.js"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Einführung in R Programming</h1>
+  <h1 class="subtitle">Tag 6 - Single cell RNA-seq Analyse</h1>
+  <p class="author">
+Andreas Mock
+  </p>
+</div>
+<div id="einführung" class="slide section level2">
+<h1>Einführung</h1>
+<p>An diesem Kurstag möchten wir uns mit der Auswertung von Daten aus einer RNA Sequenzierung (RNA-seq) beschäftigen.</p>
+<p>RNA-seq Daten sind so genannte <code>high-throughput count</code> Daten, in denen wir in vielen parallelen Analysen zählen, wieviele reads pro Gen oder Transkript im Sample detektiert wurden.</p>
+<ul>
+<li><strong>Sequenzierungsbibliothek</strong>: alle Nukleotide eines Samples, welche den Input für unser Sequenzierungsexperiment darstellen</li>
+<li><strong>Fragmente</strong>: Da der aktuelle technologische Goldstandard (Illumina Sequenzierung) nur Nukleotide von wenigen hundert Basenpaaren analysieren kann, müssen diese vor der Analyse fragmentiert werden</li>
+<li><strong>Read</strong>: Sequenz welche von einem Fragment erhoben wird. Ca. 150 bp bei Illumina. Bei RNA-seq und doppelsträngiger cDNA bezieht sich dies auf jeweils einen Strang</li>
+</ul>
+<p>Zeitliche Abfolge: 1. Sequenzierung &gt; 2. Counting</p>
+</div>
+<div id="benötigte-pakete" class="slide section level2">
+<h1>Benötigte Pakete</h1>
+<ul>
+<li><code>pasilla</code>: Paket, welches die Bespieldaten enthält</li>
+<li><code>DESeq2</code>: DAS Paket für die Analyse von RNA-seq Daten</li>
+<li><code>pheatmap</code>: Paket zur Erstellung von Heatmaps (sehr gute Alternative <code>ComplexHeatmap</code> Paket)</li>
+<li><code>broom</code>: Paket für Ergebnisstabellen</li>
+</ul>
+</div>
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+</body>
+</html>

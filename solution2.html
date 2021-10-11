@@ -22,6 +22,17 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -316,26 +327,26 @@ $(document).ready(function () {
     filter(age&lt;50, tabacco_group==&quot;Lifelong Non-smoker&quot;) %&gt;%
     arrange(age)</code></pre>
 <pre><code>## # A tibble: 18 x 11
-##    id      age alcohol days_to_death gender neoplasm_site grade pack_years
-##    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
-##  1 TCGA~    19 NO                240 MALE   Oral Tongue   G2            NA
-##  2 TCGA~    26 YES               908 MALE   Oral Tongue   G2            NA
-##  3 TCGA~    26 YES              1315 MALE   Oral Tongue   G2            NA
-##  4 TCGA~    29 &lt;NA&gt;              761 FEMALE Oral Tongue   GX            NA
-##  5 TCGA~    32 YES                64 FEMALE Oral Tongue   G2            NA
-##  6 TCGA~    35 YES              1152 FEMALE Tonsil        GX            NA
-##  7 TCGA~    38 YES              1521 MALE   Tonsil        G2            NA
-##  8 TCGA~    39 NO               3836 MALE   Oral Cavity   G2            NA
-##  9 TCGA~    40 NO               1006 MALE   Oral Tongue   G2            NA
-## 10 TCGA~    41 YES               242 FEMALE Oral Tongue   G2            NA
-## 11 TCGA~    43 NO               1149 FEMALE Oral Tongue   G2            NA
-## 12 TCGA~    45 YES               759 MALE   Oral Tongue   G1            NA
-## 13 TCGA~    46 NO                841 FEMALE Oral Tongue   G2            NA
-## 14 TCGA~    47 YES               311 MALE   Tonsil        G2            NA
-## 15 TCGA~    48 NO               2891 MALE   Tonsil        G3            NA
-## 16 TCGA~    48 YES               255 MALE   Oral Tongue   G2            NA
-## 17 TCGA~    49 YES               796 MALE   Oral Tongue   G2            NA
-## 18 TCGA~    49 NO                160 MALE   Oropharynx    G3            NA
+##    id            age alcohol days_to_death gender neoplasm_site grade pack_years
+##    &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;
+##  1 TCGA-CN-47~    19 NO                240 MALE   Oral Tongue   G2            NA
+##  2 TCGA-CR-73~    26 YES               908 MALE   Oral Tongue   G2            NA
+##  3 TCGA-CV-59~    26 YES              1315 MALE   Oral Tongue   G2            NA
+##  4 TCGA-CV-74~    29 &lt;NA&gt;              761 FEMALE Oral Tongue   GX            NA
+##  5 TCGA-CV-72~    32 YES                64 FEMALE Oral Tongue   G2            NA
+##  6 TCGA-CR-52~    35 YES              1152 FEMALE Tonsil        GX            NA
+##  7 TCGA-CR-64~    38 YES              1521 MALE   Tonsil        G2            NA
+##  8 TCGA-CV-70~    39 NO               3836 MALE   Oral Cavity   G2            NA
+##  9 TCGA-CQ-70~    40 NO               1006 MALE   Oral Tongue   G2            NA
+## 10 TCGA-BA-55~    41 YES               242 FEMALE Oral Tongue   G2            NA
+## 11 TCGA-DQ-56~    43 NO               1149 FEMALE Oral Tongue   G2            NA
+## 12 TCGA-CR-73~    45 YES               759 MALE   Oral Tongue   G1            NA
+## 13 TCGA-CQ-53~    46 NO                841 FEMALE Oral Tongue   G2            NA
+## 14 TCGA-CR-64~    47 YES               311 MALE   Tonsil        G2            NA
+## 15 TCGA-BB-42~    48 NO               2891 MALE   Tonsil        G3            NA
+## 16 TCGA-CV-69~    48 YES               255 MALE   Oral Tongue   G2            NA
+## 17 TCGA-CR-73~    49 YES               796 MALE   Oral Tongue   G2            NA
+## 18 TCGA-IQ-76~    49 NO                160 MALE   Oropharynx    G3            NA
 ## # ... with 3 more variables: tabacco_group &lt;chr&gt;, tumor_stage &lt;chr&gt;,
 ## #   vital_status &lt;chr&gt;</code></pre>
 <ol start="2" style="list-style-type: lower-alpha">
@@ -360,7 +371,6 @@ table(hnscc$is_young)</code></pre>
 <pre class="r"><code>hnscc %&gt;%
     group_by(grade) %&gt;%
     summarise(median_OS = median(days_to_death, na.rm=TRUE))</code></pre>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 5 x 2
 ##   grade median_OS
 ##   &lt;chr&gt;     &lt;dbl&gt;
@@ -414,7 +424,7 @@ table(hnscc$is_young)</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

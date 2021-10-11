@@ -8,11 +8,81 @@
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Andreas Mock" />
   <title>Einführung in R Programming</title>
-  <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode { white-space: pre; position: relative; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    code.sourceCode { white-space: pre-wrap; }
+    code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+          </style>
+  <style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -22,14 +92,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -38,9 +110,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -98,42 +170,42 @@ Andreas Mock
 <ol style="list-style-type: decimal">
 <li>Wie finde ich den <strong>absoluten</strong> Dateipfad heraus, in dem sich meine R Umgebung befindet, das so genannte <em>working directory</em>?</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">getwd</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;C:/Users/admmock/PowerFolders/git/content/AMhome&quot;</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">getwd</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;D:/pnc/website/AMhome&quot;</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Welche Dateien befinden sich in dem aktuellen Dateipfad?</li>
 </ol>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">list.files</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">list.files</span>()</span></code></pre></div>
 <pre><code>##  [1] &quot;_site&quot;           &quot;_site.yml&quot;       &quot;AMhome.Rproj&quot;    &quot;data&quot;           
-##  [5] &quot;index.html&quot;      &quot;index.Rmd&quot;       &quot;pics&quot;            &quot;pres_day1.html&quot; 
-##  [9] &quot;pres_day1.Rmd&quot;   &quot;pres_day1_cache&quot; &quot;pres_day1_files&quot; &quot;pres_day2.html&quot; 
-## [13] &quot;pres_day2.Rmd&quot;   &quot;pres_day2_files&quot; &quot;pres_day3.html&quot;  &quot;pres_day3.Rmd&quot;  
-## [17] &quot;pres_day3_files&quot; &quot;pres_day4.Rmd&quot;   &quot;pres_day4_files&quot; &quot;pres_day5.Rmd&quot;  
-## [21] &quot;pres_day5_cache&quot; &quot;pres_day5_files&quot; &quot;refs.Rmd&quot;        &quot;refs2021.Rmd&quot;   
-## [25] &quot;SI647E~1&quot;        &quot;SI647E~2&quot;        &quot;SI647E~3&quot;        &quot;SI647E~4&quot;       
-## [29] &quot;SITE_L~1&quot;        &quot;SITE_L~2&quot;        &quot;SITE_L~3&quot;        &quot;SITE_L~4&quot;       
-## [33] &quot;site_libs&quot;       &quot;solution1.Rmd&quot;   &quot;solution2.Rmd&quot;   &quot;solution3.Rmd&quot;  
-## [37] &quot;solution4.Rmd&quot;   &quot;teaching.Rmd&quot;    &quot;teaching_cache&quot;  &quot;teaching_files&quot;</code></pre>
+##  [5] &quot;index.html&quot;      &quot;index.Rmd&quot;       &quot;index22.html&quot;    &quot;index22.Rmd&quot;    
+##  [9] &quot;pics&quot;            &quot;pres_day1.html&quot;  &quot;pres_day1.Rmd&quot;   &quot;pres_day1_cache&quot;
+## [13] &quot;pres_day1_files&quot; &quot;pres_day2.html&quot;  &quot;pres_day2.Rmd&quot;   &quot;pres_day2_files&quot;
+## [17] &quot;pres_day3.html&quot;  &quot;pres_day3.Rmd&quot;   &quot;pres_day3_files&quot; &quot;pres_day4.Rmd&quot;  
+## [21] &quot;pres_day4_files&quot; &quot;pres_day5.Rmd&quot;   &quot;pres_day5_cache&quot; &quot;pres_day5_files&quot;
+## [25] &quot;pres_day6.Rmd&quot;   &quot;pres_day7.pptx&quot;  &quot;refs.Rmd&quot;        &quot;refs2021.Rmd&quot;   
+## [29] &quot;SI647E~1&quot;        &quot;SI647E~2&quot;        &quot;SI647E~3&quot;        &quot;SI647E~4&quot;       
+## [33] &quot;SI647E~5&quot;        &quot;SI647E~6&quot;        &quot;SITE_L~1&quot;        &quot;SITE_L~2&quot;       
+## [37] &quot;SITE_L~3&quot;        &quot;SITE_L~4&quot;        &quot;site_libs&quot;       &quot;solution1.Rmd&quot;  
+## [41] &quot;solution2.Rmd&quot;   &quot;solution3.Rmd&quot;   &quot;solution4.Rmd&quot;   &quot;teaching.Rmd&quot;   
+## [45] &quot;teaching_cache&quot;  &quot;teaching_files&quot;</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Wie kann ich ausgehend vom <em>working directory</em> einen <strong>relativen</strong> Dateipfad angeben?</li>
 </ol>
 <p>Mit dem Präfix <code>../</code> lässt sich eine Ordnereben, mit <code>../../</code> entsprechend 2 Ebenen nach oben gehen.</p>
 <p>Der relative Pfad</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">list.files</span>(<span class="st">&quot;../&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] &quot;AMhome&quot;                         &quot;Github_page&quot;                   
-## [3] &quot;Github_paper_content&quot;           &quot;TMO_page&quot;                      
-## [5] &quot;Zewener_Kammerkonzerte_Webpage&quot;</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">list.files</span>(<span class="st">&quot;../&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;AMhome&quot;                &quot;andreasmock.github.io&quot;</code></pre>
 <p>entspricht damit dem <strong>absoluten</strong> Dateipfad</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">list.files</span>(<span class="st">&quot;C:/Users/admmock/PowerFolders/git/content/&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">list.files</span>(<span class="st">&quot;C:/Users/admmock/PowerFolders/git/content/&quot;</span>)</span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>Wie kann ich Daten aus dem Internet einlesen?</li>
 </ol>
 <p>Einfach den Webpfad benutzen:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">library</span>(readxl)</a>
-<a class="sourceLine" id="cb8-2" title="2">path &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;https://tcga-data.nci.nih.gov/docs/publications/sarc_2017/&quot;</span>,</a>
-<a class="sourceLine" id="cb8-3" title="3">               <span class="st">&quot;SARC_264_Fusion_Gene_Profiles.txt&quot;</span>)</a>
-<a class="sourceLine" id="cb8-4" title="4"></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="kw">read_tsv</span>(<span class="dt">file =</span> path)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">library</span>(readxl)</span>
+<span id="cb8-2"><a href="#cb8-2"></a>path &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;https://tcga-data.nci.nih.gov/docs/publications/sarc_2017/&quot;</span>,</span>
+<span id="cb8-3"><a href="#cb8-3"></a>               <span class="st">&quot;SARC_264_Fusion_Gene_Profiles.txt&quot;</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">read_tsv</span>(<span class="dt">file =</span> path)</span></code></pre></div>
 </div>
 <div id="datenimport" class="slide section level1">
 <h1>Datenimport</h1>
@@ -149,15 +221,15 @@ Andreas Mock
 <div id="datenmodellierung" class="slide section level1">
 <h1>Datenmodellierung</h1>
 <p>HNSCC Datensatz laden</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;http://andreasmock.github.io/data/hnscc.RData&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;http://andreasmock.github.io/data/hnscc.RData&quot;</span>))</span></code></pre></div>
 </div>
 <div id="t-test" class="slide section level1">
 <h1>T-Test</h1>
 <p>Der T-Test ist ein parametrischer (geht von normalverteilten Daten aus) Hypothesentest zum Vergleich von kontinuierlichen Daten zweier Gruppen.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>gender, <span class="dt">y=</span>age)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="st">    </span><span class="kw">geom_boxplot</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>gender, <span class="dt">y=</span>age)) <span class="op">+</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="st">    </span><span class="kw">geom_boxplot</span>()</span></code></pre></div>
 <p><img src="pres_day3_files/figure-slidy/unnamed-chunk-7-1.png" width="288" /></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">t.test</span>(age <span class="op">~</span><span class="st"> </span>gender, <span class="dt">data=</span>hnscc)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">t.test</span>(age <span class="op">~</span><span class="st"> </span>gender, <span class="dt">data=</span>hnscc)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -173,11 +245,11 @@ Andreas Mock
 <div id="anova-analysis-of-variance" class="slide section level1">
 <h1>ANOVA (analysis of variance)</h1>
 <p>ANOVA bietet die Möglichkeit mehr als 2 Gruppen miteinander zu vergleichen.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>tabacco_group, <span class="dt">y=</span>age)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-3" title="3"><span class="st">    </span><span class="kw">coord_flip</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>tabacco_group, <span class="dt">y=</span>age)) <span class="op">+</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="st">    </span><span class="kw">coord_flip</span>()</span></code></pre></div>
 <p><img src="pres_day3_files/figure-slidy/unnamed-chunk-9-1.png" width="576" /></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">summary</span>(<span class="kw">aov</span>(age <span class="op">~</span><span class="st"> </span>tabacco_group, <span class="dt">data=</span>hnscc))</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">summary</span>(<span class="kw">aov</span>(age <span class="op">~</span><span class="st"> </span>tabacco_group, <span class="dt">data=</span>hnscc))</span></code></pre></div>
 <pre><code>##                Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 ## tabacco_group   3   4385  1461.7   10.79 1.02e-06 ***
 ## Residuals     268  36294   135.4                     
@@ -187,12 +259,12 @@ Andreas Mock
 </div>
 <div id="korrelationstest" class="slide section level1">
 <h1>Korrelationstest</h1>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>pack_years)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-3" title="3"><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">ggplot</span>(hnscc, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>pack_years)) <span class="op">+</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="pres_day3_files/figure-slidy/unnamed-chunk-11-1.png" width="288" /></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">cor.test</span>(<span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>pack_years, <span class="dt">data=</span>hnscc)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">cor.test</span>(<span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>pack_years, <span class="dt">data=</span>hnscc)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 

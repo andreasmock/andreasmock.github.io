@@ -8,11 +8,81 @@
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Andreas Mock" />
   <title>Einführung in R Programming</title>
-  <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode { white-space: pre; position: relative; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    code.sourceCode { white-space: pre-wrap; }
+    code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+          </style>
+  <style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -22,14 +92,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -38,9 +110,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -112,14 +184,14 @@ Andreas Mock
 <div id="beispieldatensatz" class="slide section level2">
 <h1>Beispieldatensatz</h1>
 <p>Unseren Bespieldatensatz beziehen wir aus dem Paket <code>pasilla</code></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">fn &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;pasilla_gene_counts.tsv&quot;</span>,</a>
-<a class="sourceLine" id="cb1-2" title="2">                  <span class="dt">package =</span> <span class="st">&quot;pasilla&quot;</span>, <span class="dt">mustWork =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb1-3" title="3"></a>
-<a class="sourceLine" id="cb1-4" title="4">counts &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">read.csv</span>(fn, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">row.names =</span> <span class="st">&quot;gene_id&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>fn &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;pasilla_gene_counts.tsv&quot;</span>,</span>
+<span id="cb1-2"><a href="#cb1-2"></a>                  <span class="dt">package =</span> <span class="st">&quot;pasilla&quot;</span>, <span class="dt">mustWork =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>counts &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">read.csv</span>(fn, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">row.names =</span> <span class="st">&quot;gene_id&quot;</span>))</span></code></pre></div>
 <p>Sequenzierungsdaten sollten als Matrix gespeichert sein und nicht als Dataframe bzw. Tibble!</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">dim</span>(counts)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">dim</span>(counts)</span></code></pre></div>
 <pre><code>## [1] 14599     7</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">counts[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,]</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>counts[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,]</span></code></pre></div>
 <pre><code>##             untreated1 untreated2 untreated3 untreated4 treated1 treated2
 ## FBgn0000003          0          0          0          0        0        0
 ## FBgn0000008         92        161         76         70      140       88
@@ -136,7 +208,7 @@ Andreas Mock
 <li>großer Wertebereich (0-Millionen)</li>
 <li>Die nicht-negativen Count Daten (Integers) folgen keine symmetrischen Verteilung und damit keiner! Normalverteilung</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">plot</span>(<span class="kw">density</span>(counts), <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10000</span>), <span class="dt">xlab =</span> <span class="st">&quot;Counts&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;none&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">plot</span>(<span class="kw">density</span>(counts), <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10000</span>), <span class="dt">xlab =</span> <span class="st">&quot;Counts&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <p><img src="pres_day5_files/figure-slidy/unnamed-chunk-3-1.png" width="384" /></p>
 <ul>
 <li>Im Count Daten zwischen Samples zu vergleichen bedarf es einer Normalisierung. Faktoren sind hier u.a. die Sequenzierungsbibliothek, Sequenzierungstiefe, Genlänge, GC content.</li>
@@ -145,15 +217,15 @@ Andreas Mock
 <div id="beispieldatensatz---informationen-zu-samples-und-zum-experiment" class="slide section level2">
 <h1>Beispieldatensatz - Informationen zu Samples und zum Experiment</h1>
 <p>RNAi Knockdown Experiment des Splicingfaktors <em>pasilla</em> in D. melanogaster. Zwei Konditionen: treated und untreated. Den Annotationfile laden wir mit:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">annotationFile &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>,</a>
-<a class="sourceLine" id="cb7-2" title="2">  <span class="st">&quot;pasilla_sample_annotation.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb7-3" title="3">  <span class="dt">package =</span> <span class="st">&quot;pasilla&quot;</span>, <span class="dt">mustWork =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb7-4" title="4">pasillaSampleAnno &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(annotationFile)</a>
-<a class="sourceLine" id="cb7-5" title="5"></a>
-<a class="sourceLine" id="cb7-6" title="6">pasillaSampleAnno &lt;-<span class="st"> </span><span class="kw">mutate</span>(pasillaSampleAnno,</a>
-<a class="sourceLine" id="cb7-7" title="7">condition &lt;-<span class="st"> </span><span class="kw">factor</span>(condition, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;untreated&quot;</span>, <span class="st">&quot;treated&quot;</span>)),</a>
-<a class="sourceLine" id="cb7-8" title="8">type &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">sub</span>(<span class="st">&quot;-.*&quot;</span>, <span class="st">&quot;&quot;</span>, type), <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;single&quot;</span>, <span class="st">&quot;paired&quot;</span>)))</a></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">pasillaSampleAnno</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>annotationFile &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>,</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="st">&quot;pasilla_sample_annotation.csv&quot;</span>,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="dt">package =</span> <span class="st">&quot;pasilla&quot;</span>, <span class="dt">mustWork =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb7-4"><a href="#cb7-4"></a>pasillaSampleAnno &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(annotationFile)</span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a>pasillaSampleAnno &lt;-<span class="st"> </span><span class="kw">mutate</span>(pasillaSampleAnno,</span>
+<span id="cb7-7"><a href="#cb7-7"></a>condition &lt;-<span class="st"> </span><span class="kw">factor</span>(condition, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;untreated&quot;</span>, <span class="st">&quot;treated&quot;</span>)),</span>
+<span id="cb7-8"><a href="#cb7-8"></a>type &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">sub</span>(<span class="st">&quot;-.*&quot;</span>, <span class="st">&quot;&quot;</span>, type), <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;single&quot;</span>, <span class="st">&quot;paired&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>pasillaSampleAnno</span></code></pre></div>
 <pre><code>## # A tibble: 7 x 8
 ##   file  condition type  `number of lane~ `total number o~ `exon counts`
 ##   &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;                    &lt;dbl&gt;
@@ -167,8 +239,8 @@ Andreas Mock
 ## # ... with 2 more variables: `condition &lt;- factor(condition, levels =
 ## #   c(&quot;untreated&quot;, &quot;treated&quot;))` &lt;fct&gt;, `type &lt;- factor(sub(&quot;-.*&quot;, &quot;&quot;, type),
 ## #   levels = c(&quot;single&quot;, &quot;paired&quot;))` &lt;fct&gt;</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">with</span>(pasillaSampleAnno,</a>
-<a class="sourceLine" id="cb10-2" title="2">       <span class="kw">table</span>(condition, type))</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">with</span>(pasillaSampleAnno,</span>
+<span id="cb10-2"><a href="#cb10-2"></a>       <span class="kw">table</span>(condition, type))</span></code></pre></div>
 <pre><code>##            type
 ## condition   paired-end single-read
 ##   treated            2           1
@@ -178,14 +250,14 @@ Andreas Mock
 <h1>DESeq2 - DAS R Paket für die Analyse von RNA-seq Daten</h1>
 <p>Das DESeq2 gehört zu den weltweit meist genutzen Pakten zur Analyse von RNA-seq Datensätzen.</p>
 <p>Bevor wir mit der Analyse starten können, gilt es aus der Matrix <code>counts</code> und dem Dataframe der die Sampleinfo beschreibt <code>pasillaSampleAnno</code> ein sogenanntes <code>DESeqDataSet</code> zu erstellen:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">mt &lt;-<span class="st"> </span><span class="kw">match</span>(<span class="kw">colnames</span>(counts), <span class="kw">sub</span>(<span class="st">&quot;fb$&quot;</span>, <span class="st">&quot;&quot;</span>, pasillaSampleAnno<span class="op">$</span>file))</a>
-<a class="sourceLine" id="cb12-2" title="2"><span class="kw">stopifnot</span>(<span class="op">!</span><span class="kw">any</span>(<span class="kw">is.na</span>(mt)))</a>
-<a class="sourceLine" id="cb12-3" title="3"></a>
-<a class="sourceLine" id="cb12-4" title="4">pasilla &lt;-<span class="st"> </span><span class="kw">DESeqDataSetFromMatrix</span>(</a>
-<a class="sourceLine" id="cb12-5" title="5">  <span class="dt">countData =</span> counts,</a>
-<a class="sourceLine" id="cb12-6" title="6">  <span class="dt">colData   =</span> pasillaSampleAnno[mt, ],</a>
-<a class="sourceLine" id="cb12-7" title="7">  <span class="dt">design    =</span> <span class="op">~</span><span class="st"> </span>condition)</a></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">pasilla</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>mt &lt;-<span class="st"> </span><span class="kw">match</span>(<span class="kw">colnames</span>(counts), <span class="kw">sub</span>(<span class="st">&quot;fb$&quot;</span>, <span class="st">&quot;&quot;</span>, pasillaSampleAnno<span class="op">$</span>file))</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">stopifnot</span>(<span class="op">!</span><span class="kw">any</span>(<span class="kw">is.na</span>(mt)))</span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a>pasilla &lt;-<span class="st"> </span><span class="kw">DESeqDataSetFromMatrix</span>(</span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="dt">countData =</span> counts,</span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="dt">colData   =</span> pasillaSampleAnno[mt, ],</span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="dt">design    =</span> <span class="op">~</span><span class="st"> </span>condition)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>pasilla</span></code></pre></div>
 <pre><code>## class: DESeqDataSet 
 ## dim: 14599 7 
 ## metadata(1): version
@@ -200,8 +272,8 @@ Andreas Mock
 <div id="durchführung-der-differentiellen-expressionsanalyse" class="slide section level2">
 <h1>Durchführung der differentiellen Expressionsanalyse</h1>
 <p>Ziel: Gene identifizieren, die zwischen treated und untreated Samples unterschiedlich sind. Wir wenden hier einen Hypothesentest an, der mit dem t-Test mathematisch verwandt ist.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">pasilla &lt;-<span class="st"> </span><span class="kw">DESeq</span>(pasilla)</a></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">pasilla</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>pasilla &lt;-<span class="st"> </span><span class="kw">DESeq</span>(pasilla)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>pasilla</span></code></pre></div>
 <pre><code>## class: DESeqDataSet 
 ## dim: 14599 7 
 ## metadata(1): version
@@ -212,8 +284,8 @@ Andreas Mock
 ## colData names(9): file condition ... type &lt;- factor(sub(&quot;-.*&quot;, &quot;&quot;,
 ##   type), levels = c(&quot;single&quot;, &quot;paired&quot;)) sizeFactor</code></pre>
 <p>Results</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">res &lt;-<span class="st"> </span><span class="kw">results</span>(pasilla)</a>
-<a class="sourceLine" id="cb18-2" title="2">res[<span class="kw">order</span>(res<span class="op">$</span>padj), ] <span class="op">%&gt;%</span><span class="st"> </span>head</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>res &lt;-<span class="st"> </span><span class="kw">results</span>(pasilla)</span>
+<span id="cb18-2"><a href="#cb18-2"></a>res[<span class="kw">order</span>(res<span class="op">$</span>padj), ] <span class="op">%&gt;%</span><span class="st"> </span>head</span></code></pre></div>
 <pre><code>## log2 fold change (MLE): condition untreated vs treated 
 ## Wald test p-value: condition untreated vs treated 
 ## DataFrame with 6 rows and 6 columns
@@ -237,55 +309,55 @@ Andreas Mock
 </div>
 <div id="histogramm-der-p-werte" class="slide section level2">
 <h1>Histogramm der p-Werte</h1>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">ggplot</span>(<span class="kw">as</span>(res, <span class="st">&quot;data.frame&quot;</span>), <span class="kw">aes</span>(<span class="dt">x =</span> pvalue)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb20-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.01</span>, <span class="dt">fill =</span> <span class="st">&quot;Royalblue&quot;</span>, <span class="dt">boundary =</span> <span class="dv">0</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb20-3" title="3"><span class="st">    </span><span class="kw">theme_classic</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">ggplot</span>(<span class="kw">as</span>(res, <span class="st">&quot;data.frame&quot;</span>), <span class="kw">aes</span>(<span class="dt">x =</span> pvalue)) <span class="op">+</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.01</span>, <span class="dt">fill =</span> <span class="st">&quot;Royalblue&quot;</span>, <span class="dt">boundary =</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="st">    </span><span class="kw">theme_classic</span>()</span></code></pre></div>
 <p><img src="pres_day5_files/figure-slidy/unnamed-chunk-11-1.png" width="432" /></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">ggplot</span>(<span class="kw">as</span>(res, <span class="st">&quot;data.frame&quot;</span>), <span class="kw">aes</span>(<span class="dt">x =</span> pvalue)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb21-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.005</span>, <span class="dt">fill =</span> <span class="st">&quot;Royalblue&quot;</span>, <span class="dt">boundary =</span> <span class="dv">0</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb21-3" title="3"><span class="st">    </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb21-4" title="4"><span class="st">    </span><span class="kw">theme_classic</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">ggplot</span>(<span class="kw">as</span>(res, <span class="st">&quot;data.frame&quot;</span>), <span class="kw">aes</span>(<span class="dt">x =</span> pvalue)) <span class="op">+</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.005</span>, <span class="dt">fill =</span> <span class="st">&quot;Royalblue&quot;</span>, <span class="dt">boundary =</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="st">    </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>)) <span class="op">+</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="st">    </span><span class="kw">theme_classic</span>()</span></code></pre></div>
 <p><img src="pres_day5_files/figure-slidy/unnamed-chunk-12-1.png" width="432" /></p>
 </div>
 <div id="ma-plot" class="slide section level2">
 <h1>MA plot</h1>
 <p>Fold change (M-value) vs. average counts (A-value)</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">plotMA</span>(pasilla, <span class="dt">ylim =</span> <span class="kw">c</span>( <span class="dv">-2</span>, <span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">plotMA</span>(pasilla, <span class="dt">ylim =</span> <span class="kw">c</span>( <span class="dv">-2</span>, <span class="dv">2</span>))</span></code></pre></div>
 <p><img src="pres_day5_files/figure-slidy/unnamed-chunk-13-1.png" width="432" /></p>
 <p>Roten Punkte = adjustierter P-Wert &lt; 0.1</p>
 </div>
 <div id="pca-plot" class="slide section level2">
 <h1>PCA plot</h1>
 <p>Die Principle Component Analysis (PCA) ist eine Methodik zur Dimensionsreduktion. Hierbei werden für jeden Sample die Infos zu allen 14,599 Genen auf zwei Dimensionen (x- und y-Achse) reduziert. Ein Sample ist ein Punkt auf dem Plot.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">pas_rlog &lt;-<span class="st"> </span><span class="kw">rlogTransformation</span>(pasilla)</a>
-<a class="sourceLine" id="cb23-2" title="2"><span class="kw">plotPCA</span>(pas_rlog, <span class="dt">intgroup=</span><span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;type&quot;</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-3" title="3"><span class="st">    </span><span class="kw">coord_fixed</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb23-4" title="4"><span class="st">    </span><span class="kw">theme_classic</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>pas_rlog &lt;-<span class="st"> </span><span class="kw">rlogTransformation</span>(pasilla)</span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="kw">plotPCA</span>(pas_rlog, <span class="dt">intgroup=</span><span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;type&quot;</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="st">    </span><span class="kw">coord_fixed</span>() <span class="op">+</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="st">    </span><span class="kw">theme_classic</span>()</span></code></pre></div>
 <p><img src="pres_day5_files/figure-slidy/unnamed-chunk-14-1.png" width="432" /></p>
 </div>
 <div id="heatmap" class="slide section level2">
 <h1>Heatmap</h1>
 <p>Eine Heatmap aller Gene darzustellen macht keinen Sinn. Es gilt Filterkriterien zu definieren.</p>
 <p>Filter 1) Top 30 most expressed genes.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">select &lt;-<span class="st"> </span><span class="kw">order</span>(<span class="kw">rowMeans</span>(<span class="kw">assay</span>(pas_rlog)), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">30</span>]</a>
-<a class="sourceLine" id="cb24-2" title="2"></a>
-<a class="sourceLine" id="cb24-3" title="3"><span class="kw">pheatmap</span>( <span class="kw">assay</span>(pas_rlog)[select, ],</a>
-<a class="sourceLine" id="cb24-4" title="4">     <span class="dt">scale =</span> <span class="st">&quot;row&quot;</span>,</a>
-<a class="sourceLine" id="cb24-5" title="5">     <span class="dt">annotation_col =</span> <span class="kw">as.data.frame</span>(</a>
-<a class="sourceLine" id="cb24-6" title="6">        <span class="kw">colData</span>(pas_rlog)[, <span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;type&quot;</span>)] ))</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>select &lt;-<span class="st"> </span><span class="kw">order</span>(<span class="kw">rowMeans</span>(<span class="kw">assay</span>(pas_rlog)), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">30</span>]</span>
+<span id="cb24-2"><a href="#cb24-2"></a></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="kw">pheatmap</span>( <span class="kw">assay</span>(pas_rlog)[select, ],</span>
+<span id="cb24-4"><a href="#cb24-4"></a>     <span class="dt">scale =</span> <span class="st">&quot;row&quot;</span>,</span>
+<span id="cb24-5"><a href="#cb24-5"></a>     <span class="dt">annotation_col =</span> <span class="kw">as.data.frame</span>(</span>
+<span id="cb24-6"><a href="#cb24-6"></a>        <span class="kw">colData</span>(pas_rlog)[, <span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;type&quot;</span>)] ))</span></code></pre></div>
 <p><img src="pres_day5_files/figure-slidy/unnamed-chunk-15-1.png" width="576" /></p>
 <p>Filter 2) Adjusted p-Value &lt; 0.01 und absolute log2 Fold Change &gt; 2</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">select2 &lt;-<span class="st"> </span>(res<span class="op">$</span>padj<span class="op">&lt;</span><span class="fl">0.01</span> <span class="op">&amp;</span><span class="st"> </span><span class="kw">abs</span>(res<span class="op">$</span>log2FoldChange)<span class="op">&gt;</span><span class="dv">2</span>)<span class="op">*</span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb25-2" title="2"></a>
-<a class="sourceLine" id="cb25-3" title="3"><span class="kw">pheatmap</span>( <span class="kw">assay</span>(pas_rlog)[select2 <span class="op">%in%</span><span class="st"> </span><span class="dv">1</span>, ],</a>
-<a class="sourceLine" id="cb25-4" title="4">     <span class="dt">scale =</span> <span class="st">&quot;row&quot;</span>,</a>
-<a class="sourceLine" id="cb25-5" title="5">     <span class="dt">annotation_col =</span> <span class="kw">as.data.frame</span>(</a>
-<a class="sourceLine" id="cb25-6" title="6">        <span class="kw">colData</span>(pas_rlog)[, <span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;type&quot;</span>)] ))</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>select2 &lt;-<span class="st"> </span>(res<span class="op">$</span>padj<span class="op">&lt;</span><span class="fl">0.01</span> <span class="op">&amp;</span><span class="st"> </span><span class="kw">abs</span>(res<span class="op">$</span>log2FoldChange)<span class="op">&gt;</span><span class="dv">2</span>)<span class="op">*</span><span class="dv">1</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="kw">pheatmap</span>( <span class="kw">assay</span>(pas_rlog)[select2 <span class="op">%in%</span><span class="st"> </span><span class="dv">1</span>, ],</span>
+<span id="cb25-4"><a href="#cb25-4"></a>     <span class="dt">scale =</span> <span class="st">&quot;row&quot;</span>,</span>
+<span id="cb25-5"><a href="#cb25-5"></a>     <span class="dt">annotation_col =</span> <span class="kw">as.data.frame</span>(</span>
+<span id="cb25-6"><a href="#cb25-6"></a>        <span class="kw">colData</span>(pas_rlog)[, <span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;type&quot;</span>)] ))</span></code></pre></div>
 <p><img src="pres_day5_files/figure-slidy/unnamed-chunk-16-1.png" width="576" /></p>
 </div>
 <div id="export-der-results-als-csv-file" class="slide section level2">
 <h1>Export der Results als csv File</h1>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">write.csv</span>(<span class="kw">as.data.frame</span>(res), <span class="dt">file =</span> <span class="st">&quot;treated_vs_untreated.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">write.csv</span>(<span class="kw">as.data.frame</span>(res), <span class="dt">file =</span> <span class="st">&quot;treated_vs_untreated.csv&quot;</span>)</span></code></pre></div>
 </div>
 <div id="übung" class="slide section level2">
 <h1>Übung</h1>
